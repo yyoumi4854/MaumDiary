@@ -1,0 +1,15 @@
+### Variables
+
+@url = http://localhost:3002/api
+
+### Refresh
+
+GET {{url}}/token/refresh
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdDQiLCJpYXQiOjE2Njk2MTI3NDUsImV4cCI6MTY2OTYxNDU0NX0.103UrN-pU-9Hp-F33Zyr8LcwzFVz_4lwYmApybPSf20
+RefreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjY5NjEyNzQ1LCJleHAiOjE2Njk2MjM1NDV9.BKibWCYvZnpoaHChSHSDL_bdLsROEhAaE-A5ZmFLw3o
+
+###
+
+GET {{url}}/token/access
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdDQiLCJpYXQiOjE2Njk2MTI3NDUsImV4cCI6MTY2OTYxNDU0NX0.103UrN-pU-9Hp-F33Zyr8LcwzFVz_4lwYmApybPSf20
+RefreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjY5NjEyNzQ1LCJleHAiOjE2Njk2MjM1NDV9.BKibWCYvZnpoaHChSHSDL_bdLsROEhAaE-A5ZmFLw3o

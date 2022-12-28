@@ -1,0 +1,8 @@
+node_modules
+
+.env
+senderinfo.json
+
+src/lib/apidoc/doc
+logs/*
+dev.db
