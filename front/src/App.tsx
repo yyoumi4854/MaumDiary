@@ -1,8 +1,6 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 
-import "./App.css";
-
 // 외부 라이브러리를 임포트 하는 구문
 
 // 내부에 모듈을 임포트하는 구문
