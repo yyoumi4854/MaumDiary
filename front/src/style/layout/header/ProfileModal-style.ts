@@ -65,7 +65,7 @@ export const ProfileTopContent = styled.div`
 
 export const ProfileBottomContent = styled.div`
     width: 100%;
-    padding: 8px 16px;
+    padding: 16px;
     border-top: 1px solid ${({ theme }) => theme.colors.greyBorder};
 
     ul li > * {
@@ -78,11 +78,17 @@ export const ProfileBottomContent = styled.div`
         transition: all 0.3s;
 
         svg {
-            font-size: 24px;
+            font-size: 20px;
         }
 
         &:hover {
             color: ${({ theme }) => theme.colors.mainDeep};
+        }
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        ul li > * svg {
+            font-size: ${({ theme }) => theme.fonts.size.basicsDesktop};
         }
     }
 `;

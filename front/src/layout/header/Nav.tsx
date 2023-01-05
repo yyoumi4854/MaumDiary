@@ -7,7 +7,7 @@ const Nav = () => {
         <Style.NavContent className="pc">
             <ul>
                 <li>
-                    <a href="#">서비스소개</a>
+                    <a href="#">서비스 소개</a>
                 </li>
                 <li>
                     <a href="#">일기장</a>

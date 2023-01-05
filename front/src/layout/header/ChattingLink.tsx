@@ -2,7 +2,7 @@ import React from "react";
 
 import * as Style from "@/style/layout/header/ChattingLink-style";
 
-import TelegramIcon from "@mui/icons-material/Telegram";
+import { BsChat } from "react-icons/bs";
 
 const ChattingLink = () => {
     return (
@@ -10,7 +10,7 @@ const ChattingLink = () => {
             <ul>
                 <li className="pc">
                     <a href="#">
-                        <TelegramIcon />
+                        <BsChat />
                         <span>10</span>
                     </a>
                 </li>

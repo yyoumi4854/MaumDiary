@@ -6,16 +6,19 @@ export const ChattingLinkContent = styled.div`
     }
 
     ul li:first-of-type a {
+        ${({ theme }) => theme.common.flexCenter};
         position: relative;
+        width: 36px;
+        height: 36px;
 
         svg {
-            font-size: 36px;
+            font-size: ${({ theme }) => theme.fonts.size.middle};
         }
 
         span {
             position: absolute;
-            top: -8px;
-            right: -12px;
+            top: 0px;
+            right: -8px;
             padding: 4px;
             border-radius: 50%;
             background: ${({ theme }) => theme.colors.main};

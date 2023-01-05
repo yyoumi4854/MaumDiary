@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 import * as Style from "@/style/layout/header/ProfileModal-style";
 
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import LogoutIcon from "@mui/icons-material/Logout";
+import { BsPerson } from "react-icons/bs";
+import { BsPower } from "react-icons/bs";
 
 const ProfileModal = () => {
     const modalRef = useRef<HTMLButtonElement>(null);
@@ -43,13 +43,13 @@ const ProfileModal = () => {
                         <ul>
                             <li>
                                 <a href="#">
-                                    <PermIdentityIcon />
+                                    <BsPerson />
                                     <span>내정보</span>
                                 </a>
                             </li>
                             <li>
                                 <button>
-                                    <LogoutIcon />
+                                    <BsPower />
                                     <span>로그아웃</span>
                                 </button>
                             </li>
