@@ -6,7 +6,7 @@ export const UserMenuContent = styled.div`
         gap: 0 24px;
 
         li a {
-            color: ${({ theme }) => theme.colors.greyFont};
+            color: ${({ theme }) => theme.colors.greyText};
             transition: all 0.3s;
 
             &:hover {

@@ -12,7 +12,7 @@ const colors = {
     mainDark: "#475367",
 
     // grey
-    greyFont: "#888",
+    greyText: "#888",
     greyBorder: "#E1E1E1",
     gretBackground: "#F8F8F8",
 

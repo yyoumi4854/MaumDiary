@@ -58,7 +58,7 @@ export const ProfileTopContent = styled.div`
             margin-top: 4px;
             font-weight: ${({ theme }) => theme.fonts.weight.light};
             font-size: ${({ theme }) => theme.fonts.size.small};
-            color: ${({ theme }) => theme.colors.greyFont};
+            color: ${({ theme }) => theme.colors.greyText};
         }
     }
 `;
@@ -73,7 +73,7 @@ export const ProfileBottomContent = styled.div`
         align-items: center;
         gap: 0 8px;
         padding: 4px 0;
-        color: ${({ theme }) => theme.colors.greyFont};
+        color: ${({ theme }) => theme.colors.greyText};
         font-weight: ${({ theme }) => theme.fonts.weight.light};
         transition: all 0.3s;
 
