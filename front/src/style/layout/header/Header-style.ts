@@ -5,7 +5,11 @@ export const HeaderContent = styled.header`
     top: 0;
     left: 0;
     padding: 12px 0;
-    background: skyblue; // 지울꺼
+
+    &.active {
+        background: #fff;
+        box-shadow: 0px 2px 8px rgba(71, 83, 103, 0.1);
+    }
 
     .inner {
         ${({ theme }) => theme.common.flexCenter};

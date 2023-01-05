@@ -19,7 +19,7 @@ export const ProfileContent = styled.div`
     height: 200px;
     border-radius: 4px;
     background: #fff;
-    ${({ theme }) => theme.common.boxShadow};
+    box-shadow: 0px 0px 10px rgba(71, 83, 103, 0.2);
 
     &::before {
         content: "";

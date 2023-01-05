@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Nav from "./Nav";
 import RightMenu from "./RightMenu";
@@ -8,8 +8,21 @@ import * as Style from "@/style/layout/header/Header-style";
 import logo from "@/images/logo.svg";
 
 const Header = () => {
+    const [headerBackground, setHeaderBackground] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    });
+
+    const handleScroll = () => {
+        setHeaderBackground(window.scrollY ? true : false);
+    };
+
     return (
-        <Style.HeaderContent>
+        <Style.HeaderContent className={headerBackground ? "active" : ""}>
             <div className="inner">
                 <Style.LeftContent>
                     <h1>

@@ -74,10 +74,6 @@ const common = {
         justify-content: center;
         align-items: center;
     `,
-
-    boxShadow: `
-        box-shadow: 0px 0px 10px rgba(71, 83, 103, 0.2);
-    `,
 };
 
 const size = {

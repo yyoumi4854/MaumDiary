@@ -30,7 +30,7 @@ const Global = createGlobalStyle`
         text-decoration: none;
         color: ${({ theme }) => theme.colors.mainDark};
     }
-  
+
     button{
         padding: 0;
         background: transparent;
