@@ -58,7 +58,7 @@ const fonts = {
         title: "2rem", // 32px
         middle: "1.5rem", // 24px
         small: ".9rem", // 14.4px
-        xSmall: ".5rem", // 8px
+        // xSmall: ".5rem", // 8px
     },
 
     weight: {
@@ -70,10 +70,14 @@ const fonts = {
 
 const common = {
     flexCenter: `
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  `,
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `,
+
+    boxShadow: `
+        box-shadow: 0px 0px 10px rgba(71, 83, 103, 0.2);
+    `,
 };
 
 const size = {

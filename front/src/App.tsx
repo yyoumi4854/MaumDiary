@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import Header from "./layout/header/Header";
+
 import reactLogo from "./assets/react.svg";
 
 // 외부 라이브러리를 임포트 하는 구문
@@ -26,7 +29,8 @@ function App() {
     // memo(컴포넌트를 메모라이징) useMemo(연산한 결과) useCallback(함수) 비용이 있어서 너무 남발하면 더 느려져요
 
     return (
-        <div className="App">
+        <div className="App" style={{ background: "lightyellow", height: "120vh" }}>
+            <Header />
             <div>
                 <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
                     <img src="/vite.svg" className="logo" alt="Vite logo" />
