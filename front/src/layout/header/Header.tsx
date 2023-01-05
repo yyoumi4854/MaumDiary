@@ -26,7 +26,9 @@ const Header = () => {
             <div className="inner">
                 <Style.LeftContent>
                     <h1>
-                        <img src={logo} alt="마음일기 로고" />
+                        <a href="#">
+                            <img src={logo} alt="마음일기 로고" />
+                        </a>
                     </h1>
                     <Nav />
                 </Style.LeftContent>

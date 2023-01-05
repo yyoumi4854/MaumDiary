@@ -10,9 +10,15 @@ export const ChattingLinkContent = styled.div`
         position: relative;
         width: 36px;
         height: 36px;
+        border-radius: 50%;
+        transition: all 0.2s;
+
+        &:hover {
+            background: rgba(132, 179, 255, 0.2);
+        }
 
         svg {
-            font-size: ${({ theme }) => theme.fonts.size.middle};
+            font-size: 20px;
         }
 
         span {

@@ -13,6 +13,6 @@ export const NavContent = styled.nav`
     }
 
     ${({ theme }) => theme.device.mobile} {
-        margin: 16px 0 40px;
+        margin: 12px 0 40px;
     }
 `;

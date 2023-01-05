@@ -5,6 +5,7 @@ export const HeaderContent = styled.header`
     top: 0;
     left: 0;
     padding: 12px 0;
+    transition: all 0.2s;
 
     &.active {
         background: #fff;
