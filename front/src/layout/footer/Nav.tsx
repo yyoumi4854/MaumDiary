@@ -1,10 +1,10 @@
 import React from "react";
 
-import * as Style from "@/style/layout/header/Nav-style";
+import * as Style from "@/style/layout/footer/Nav-style";
 
 const Nav = () => {
     return (
-        <Style.NavContent className="pc">
+        <Style.NavContent>
             <ul>
                 <li>
                     <a href="#">일기장</a>

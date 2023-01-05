@@ -5,10 +5,7 @@ export const NavContent = styled.nav`
 
     ul {
         display: flex;
-
-        li + li {
-            margin-left: 24px;
-        }
+        gap: 0 24px;
 
         li {
             a {

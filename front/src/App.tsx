@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Header from "./layout/header/Header";
+import Footer from "./layout/footer/Footer";
 
 import reactLogo from "./assets/react.svg";
 
@@ -29,24 +30,27 @@ function App() {
     // memo(컴포넌트를 메모라이징) useMemo(연산한 결과) useCallback(함수) 비용이 있어서 너무 남발하면 더 느려져요
 
     return (
-        <div className="App" style={{ background: "lightyellow", height: "120vh" }}>
+        <div className="App" style={{ background: "lightyellow" }}>
             <Header />
-            <div>
-                <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-                    <img src="/vite.svg" className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
+            <div style={{ height: "120vh" }}>
+                <div>
+                    <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
+                        <img src="/vite.svg" className="logo" alt="Vite logo" />
+                    </a>
+                    <a href="https://reactjs.org" target="_blank" rel="noreferrer">
+                        <img src={reactLogo} className="logo react" alt="React logo" />
+                    </a>
+                </div>
+                <h1>Vite + React</h1>
+                <div className="card">
+                    <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
+                    <p>
+                        Edit <code>src/App.tsx</code> and save to test HMR
+                    </p>
+                </div>
+                <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
             </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+            <Footer />
         </div>
     );
 }
