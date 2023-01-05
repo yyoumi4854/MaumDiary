@@ -11,7 +11,7 @@ const Global = createGlobalStyle`
         outline: none;
     }
 
-    body{
+    html{
         font-family: 'Noto Sans KR', sans-serif;
         letter-spacing: -0.0125em;
         color: ${({ theme }) => theme.colors.mainDark};
@@ -35,7 +35,7 @@ const Global = createGlobalStyle`
         padding: 0;
         background: transparent;
         border: 0;
-        font-size: 16px;
+        font-size: ${({ theme }) => theme.fonts.size.basicsDesktop};
         cursor: pointer;
     }
 
@@ -46,6 +46,44 @@ const Global = createGlobalStyle`
     .inner{
         max-width: 1200px;
         margin: 0 auto;
+    }
+
+    // 반응형 조작을 위한 css
+    .pc {
+        display: block;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    ${({ theme }) => theme.device.desktop}{
+        .inner{
+            margin: 0 3%;
+        }
+    }
+
+    ${({ theme }) => theme.device.mobile}{
+        html {
+            font-size: ${({ theme }) => theme.fonts.size.basicsMobile};
+        }
+
+        button{
+            font-size: ${({ theme }) => theme.fonts.size.basicsMobile};
+        }
+
+        // 반응형 조작을 위한 css
+        .pc {
+            display: none;
+        }
+
+        .mobile {
+            display: block;
+        }
+
+        .inner{
+            margin: 0 5%;
+        }
     }
 `;
 

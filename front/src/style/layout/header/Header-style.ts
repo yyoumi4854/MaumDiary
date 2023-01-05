@@ -15,6 +15,14 @@ export const HeaderContent = styled.header`
         ${({ theme }) => theme.common.flexCenter};
         justify-content: space-between;
     }
+
+    ${({ theme }) => theme.device.mobile} {
+        padding: 8px 0;
+
+        h1 img {
+            height: 24px;
+        }
+    }
 `;
 
 export const LeftContent = styled.div`

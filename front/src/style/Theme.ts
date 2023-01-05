@@ -54,7 +54,7 @@ const fonts = {
     size: {
         basicsDesktop: "16px",
         // basicsTablet: "15px",
-        basicsMibile: "13px",
+        basicsMobile: "14px",
         title: "2rem", // 32px
         middle: "1.5rem", // 24px
         small: ".9rem", // 14.4px
@@ -78,13 +78,14 @@ const common = {
 
 const size = {
     desktop: "1200px",
-    tablet: "768px",
-    mobile: "600px",
+    // tablet: "768px",
+    // mobile: "600px",
+    mobile: "768px",
 };
 
 const device = {
     desktop: `@media only screen and (max-width: ${size.desktop})`,
-    tablet: `@media only screen and (max-width: ${size.tablet})`,
+    // tablet: `@media only screen and (max-width: ${size.tablet})`,
     mobile: `@media only screen and (max-width: ${size.mobile})`,
 };
 

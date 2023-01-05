@@ -7,10 +7,17 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 const ChattingLink = () => {
     return (
         <Style.ChattingLinkContent>
-            <a href="#">
-                <TelegramIcon />
-                <span>10</span>
-            </a>
+            <ul>
+                <li className="pc">
+                    <a href="#">
+                        <TelegramIcon />
+                        <span>10</span>
+                    </a>
+                </li>
+                <li className="mobile">
+                    <a href="#">서비스 소개</a>
+                </li>
+            </ul>
         </Style.ChattingLinkContent>
     );
 };

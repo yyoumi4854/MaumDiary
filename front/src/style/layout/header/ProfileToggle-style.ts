@@ -65,7 +65,7 @@ export const ProfileTopContent = styled.div`
 
 export const ProfileBottomContent = styled.div`
     width: 100%;
-    padding: 16px;
+    padding: 8px 16px;
     border-top: 1px solid ${({ theme }) => theme.colors.greyBorder};
 
     ul li > * {

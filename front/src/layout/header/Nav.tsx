@@ -4,13 +4,13 @@ import * as Style from "@/style/layout/header/Nav-style";
 
 const Nav = () => {
     return (
-        <Style.NavContent>
+        <Style.NavContent className="pc">
             <ul>
                 <li>
-                    <a href="#">일기장</a>
+                    <a href="#">서비스소개</a>
                 </li>
                 <li>
-                    <a href="#">서비스소개</a>
+                    <a href="#">일기장</a>
                 </li>
             </ul>
         </Style.NavContent>

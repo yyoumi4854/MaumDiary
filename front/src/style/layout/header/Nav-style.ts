@@ -9,5 +9,15 @@ export const NavContent = styled.nav`
         li + li {
             margin-left: 24px;
         }
+
+        li {
+            a {
+                transition: all 0.3s;
+            }
+
+            &:hover a {
+                color: ${({ theme }) => theme.colors.mainDeep};
+            }
+        }
     }
 `;
