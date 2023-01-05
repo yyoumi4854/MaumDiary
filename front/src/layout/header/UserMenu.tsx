@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import * as Style from "@/style/layout/header/UserMenu-style";
 
 const UserMenu = () => {
@@ -7,7 +9,7 @@ const UserMenu = () => {
         <Style.UserMenuContent>
             <ul>
                 <li>
-                    <a href="#">로그인</a>
+                    <Link to="/login">로그인</Link>
                 </li>
                 <li>
                     <a href="#">회원가입</a>
