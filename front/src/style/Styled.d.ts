@@ -8,4 +8,13 @@ declare module "styled-components" {
         device: ThemeType.deviceType;
         common: ThemeType.commonType;
     }
+
+    export interface TextStyle {
+        lineHeight?: boolean; // 1줄: 1, 2줄이상: 1.5
+    }
+
+    export interface FormStyle {
+        isButton?: boolean;
+        warnning?: boolean;
+    }
 }
