@@ -1,8 +1,8 @@
 import React from "react";
 
-import * as TextStyle from "@/style/Text-style";
-import * as FormStyle from "@/style/Form-style";
-import * as ButtonStyle from "@/style/Button-style";
+import * as TextStyle from "@/style/common/Text-style";
+import * as FormStyle from "@/style/common/Form-style";
+import * as ButtonStyle from "@/style/common/Button-style";
 
 import faviconLogo from "@/images/favicon-logo.svg";
 

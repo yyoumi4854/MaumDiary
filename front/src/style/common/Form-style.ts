@@ -1,5 +1,5 @@
 import styled, { FormStyle } from "styled-components";
-import theme from "./Theme";
+import theme from "../Theme";
 
 export const BasicsInputText = styled.input<FormStyle>`
     display: block;
