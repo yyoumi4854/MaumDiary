@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const HeaderContent = styled.header`
+    display: flex;
     position: sticky;
     top: 0;
     left: 0;
-    padding: 12px 0;
+    height: 60px;
     transition: all 0.2s;
+    z-index: 10;
 
     &.active {
         background: #fff;
@@ -15,13 +17,20 @@ export const HeaderContent = styled.header`
     .inner {
         ${({ theme }) => theme.common.flexCenter};
         justify-content: space-between;
+
+        h1 img {
+            filter: invert(62%) sepia(54%) saturate(627%) hue-rotate(189deg) brightness(103%)
+                contrast(101%);
+        }
     }
 
     ${({ theme }) => theme.device.mobile} {
-        padding: 8px 0;
+        height: 48px;
 
-        h1 img {
-            height: 24px;
+        .inner {
+            h1 img {
+                height: 24px;
+            }
         }
     }
 `;
