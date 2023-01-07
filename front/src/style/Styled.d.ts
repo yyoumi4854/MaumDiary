@@ -11,10 +11,16 @@ declare module "styled-components" {
 
     export interface TextStyle {
         lineHeight?: boolean; // 1줄: 1, 2줄이상: 1.5
+        textAlign?: string;
     }
 
     export interface FormStyle {
         isButton?: boolean;
         warnning?: boolean;
+        marginBottom?: string;
+    }
+
+    export interface UserFormStyle {
+        marginTop?: string;
     }
 }

@@ -81,12 +81,14 @@ const size = {
     // tablet: "768px",
     // mobile: "600px",
     mobile: "768px",
+    userForm: "448px",
 };
 
 const device = {
     desktop: `@media only screen and (max-width: ${size.desktop})`,
     // tablet: `@media only screen and (max-width: ${size.tablet})`,
     mobile: `@media only screen and (max-width: ${size.mobile})`,
+    userForm: `@media only screen and (max-width: ${size.userForm})`,
 };
 
 const theme: DefaultTheme = {

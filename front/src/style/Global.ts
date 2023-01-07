@@ -43,8 +43,12 @@ const Global = createGlobalStyle`
         vertical-align: middle;
     }
 
+    .content{
+        min-height: calc(100vh - 60px - 240px);
+    }
+
     .inner{
-        max-width: 1200px;
+        width: 1200px;
         margin: 0 auto;
     }
 
@@ -59,6 +63,7 @@ const Global = createGlobalStyle`
 
     ${({ theme }) => theme.device.desktop}{
         .inner{
+            width: 100%;
             margin: 0 3%;
         }
     }
@@ -70,6 +75,10 @@ const Global = createGlobalStyle`
 
         button{
             font-size: ${({ theme }) => theme.fonts.size.basicsMobile};
+        }
+
+        .content{
+            min-height: calc(100vh - 48px - 160px);
         }
 
         // 반응형 조작을 위한 css

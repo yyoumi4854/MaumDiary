@@ -1,10 +1,10 @@
 import styled, { FormStyle } from "styled-components";
-import theme from "../Theme";
 
 export const BasicsInputText = styled.input<FormStyle>`
     display: block;
-    width: ${({ isButton }) => (isButton ? "auto" : "400px")};
+    width: ${({ isButton }) => (isButton ? "auto" : "100%")};
     height: 40px;
+    margin-bottom: ${({ marginBottom }) => marginBottom};
     padding: 0 16px;
     border: 1px solid ${({ theme }) => theme.colors.greyBorder};
     border-radius: 4px;
@@ -31,7 +31,7 @@ export const BasicsInputText = styled.input<FormStyle>`
 `;
 
 export const FormContent = styled.div`
-    width: 400px;
+    width: 100%;
     height: 96px;
 
     p {
@@ -49,5 +49,5 @@ export const FormContent = styled.div`
 export const MessageText = styled.span<FormStyle>`
     margin: 8px;
     font-size: ${({ theme }) => theme.fonts.size.small};
-    color: ${({ warnning }) => (warnning ? theme.colors.warnning : theme.colors.confirm)};
+    color: ${({ theme, warnning }) => (warnning ? theme.colors.warnning : theme.colors.confirm)};
 `;
