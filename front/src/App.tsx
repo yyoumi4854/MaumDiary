@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Header from "./layout/header/Header";
 import Footer from "./layout/footer/Footer";
-import Login from "./page/login/Login";
+import Login from "./page/Login";
 
 function App() {
     return (
