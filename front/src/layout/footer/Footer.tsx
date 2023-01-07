@@ -9,13 +9,15 @@ import logo from "@/images/logo.svg";
 const Footer = () => {
     return (
         <Style.FooterContent>
-            <h1>
-                <img src={logo} alt="마음일기" />
-            </h1>
+            <div>
+                <h1>
+                    <img src={logo} alt="마음일기" />
+                </h1>
 
-            <Nav />
+                <Nav />
 
-            <p>&copy; 2023. MaumDiary all rights reserved.</p>
+                <p>&copy; 2023. MaumDiary all rights reserved.</p>
+            </div>
         </Style.FooterContent>
     );
 };

@@ -1,23 +1,26 @@
 import styled from "styled-components";
 
 export const FooterContent = styled.footer`
-    padding: 40px 0;
+    ${({ theme }) => theme.common.flexCenter}
+    height: 240px;
     text-align: center;
     background: ${({ theme }) => theme.colors.mainDark};
     color: ${({ theme }) => theme.colors.greyBorder};
 
-    h1 img {
-        filter: invert(100%) sepia(94%) saturate(2%) hue-rotate(254deg) brightness(108%)
-            contrast(100%);
-    }
+    div {
+        h1 img {
+            filter: invert(100%) sepia(0%) saturate(4411%) hue-rotate(274deg) brightness(128%)
+                contrast(76%);
+        }
 
-    p {
-        font-weight: ${({ theme }) => theme.fonts.weight.light};
-        font-size: ${({ theme }) => theme.fonts.size.small};
+        p {
+            font-weight: ${({ theme }) => theme.fonts.weight.light};
+            font-size: ${({ theme }) => theme.fonts.size.small};
+        }
     }
 
     ${({ theme }) => theme.device.mobile} {
-        padding: 24px 0;
+        height: 160px;
 
         h1 img {
             height: 24px;
