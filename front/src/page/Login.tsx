@@ -39,7 +39,7 @@ const Login = () => {
                             <Link to={"/recovery/id"}>아이디 찾기</Link>
                         </li>
                         <li>
-                            <Link to={"/recovery/id"}>비밀번호 찾기</Link>
+                            <Link to={"/recovery/password"}>비밀번호 찾기</Link>
                         </li>
                         <li>
                             <a href="#">회원가입</a>

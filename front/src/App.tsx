@@ -5,6 +5,7 @@ import Header from "./layout/header/Header";
 import Footer from "./layout/footer/Footer";
 import Login from "./page/Login";
 import RecoveryID from "./page/RecoveryID";
+import RecoveryPW from "./page/RecoveryPW";
 
 import { Star } from "./style/common/floatBackground-style";
 
@@ -16,6 +17,7 @@ function App() {
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/recovery/id" element={<RecoveryID />} />
+                    <Route path="/recovery/password" element={<RecoveryPW />} />
                 </Routes>
                 {/* <div style={{ height: "110vh" }}>
                     <Star>

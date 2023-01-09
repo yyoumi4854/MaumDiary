@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const RecoveryText = styled.p`
-    ${({ theme }) => theme.common.positionXCenter};
-    top: inherit;
+    position: absolute;
+    left: 0;
     bottom: -2em;
+    width: 100%;
+    text-align: center;
 
     span {
         font-weight: ${({ theme }) => theme.fonts.weight.bold};
