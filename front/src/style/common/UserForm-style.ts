@@ -37,7 +37,7 @@ export const TitleContent = styled.div`
 export const InputWrap = styled.div<UserFormStyle>`
     position: relative;
     margin-top: ${({ marginTop }) => marginTop};
-    margin-bottom: 64px;
+    margin-bottom: 4em;
 
     & > span {
         position: absolute;
@@ -66,6 +66,7 @@ export const userFomMenu = styled.div`
 
             a {
                 font-weight: ${({ theme }) => theme.fonts.weight.light};
+                font-size: ${({ theme }) => theme.fonts.size.small};
             }
         }
     }

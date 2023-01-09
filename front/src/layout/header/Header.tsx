@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import Nav from "./Nav";
 import RightMenu from "./RightMenu";
@@ -26,9 +27,9 @@ const Header = () => {
             <div className="inner">
                 <Style.LeftContent>
                     <h1>
-                        <a href="#">
+                        <Link to="/">
                             <img src={logo} alt="마음일기 로고" />
-                        </a>
+                        </Link>
                     </h1>
                     <Nav />
                 </Style.LeftContent>

@@ -6,9 +6,7 @@ import kakaoIcon from "@/images/kakao-icon.png";
 
 const pseudoSelectorLine = css`
     content: "";
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    ${({ theme }) => theme.common.positionYCenter}
     width: calc(50% - 1rem);
     height: 1px;
     background: ${({ theme }) => theme.colors.mainDeep};
@@ -24,10 +22,10 @@ export const EasyLoginContent = styled.div`
 
         &::before {
             ${pseudoSelectorLine}
-            left: 0;
         }
         &::after {
             ${pseudoSelectorLine}
+            left: inherit;
             right: 0;
         }
     }
@@ -42,6 +40,9 @@ export const EasyLoginContent = styled.div`
         }
 
         &:hover p svg {
+            -webkit-animation: ${Animation.MoveForwardArrow} 1.5s infinite;
+            -moz-animation: ${Animation.MoveForwardArrow} 1.5s infinite;
+            -o-animation: ${Animation.MoveForwardArrow} 1.5s infinite;
             animation: ${Animation.MoveForwardArrow} 1.5s infinite;
         }
 

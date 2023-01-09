@@ -44,10 +44,17 @@ export const FormContent = styled.div`
         grid-template-columns: 1fr 120px;
         gap: 0 4px;
     }
+
+    ${({ theme }) => theme.device.mobile} {
+        div {
+            grid-template-columns: 1fr 100px;
+        }
+    }
 `;
 
 export const MessageText = styled.span<FormStyle>`
     margin: 8px;
+    font-weight: ${({ theme }) => theme.fonts.weight.light};
     font-size: ${({ theme }) => theme.fonts.size.small};
     color: ${({ theme, warnning }) => (warnning ? theme.colors.warnning : theme.colors.confirm)};
 `;

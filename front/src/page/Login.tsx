@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { BsChevronRight } from "react-icons/bs";
 
 import * as TextStyle from "@/style/common/Text-style";
@@ -19,7 +19,7 @@ const Login = () => {
                     <TextStyle.TitleText textAlign="center">로그인</TextStyle.TitleText>
                 </UserFormStyle.TitleContent>
 
-                <UserFormStyle.InputWrap marginTop="1em">
+                <UserFormStyle.InputWrap marginTop="2.5em">
                     <FormStyle.BasicsInputText
                         type="password"
                         placeholder="아이디"
@@ -36,10 +36,10 @@ const Login = () => {
                 <UserFormStyle.userFomMenu>
                     <ul>
                         <li>
-                            <a href="#">아이디 찾기</a>
+                            <Link to={"/recovery/id"}>아이디 찾기</Link>
                         </li>
                         <li>
-                            <a href="#">비밀번호 찾기</a>
+                            <Link to={"/recovery/id"}>비밀번호 찾기</Link>
                         </li>
                         <li>
                             <a href="#">회원가입</a>

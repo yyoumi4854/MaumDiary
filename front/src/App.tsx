@@ -25,6 +25,55 @@ function App() {
                             <span></span>
                         </div>
                     </Star>
+                    <Star>
+                        <div>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </Star>
+                    <Star>
+                        <div>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </Star>
+                    <Star>
+                        <div>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </Star>
+                    <Star>
+                        <div>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </Star>
+                    <Star>
+                        <div>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </Star>
+                    <Star>
+                        <div>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </Star>
+                    <Star>
+                        <div>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </Star>
                 </div> */}
                 <Footer />
             </div>
