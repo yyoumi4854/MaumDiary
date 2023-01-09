@@ -14,7 +14,7 @@ const colors = {
     // grey
     greyText: "#888",
     greyBorder: "#E1E1E1",
-    gretBackground: "#F8F8F8",
+    greytBackground: "#F8F8F8",
 
     // background by time
     morningLevel1: "#DFEFFF",
@@ -33,7 +33,7 @@ const colors = {
     nightLevel1: "#3A3549",
     nightLevel2: "#544946",
     nightLevel3: "#705E42",
-    nigintStar: "#FFF4BD",
+    nightStar: "#FFF4BD",
 
     // emotion
     emotionConfidence: "#FED723",
@@ -73,6 +73,27 @@ const common = {
         display: flex;
         justify-content: center;
         align-items: center;
+    `,
+
+    positionCenter: `
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    `,
+
+    positionXCenter: `
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    `,
+
+    positionYCenter: `
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
     `,
 };
 
