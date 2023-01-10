@@ -36,7 +36,9 @@ const DynamicBackground = () => {
                     const newOffset = offset + Math.random() * 0.1;
 
                     if (newOffset >= 100) {
-                        return Math.random() * -1;
+                        // return Math.random() * -1;
+
+                        return -((141 / window.innerWidth) * 100);
                     }
 
                     return newOffset;
