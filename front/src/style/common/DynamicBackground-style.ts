@@ -19,12 +19,10 @@ export const Lane = styled.div`
     height: 160px;
 `;
 
-export const Cloud = styled.img.attrs((props: { offset: string }) => ({
+export const Cloud = styled.img.attrs({
     src: CloudSVG,
-    offset: props.offset || 0,
-}))`
+})`
     position: absolute;
     top: 50%;
-    left: ${(props) => props.offset};
     transform: translateY(-50%);
 `;
