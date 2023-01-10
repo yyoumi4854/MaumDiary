@@ -5,7 +5,7 @@ export const BasicsInputText = styled.input<FormStyle>`
     width: ${({ isButton }) => (isButton ? "auto" : "100%")};
     height: 40px;
     margin-bottom: ${({ marginBottom }) => marginBottom};
-    padding: 0 16px;
+    padding: 0 1rem;
     border: 1px solid ${({ theme }) => theme.colors.greyBorder};
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.6);
@@ -53,7 +53,7 @@ export const FormContent = styled.div`
 `;
 
 export const MessageText = styled.span<FormStyle>`
-    margin: 8px;
+    margin: 0.5rem;
     font-weight: ${({ theme }) => theme.fonts.weight.light};
     font-size: ${({ theme }) => theme.fonts.size.small};
     color: ${({ theme, warnning }) => (warnning ? theme.colors.warnning : theme.colors.confirm)};

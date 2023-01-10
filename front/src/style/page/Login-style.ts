@@ -33,10 +33,10 @@ export const EasyLoginContent = styled.div`
     a {
         ${({ theme }) => theme.common.flexCenter}
         justify-content: space-between;
-        margin-top: 1em;
+        margin-top: 1rem;
 
         p svg {
-            margin-left: 0.5em;
+            margin-left: 0.5rem;
         }
 
         &:hover p svg {
