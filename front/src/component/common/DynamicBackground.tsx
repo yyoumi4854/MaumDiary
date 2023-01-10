@@ -30,10 +30,10 @@ const DynamicBackground = () => {
     const period = usePeriodOfDay();
 
     useEffect(() => {
-        const mover = setInterval(() => {
+        const mover = requestAnimationFrame(() => {
             setOffsetList((prev) => {
                 return prev.map((offset) => {
-                    const newOffset = offset + Math.random() * 0.2;
+                    const newOffset = offset + Math.random() * 0.1;
 
                     if (newOffset >= 100) {
                         return Math.random() * -1;
@@ -42,9 +42,9 @@ const DynamicBackground = () => {
                     return newOffset;
                 });
             });
-        }, 900);
+        });
 
-        return () => clearInterval(mover);
+        return () => cancelAnimationFrame(mover);
     });
 
     return (
