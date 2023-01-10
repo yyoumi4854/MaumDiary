@@ -11,7 +11,7 @@ const UserMenu = () => {
                     <Link to="/login">로그인</Link>
                 </li>
                 <li>
-                    <a href="#">회원가입</a>
+                    <Link to={"/register"}>회원가입</Link>
                 </li>
             </ul>
         </Style.UserMenuContent>

@@ -13,7 +13,7 @@ const Global = createGlobalStyle`
 
     html{
         font-family: 'Noto Sans KR', sans-serif;
-        letter-spacing: -0.0125em;
+        letter-spacing: -0.0125rem;
         color: ${({ theme }) => theme.colors.mainDark};
     }
 
