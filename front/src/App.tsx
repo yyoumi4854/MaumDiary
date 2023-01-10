@@ -24,64 +24,6 @@ function App() {
                     <Route path="/recovery/password" element={<RecoveryPW />} />
                     <Route path="/user" element={<User />} />
                 </Routes>
-                {/* <div style={{ height: "110vh" }}>
-                    <Star>
-                        <div>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </Star>
-                    <Star>
-                        <div>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </Star>
-                    <Star>
-                        <div>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </Star>
-                    <Star>
-                        <div>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </Star>
-                    <Star>
-                        <div>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </Star>
-                    <Star>
-                        <div>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </Star>
-                    <Star>
-                        <div>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </Star>
-                    <Star>
-                        <div>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </Star>
-                </div> */}
                 <Footer />
             </div>
         </BrowserRouter>

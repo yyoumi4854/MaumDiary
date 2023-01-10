@@ -50,7 +50,6 @@ export const UserImgContent = styled.div`
     }
 `;
 
-// cancelAccount
 export const ButtonContent = styled.div`
     margin-top: 1.5em;
     button {
