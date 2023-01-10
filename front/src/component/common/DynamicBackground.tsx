@@ -33,7 +33,7 @@ const DynamicBackground = () => {
         const mover = requestAnimationFrame(() => {
             setOffsetList((prev) => {
                 return prev.map((offset) => {
-                    const newOffset = offset + Math.random() * 0.1;
+                    const newOffset = offset + Math.random() * 0.01;
 
                     if (newOffset >= 100) {
                         // return Math.random() * -1;
@@ -55,7 +55,7 @@ const DynamicBackground = () => {
                 <Style.Background backgroundColor={ColorByPeriod[period]}>
                     {OffestList.map((offset, idx) => (
                         <Style.Lane key={idx}>
-                            <Style.Cloud offset={`${offset}%`} />
+                            <Style.Cloud style={{ left: `${offset}%` }} />
                         </Style.Lane>
                     ))}
                 </Style.Background>
