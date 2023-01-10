@@ -56,6 +56,13 @@ const DynamicBackground = () => {
                     {OffestList.map((offset, idx) => (
                         <Style.Lane key={idx}>
                             <Style.Cloud style={{ left: `${offset}%` }} />
+                            <Style.Star>
+                                <div>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </Style.Star>
                         </Style.Lane>
                     ))}
                 </Style.Background>
