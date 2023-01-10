@@ -8,7 +8,7 @@ const ColorByPeriod = {
     dawn: "red",
     morning: "blue",
     afternoon: "green",
-    evening: "yellow",
+    evening: "#3A3549",
 } as const;
 
 const getOffset = () => {
@@ -22,7 +22,7 @@ const getOffset = () => {
 
 const DynamicBackground = () => {
     const [OffestList, setOffsetList] = useState(() => {
-        return Array(Math.trunc(window.innerHeight / 160))
+        return Array(Math.trunc(window.innerHeight / 120)) // 160
             .fill(undefined)
             .map(getOffset);
     });
@@ -33,7 +33,7 @@ const DynamicBackground = () => {
         const mover = requestAnimationFrame(() => {
             setOffsetList((prev) => {
                 return prev.map((offset) => {
-                    const newOffset = offset + Math.random() * 0.01;
+                    const newOffset = offset + Math.random() * 0.01; // 0.01
 
                     if (newOffset >= 100) {
                         // return Math.random() * -1;
@@ -53,18 +53,21 @@ const DynamicBackground = () => {
         <>
             {period !== null && (
                 <Style.Background backgroundColor={ColorByPeriod[period]}>
-                    {OffestList.map((offset, idx) => (
-                        <Style.Lane key={idx}>
-                            <Style.Cloud style={{ left: `${offset}%` }} />
-                            <Style.Star>
-                                <div>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </Style.Star>
-                        </Style.Lane>
-                    ))}
+                    {OffestList.map((offset, idx) => {
+                        return (
+                            <Style.Lane key={idx}>
+                                {period === "morning" || period === "afternoon" ? (
+                                    <Style.Cloud style={{ left: `${offset}%` }} />
+                                ) : (
+                                    <Style.Star style={{ left: `${offset}%` }}>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </Style.Star>
+                                )}
+                            </Style.Lane>
+                        );
+                    })}
                 </Style.Background>
             )}
         </>

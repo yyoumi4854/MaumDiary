@@ -1,7 +1,11 @@
 import * as Style from "@/style/layout/Main-style";
 
-const Main = () => {
-    return <Style.MainContainer></Style.MainContainer>;
+interface Props {
+    children: React.ReactNode;
+}
+
+const Main = ({ children }: Props) => {
+    return <Style.MainContainer>{children}</Style.MainContainer>;
 };
 
 export default Main;

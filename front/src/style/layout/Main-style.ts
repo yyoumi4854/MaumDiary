@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const MainContainer = styled.main`
-    position: relative;
+    /* position: relative; */
 
     width: 100vw;
     height: 100vh;
 
     /* background-color: none; */
 
-    z-index: 1;
+    /* z-index: 1000; */
 `;
