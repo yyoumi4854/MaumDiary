@@ -5,13 +5,6 @@ import * as Style from "@/style/common/DynamicBackground-style";
 
 import usePeriodOfDay from "@/hooks/useReriodOfDay";
 
-const ColorByPeriod = {
-    dawn: theme.TimeGradient.dawn,
-    morning: theme.TimeGradient.morning,
-    afternoon: theme.TimeGradient.afternoon,
-    evening: theme.TimeGradient.evening,
-} as const;
-
 const getOffset = () => {
     const offset = Math.floor(((Math.random() * window.innerWidth) / window.innerWidth) * 100);
 
@@ -53,7 +46,7 @@ const DynamicBackground = () => {
     return (
         <>
             {period !== null && (
-                <Style.Background backgroundColor={ColorByPeriod[period]}>
+                <Style.Background>
                     {OffestList.map((offset, idx) => {
                         return (
                             <Style.Lane key={idx}>
