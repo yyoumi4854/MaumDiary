@@ -7,14 +7,14 @@ import * as Animation from "../common/Animation-style";
 import CloudSVG from "@/images/cloud.svg";
 
 export const Background = styled.div<{ backgroundColor: string }>`
-    position: relative;
+    position: fixed;
+    left: 0;
+    top: 0;
 
-    width: 100vw;
+    width: 100%;
     height: 100vh;
 
-    background-color: ${({ backgroundColor }) => backgroundColor};
-
-    z-index: -9999;
+    /* background: ${({ backgroundColor }) => backgroundColor}; */
 `;
 
 export const Lane = styled.div`

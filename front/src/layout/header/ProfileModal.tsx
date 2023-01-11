@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { BsPerson, BsPower } from "react-icons/bs";
 
 import * as Style from "@/style/layout/header/ProfileModal-style";
-
-import { BsPerson } from "react-icons/bs";
-import { BsPower } from "react-icons/bs";
 
 const ProfileModal = () => {
     const modalRef = useRef<HTMLButtonElement>(null);
@@ -42,10 +41,10 @@ const ProfileModal = () => {
                     <Style.ProfileBottomContent>
                         <ul>
                             <li>
-                                <a href="#">
+                                <Link to="/user">
                                     <BsPerson />
                                     <span>내정보</span>
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <button>

@@ -7,6 +7,12 @@ const mainColorButton = css`
     color: #fff;
 `;
 
+const greyColorButton = css`
+    height: 40px;
+    background: ${({ theme }) => theme.colors.greyBackground};
+    color: ${({ theme }) => theme.colors.greyText};
+`;
+
 const disabled = css`
     &:disabled {
         opacity: 0.5;
@@ -32,4 +38,22 @@ export const LongButton = styled.button`
     border-radius: 4px;
     ${mainColorButton}
     ${disabled}
+`;
+
+// 취소/탈퇴
+export const ButtonWrap = styled.div`
+    ${({ theme }) => theme.common.flexCenter};
+
+    button {
+        width: 80px;
+        height: 40px;
+        border-radius: 2px;
+    }
+    button:first-of-type {
+        ${greyColorButton}
+    }
+    button:last-of-type {
+        margin-left: 0.5rem;
+        ${mainColorButton}
+    }
 `;

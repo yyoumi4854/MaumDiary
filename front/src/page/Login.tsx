@@ -42,7 +42,7 @@ const Login = () => {
                             <Link to={"/recovery/password"}>비밀번호 찾기</Link>
                         </li>
                         <li>
-                            <a href="#">회원가입</a>
+                            <Link to={"/register"}>회원가입</Link>
                         </li>
                     </ul>
                 </UserFormStyle.userFomMenu>
