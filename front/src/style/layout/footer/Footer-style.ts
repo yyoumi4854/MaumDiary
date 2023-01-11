@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 export const FooterContent = styled.footer`
+    position: relative;
     ${({ theme }) => theme.common.flexCenter}
     height: 240px;
     text-align: center;
     background: ${({ theme }) => theme.colors.mainDark};
     color: ${({ theme }) => theme.colors.greyBorder};
+    z-index: 10;
 
     div {
         h1 img {

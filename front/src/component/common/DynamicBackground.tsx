@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 
+import theme from "@/style/Theme";
 import * as Style from "@/style/common/DynamicBackground-style";
 
 import usePeriodOfDay from "@/hooks/useReriodOfDay";
 
 const ColorByPeriod = {
-    dawn: "red",
-    morning: "blue",
-    afternoon: "green",
-    evening: "#3A3549",
+    dawn: theme.TimeGradient.dawn,
+    morning: theme.TimeGradient.morning,
+    afternoon: theme.TimeGradient.afternoon,
+    evening: theme.TimeGradient.evening,
 } as const;
 
 const getOffset = () => {

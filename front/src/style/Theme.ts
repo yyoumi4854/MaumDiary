@@ -4,6 +4,7 @@ export type colorsType = typeof colors;
 export type fontsType = typeof fonts;
 export type commonType = typeof common;
 export type deviceType = typeof device;
+export type backgroundTimeGradient = typeof TimeGradient;
 
 const colors = {
     // main
@@ -18,23 +19,8 @@ const colors = {
     greyBorder: "#E1E1E1",
     greyBackground: "#F8F8F8",
 
-    // background by time
-    morningLevel1: "#DFEFFF",
-    morningLevel2: "#EEECF5",
-    morningLevel3: "#FFE9E9",
-
-    dayLevel1: "#BED6FF",
-    dayLevel2: "#D4E4F5",
-    dayLevel3: "#FFFEE3",
-
-    afternoonLevel1: "#FFC9AD",
-    afternoonLevel2: "#D0BDC6",
-    afternoonLevel3: "#AFC5E8",
+    // background time
     afternoonCloud: "#FFF0C7",
-
-    nightLevel1: "#3A3549",
-    nightLevel2: "#544946",
-    nightLevel3: "#705E42",
     nightStar: "#FFF4BD",
 
     // emotion
@@ -60,7 +46,6 @@ const fonts = {
         title: "2rem", // 32px
         middle: "1.5rem", // 24px
         small: ".9rem", // 14.4px
-        // xSmall: ".5rem", // 8px
     },
 
     weight: {
@@ -114,11 +99,19 @@ const device = {
     userForm: `@media only screen and (max-width: ${size.userForm})`,
 };
 
+const TimeGradient = {
+    dawn: `linear-gradient(to bottom, #dfefff 0%, #eeecf5 100vh, #ffe9e9 100%);`,
+    morning: `linear-gradient(to bottom, #BED6FF 0%, #D4E4F5 100vh, #FFFEE3 100%);`,
+    afternoon: `linear-gradient(to bottom, #FFC9AD 0%, #D0BDC6 100vh, #AFC5E8 100%);`,
+    evening: `linear-gradient(to bottom, #3A3549 0%, #544946 100vh, #705E42 100%);`,
+};
+
 const theme: DefaultTheme = {
     colors,
     fonts,
     device,
     common,
+    TimeGradient,
 };
 
 export default theme;

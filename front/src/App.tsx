@@ -11,6 +11,7 @@ import RecoveryPW from "./page/RecoveryPW";
 import User from "./page/User";
 
 import DynamicBackground from "./component/common/DynamicBackground";
+import { relative } from "path";
 
 function App() {
     return (

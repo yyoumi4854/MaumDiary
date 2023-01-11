@@ -7,7 +7,7 @@ import UserMenu from "./UserMenu";
 import * as Style from "@/style/layout/header/RightMenu-style";
 
 const RightMenu = () => {
-    const [login, setLogin] = useState(true); // 임의로 넣은 값
+    const [login, setLogin] = useState(false); // 임의로 넣은 값
 
     return (
         <>

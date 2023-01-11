@@ -7,6 +7,7 @@ declare module "styled-components" {
         fonts: ThemeType.fontsType;
         device: ThemeType.deviceType;
         common: ThemeType.commonType;
+        TimeGradient: ThemeType.TimeGradient;
     }
 
     export interface TextStyle {
