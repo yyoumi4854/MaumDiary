@@ -18,18 +18,20 @@ function App() {
         <>
             <DynamicBackground />
             <Main>
-                <Router>
-                    <Header />
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/recovery/id" element={<RecoveryID />} />
-                        <Route path="/recovery/password" element={<RecoveryPW />} />
-                        <Route path="/user" element={<User />} />
-                    </Routes>
-                    <Footer />
-                </Router>
+                <div style={{ position: "relative", zIndex: 10 }}>
+                    <Router>
+                        <Header />
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/recovery/id" element={<RecoveryID />} />
+                            <Route path="/recovery/password" element={<RecoveryPW />} />
+                            <Route path="/user" element={<User />} />
+                        </Routes>
+                        <Footer />
+                    </Router>
+                </div>
             </Main>
         </>
     );
