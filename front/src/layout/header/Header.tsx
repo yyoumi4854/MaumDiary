@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import Logo from "@/component/common/Logo";
 import Nav from "./Nav";
 import RightMenu from "./RightMenu";
 
 import * as Style from "@/style/layout/header/Header-style";
-
-import logo from "@/images/logo.svg";
 
 const Header = () => {
     const [headerBackground, setHeaderBackground] = useState(false);
@@ -26,11 +25,9 @@ const Header = () => {
         <Style.HeaderContent className={headerBackground ? "active" : ""}>
             <div className="inner">
                 <Style.LeftContent>
-                    <h1>
-                        <Link to="/">
-                            <img src={logo} alt="마음일기 로고" />
-                        </Link>
-                    </h1>
+                    <Link to="/">
+                        <Logo />
+                    </Link>
                     <Nav />
                 </Style.LeftContent>
                 <RightMenu />
