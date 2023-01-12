@@ -1,9 +1,11 @@
 import * as Style from "@/style/layout/Main-style";
 
+import { Period } from "@/types";
+
 import theme from "@/style/Theme";
-import usePeriodOfDay from "@/hooks/useReriodOfDay";
 
 interface Props {
+    period: Period;
     children: React.ReactNode;
 }
 
@@ -14,13 +16,7 @@ const ColorByPeriod = {
     evening: theme.TimeGradient.evening,
 } as const;
 
-const Main = ({ children }: Props) => {
-    const period = usePeriodOfDay();
-
-    if (period === null) {
-        return null;
-    }
-
+const Main = ({ period, children }: Props) => {
     return <Style.MainContainer background={ColorByPeriod[period]}>{children}</Style.MainContainer>;
 };
 

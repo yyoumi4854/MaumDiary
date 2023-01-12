@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 
-import theme from "@/style/Theme";
+import { Period } from "@/types";
+
 import * as Style from "@/style/common/DynamicBackground-style";
 
-import usePeriodOfDay from "@/hooks/useReriodOfDay";
+interface Props {
+    period: Period;
+}
 
 const getOffset = () => {
     const offset = Math.floor(((Math.random() * window.innerWidth) / window.innerWidth) * 100);
@@ -14,14 +17,12 @@ const getOffset = () => {
     );
 };
 
-const DynamicBackground = () => {
+const DynamicBackground = ({ period }: Props) => {
     const [OffestList, setOffsetList] = useState(() => {
         return Array(Math.trunc(window.innerHeight / 120)) // 160
             .fill(undefined)
             .map(getOffset);
     });
-
-    const period = usePeriodOfDay();
 
     useEffect(() => {
         const mover = requestAnimationFrame(() => {
@@ -44,27 +45,23 @@ const DynamicBackground = () => {
     });
 
     return (
-        <>
-            {period !== null && (
-                <Style.Background>
-                    {OffestList.map((offset, idx) => {
-                        return (
-                            <Style.Lane key={idx}>
-                                {period === "morning" || period === "afternoon" ? (
-                                    <Style.Cloud style={{ left: `${offset}%` }} />
-                                ) : (
-                                    <Style.Star style={{ left: `${offset}%` }}>
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </Style.Star>
-                                )}
-                            </Style.Lane>
-                        );
-                    })}
-                </Style.Background>
-            )}
-        </>
+        <Style.Background>
+            {OffestList.map((offset, idx) => {
+                return (
+                    <Style.Lane key={idx}>
+                        {period === "morning" || period === "afternoon" ? (
+                            <Style.Cloud style={{ left: `${offset}%` }} />
+                        ) : (
+                            <Style.Star style={{ left: `${offset}%` }}>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </Style.Star>
+                        )}
+                    </Style.Lane>
+                );
+            })}
+        </Style.Background>
     );
 };
 
