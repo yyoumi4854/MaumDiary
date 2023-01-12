@@ -1,10 +1,11 @@
 import instance from ".";
+import dayjs from "dayjs";
 
 export const fetchSunriseAndSunset = async () => {
     const endpoint =
         "https://apis.data.go.kr/B090041/openapi/service/RiseSetInfoService/getAreaRiseSetInfo";
     const serviceKey = import.meta.env.VITE_OPEN_API_KEY;
-    const locdate = "20230105";
+    const locdate = dayjs().format("YYYYMMDD");
     const location = "서울";
 
     const URL = `${endpoint}?serviceKey=${serviceKey}&locdate=${locdate}&location=${location}`;
