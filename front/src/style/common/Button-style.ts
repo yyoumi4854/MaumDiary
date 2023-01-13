@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { darken, lighten } from "polished";
 
 const mainColorButton = css`
     height: 40px;

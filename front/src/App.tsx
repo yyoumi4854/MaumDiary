@@ -11,7 +11,7 @@ import RecoveryPW from "./page/RecoveryPW";
 import User from "./page/User";
 
 import DynamicBackground from "./component/common/DynamicBackground";
-import { relative } from "path";
+import Diary from "./page/diary/Diary";
 
 function App() {
     return (
@@ -28,6 +28,7 @@ function App() {
                             <Route path="/recovery/id" element={<RecoveryID />} />
                             <Route path="/recovery/password" element={<RecoveryPW />} />
                             <Route path="/user" element={<User />} />
+                            <Route path="/diary" element={<Diary />} />
                         </Routes>
                         <Footer />
                     </Router>
