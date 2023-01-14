@@ -1,4 +1,5 @@
 import { DefaultTheme } from "styled-components";
+import { transparentize } from "polished";
 
 export type colorsType = typeof colors;
 export type fontsType = typeof fonts;
@@ -81,6 +82,12 @@ const common = {
         top: 50%;
         left: 0;
         transform: translateY(-50%);
+    `,
+
+    diaryContent: `
+    border-radius: 10px;
+    background: ${transparentize(0.5, "#fff")};
+    backdrop-filter: saturate(180%) blur(2px);
     `,
 };
 

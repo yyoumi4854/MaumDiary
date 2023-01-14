@@ -9,16 +9,16 @@ import * as Style from "@/style/component/CancelAccount-style";
 
 import faviconLogo from "@/images/favicon-logo.svg";
 
-type PropsType = {
+type Props = {
     cancelAccountModal: boolean;
     setCancelAccountModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CancelAccount = ({ cancelAccountModal, setCancelAccountModal }: PropsType) => {
+const CancelAccount = ({ cancelAccountModal, setCancelAccountModal }: Props) => {
     useEffect(() => {
         FixModal.disableScroll();
         return FixModal.enableScroll;
-    }, []);
+    });
 
     return (
         <Style.FixedContent>

@@ -8,12 +8,12 @@ import {
 
 import * as Style from "@/style/page/diary/AsideNav-style";
 
-type PropsType = {
+type Props = {
     diaryCurrent: string;
     setDiaryCurrent: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const AsideNav = ({ diaryCurrent, setDiaryCurrent }: PropsType) => {
+const AsideNav = ({ diaryCurrent, setDiaryCurrent }: Props) => {
     return (
         <aside className="pc">
             <Style.ProfileContent>

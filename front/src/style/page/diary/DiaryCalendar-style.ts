@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
 export const DiaryCalendarContent = styled.div`
-    background: blue;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 `;
