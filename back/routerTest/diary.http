@@ -6,8 +6,8 @@ POST {{url}}/account/login
 Content-Type: application/json
 
 {
-    "userID": "ttest",
-    "password": "ttest"
+    "userID": "test4",
+    "password": "test4"
 }
 ###logout
 delete {{url}}/account
@@ -50,15 +50,20 @@ Content-Type: application/json
 
 ### 일기 작성 api
 post {{url}}/diaries/write
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoicnV5cmlhIiwiaWF0IjoxNjcwODMxNDYxLCJleHAiOjE2NzA4MzMyNjF9.tmcNLpMGtGV6WbYTw-VqAFShFqQC3DPlEoOV_ud9Sh8
-RefreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjcwODMxNDY0LCJleHAiOjE2NzA4NDIyNjR9.8zHxq-lhQAmXpuBWys20zOBKEUv5Q47mNK1BB9MpAMA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdDQiLCJpYXQiOjE2NzM3NzUwNTYsImV4cCI6MTY3Mzc3Njg1Nn0.gdhNHVasvZUgiifDj-T_O9WpECMgaVIE-jP17xGNDos
+RefreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjczNzc1MDU2LCJleHAiOjE2NzM3ODU4NTZ9.TCBr7hqUSMc0a8UMFsrp31Xx_JHKTutZkhhGPD0V9rY
 Content-Type: application/json
 
 {
-  "title": "되나?",
-  "description":"ttteeee",
+  "title": "일기에용4",
+  "description":"일기라니까용4",
   "privateDiary": true
 }
+
+### 사용자가 쓴 일기를 달 단위로 조회
+get {{url}}/diaries/?year=2023&month=01
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdDQiLCJpYXQiOjE2NzM3NzkyMDAsImV4cCI6MTY3Mzc4MTAwMH0.tnBJgvW4H4brTMm8n-WYr6DmVjSLzK3Mh22IvdljbF8
+RefreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjczNzc5MjAwLCJleHAiOjE2NzM3OTAwMDB9.6lRcTRHDjUPYB7z8LI9pss2rIFTsy76pU2tKFAn784k
 
 ### 조회수 추가
 patch {{url}}/diaries/addviewcount

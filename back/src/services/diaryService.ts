@@ -234,6 +234,33 @@ class DiaryService {
         await this.prisma.$disconnect();
         return { postDatas, diarycount };
     }
+
+    async getMyDiaryListByMonth(userID: string, year: number, month: number) {
+        const result = await this.prisma.diary.findMany({
+            where: {
+                user: {
+                    Account: {
+                        userID: userID,
+                    },
+                },
+                createdAt: {
+                    gt: new Date(`${year}-${month}-01`),
+                    lte: new Date(year, month, 1),
+                },
+            },
+        });
+
+        await this.prisma.$disconnect();
+
+        return result.reduce((prev, curr) => {
+            const key = new Date(curr.createdAt).getDate();
+
+            return {
+                ...prev,
+                [key]: curr,
+            };
+        }, {});
+    }
 }
 
 export default new DiaryService();

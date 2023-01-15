@@ -16,20 +16,42 @@ diaryRouter.post(
             throw new AppError("ArgumentError");
         }
 
-        const response = await axios.post("http://localhost:8000/api/emotion-check", {
-            text: description,
-        });
+        // const response = await axios.post("http://localhost:8000/api/emotion-check", {
+        //     text: description,
+        // });
 
         await diaryService.writeDiary(
             req.userID!,
             title,
             description,
-            response.data.result[0],
+            // response.data.result[0],
+            "none",
             privateDiary,
             createdAt
         );
 
         return { statusCode: 200, content: true };
+    })
+);
+
+// 달마다 비공개 일기 조회
+diaryRouter.get(
+    "/",
+    auth,
+    wrapRouter(async (req: Req, res: Res) => {
+        const { year, month } = req.query;
+
+        if (typeof year !== "string" || typeof month !== "string") {
+            throw new AppError("ArgumentError");
+        }
+
+        const result = await diaryService.getMyDiaryListByMonth(
+            req.userID!,
+            Number(year),
+            Number(month)
+        );
+
+        return { statusCode: 200, content: result };
     })
 );
 
