@@ -13,5 +13,5 @@ export const fetchSunriseAndSunset = async () => {
     const result = await instance.get(URL);
     const { sunrise, sunset } = result.data.response.body.items.item;
 
-    return { sunrise, sunset };
+    return { sunrise: Number(sunrise), sunset: Number(sunset) };
 };

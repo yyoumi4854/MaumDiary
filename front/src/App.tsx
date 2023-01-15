@@ -1,6 +1,10 @@
+import { useDeferredValue } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import dayjs from "dayjs";
 
-import usePeriodOfDay from "./hooks/useReriodOfDay";
+import { useQueryClient } from "@tanstack/react-query";
+
+import usePeriodOfDay from "./hooks/usePeriodOfDay";
 import DynamicBackground from "./component/common/DynamicBackground";
 import Main from "@/layout/Main";
 import Header from "./layout/header/Header";
@@ -13,26 +17,30 @@ import RecoveryPW from "./page/RecoveryPW";
 import User from "./page/User";
 
 function App() {
+    // const [now, setNow] = useState(dayjs());
     const period = usePeriodOfDay();
+    const deferredPeriod = useDeferredValue(period);
 
-    if (period === null) {
+    if (deferredPeriod === null) {
+        console.log("period", period);
         return null;
     }
 
     return (
         <>
-            <DynamicBackground period={period} />
-            <Main period={period}>
+            <DynamicBackground period={deferredPeriod} />
+            <Main period={deferredPeriod}>
                 <div style={{ position: "relative", zIndex: 10 }}>
                     <Router>
                         <Header />
                         <Routes>
-                            <Route path="/" element={<Home period={period} />} />
+                            <Route path="/" element={<Home period={deferredPeriod} />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
                             <Route path="/recovery/id" element={<RecoveryID />} />
                             <Route path="/recovery/password" element={<RecoveryPW />} />
                             <Route path="/user" element={<User />} />
+                            <Route path="/diary:target"></Route>
                         </Routes>
                         <Footer />
                     </Router>
