@@ -10,7 +10,7 @@ import { HiLockClosed, HiLockOpen } from "react-icons/hi";
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as Style from "@/style/component/diaryCalendar/Diary-style";
 
-import confidence from "@/images/emotion/emotion-confidence.svg";
+import confidence from "@/images/emotion/confidence.svg";
 
 type Props = {
     diarySelect: string;

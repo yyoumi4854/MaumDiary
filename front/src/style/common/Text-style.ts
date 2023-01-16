@@ -10,3 +10,9 @@ export const TitleText = styled.h2<TextStyle>`
         font-weight: ${({ theme }) => theme.fonts.weight.bold};
     }
 `;
+
+export const MediumText = styled.h2<TextStyle>`
+    font-weight: ${({ theme }) => theme.fonts.weight.medium};
+    font-size: ${({ theme }) => theme.fonts.size.middle};
+    text-align: ${({ textAlign }) => textAlign};
+`;

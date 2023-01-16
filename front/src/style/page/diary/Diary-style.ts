@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const DiaryLayout = styled.div`
-    padding-top: 20px;
+    padding: 20px 0;
     .inner {
         display: grid;
         grid-template-columns: repeat(4, 1fr);

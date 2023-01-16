@@ -5,7 +5,7 @@ import Calendar from "@/component/diaryCalendar/Calendar";
 import Diary from "@/component/diaryCalendar/Diary";
 
 import * as Style from "@/style/page/diary/DiaryCalendar-style";
-import MonthAnalysis from "@/component/diaryCalendar/MonthAnalysis";
+import MonthStatistics from "@/component/diaryCalendar/MonthStatistics";
 
 const DiaryCalendar = () => {
     const [diarySelect, setDiarySelect] = useState(String(dayjs().format(`YYYYMMDD`)));
@@ -14,7 +14,7 @@ const DiaryCalendar = () => {
         <Style.DiaryCalendarContent>
             <Calendar diarySelect={diarySelect} setDiarySelect={setDiarySelect} />
             <Diary diarySelect={diarySelect} />
-            <MonthAnalysis />
+            <MonthStatistics diarySelect={diarySelect} />
         </Style.DiaryCalendarContent>
     );
 };
