@@ -1,93 +1,105 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
-
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import * as Style from "@/style/component/diaryCalendar/Calendar-style";
 
-const Calendar = () => {
-    const [dayJsData, setDayJsData] = useState(dayjs());
-    const now = dayJsData;
-    const nowMonthDays = now.daysInMonth(); // 현재 몇일까지
-    const prevMonthDays = dayJsData.subtract(1, "month").daysInMonth(); // 저번달 몇일까지
-    const firstDay = now.date(1).day(); // 첫번째날 요일
-    const [selectDay, setSelectDay] = useState(Number(now.format(`YYYYMMDD`)));
-    const date = ["SUN", "MUN", "TUE", "WEN", "THU", "FRI", "SAT"];
+type Props = {
+    diarySelect: string;
+    setDiarySelect: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const Calendar = ({ diarySelect, setDiarySelect }: Props) => {
+    const [dayJs, setDayJs] = useState(dayjs());
+    const now = dayJs;
+    const nowMonthDate = now.daysInMonth(); // 현재 날짜 몇개인지
+    const prevMonthDate = dayJs.subtract(1, "month").daysInMonth(); // 저번달 날짜 몇개인지
+    const firstDay = now.date(1).day(); // 첫번째 날짜의 요일
+    const day = ["SUN", "MUN", "TUE", "WEN", "THU", "FRI", "SAT"];
+
+    const onClick = (e: React.BaseSyntheticEvent | MouseEvent) => {
+        const { innerText } = e.target;
+        setDiarySelect(
+            String(now.format(`YYYYMM${Number(innerText) < 10 ? `0${innerText}` : innerText}`))
+        );
+    };
 
     const createCalendar = () => {
         const result = [];
-        let prevDay = prevMonthDays - firstDay + 1;
-        let day = 1;
-        let nextDay = 1;
+        let prevDate = prevMonthDate - firstDay + 1;
+        let date = 1;
+        let nextDate = 1;
 
-        let dayBox = 0;
-        while (dayBox < 42) {
-            if (prevDay <= prevMonthDays) {
-                result.push(<Style.CalendarCel key={dayBox}>{prevDay++}</Style.CalendarCel>);
-            } else if (day <= nowMonthDays) {
+        let dateCell = 0;
+        while (dateCell < 42) {
+            if (prevDate <= prevMonthDate) {
                 result.push(
-                    <Style.CalendarCel
-                        key={dayBox}
-                        nowDays={true}
-                        nowDay={dayjs().format("YYYYMMDD") === now.format(`YYYYMM${day}`) && true}
-                        onClick={(e: React.BaseSyntheticEvent | MouseEvent) => {
-                            const { innerText } = e.target;
-                            setSelectDay(Number(now.format(`YYYYMM${innerText}`)));
-                        }}
-                        slelctDay={selectDay === Number(now.format(`YYYYMM${day}`)) && true}
-                    >
-                        {now.format(`${day}`)}
-                    </Style.CalendarCel>
+                    <Style.NoneNowDateCell key={dateCell}>
+                        <span>{prevDate++}</span>
+                    </Style.NoneNowDateCell>
                 );
-                day++;
+            } else if (date <= nowMonthDate) {
+                result.push(
+                    <Style.NowDateCell
+                        key={dateCell}
+                        nowDate={dayjs().format("YYYYMMDD") === now.format(`YYYYMM${date}`) && true}
+                        onClick={onClick}
+                        diarySelect={
+                            diarySelect ===
+                                String(now.format(`YYYYMM${date < 10 ? `0${date}` : date}`)) && true
+                        }
+                    >
+                        <span>{now.format(`${date}`)}</span>
+                    </Style.NowDateCell>
+                );
+                date++;
             } else {
-                result.push(<Style.CalendarCel key={dayBox}>{nextDay++}</Style.CalendarCel>);
+                result.push(
+                    <Style.NoneNowDateCell key={dateCell}>
+                        <span>{nextDate++}</span>
+                    </Style.NoneNowDateCell>
+                );
             }
-            dayBox++;
+            dateCell++;
         }
 
         return result;
     };
 
-    const [isDiary, setIsDiary] = useState(false);
-
     return (
         <>
-            <Style.DiaryContent>
-                <Style.controlContent>
+            <Style.CalendarContent>
+                <Style.ControlContent>
                     <button
                         onClick={() => {
-                            setDayJsData(dayJsData.clone().subtract(1, "month"));
+                            setDayJs(dayJs.clone().subtract(1, "month"));
                         }}
                     >
                         <BsChevronLeft />
                     </button>
                     <div>
                         <span>{now.format("YYYY")}</span>
-                        <strong>{now.format("MMMM")}</strong>
+                        <strong>{now.format("MMMM").toUpperCase()}</strong>
                     </div>
                     <button
                         onClick={() => {
-                            setDayJsData(dayJsData.clone().add(1, "month"));
+                            setDayJs(dayJs.clone().add(1, "month"));
                         }}
                     >
                         <BsChevronRight />
                     </button>
-                </Style.controlContent>
+                </Style.ControlContent>
 
-                <Style.CalendarContent>
-                    {date.map((date, index) => (
-                        <div key={index}>{date}</div>
+                <Style.CellsContent>
+                    {day.map((date, index) => (
+                        <Style.DayCell key={index}>
+                            <span>{date}</span>
+                        </Style.DayCell>
                     ))}
 
                     {createCalendar()}
-                </Style.CalendarContent>
-            </Style.DiaryContent>
-
-            <Style.DiaryContent>
-                {selectDay}
-                <div></div>
-            </Style.DiaryContent>
+                </Style.CellsContent>
+            </Style.CalendarContent>
         </>
     );
 };

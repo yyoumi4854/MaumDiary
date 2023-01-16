@@ -8,7 +8,7 @@ import * as Style from "@/style/page/diary/Diary-style";
 const Diary = () => {
     const [diaryCurrent, setDiaryCurrent] = useState("calendar");
     return (
-        <Style.DiaryLayout>
+        <Style.DiaryLayout className="content">
             <div className="inner">
                 <AsideNav diaryCurrent={diaryCurrent} setDiaryCurrent={setDiaryCurrent} />
                 <div>

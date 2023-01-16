@@ -1,12 +1,14 @@
 import styled from "styled-components";
-import { transparentize } from "polished";
+import { darken } from "polished";
 
-export const DiaryContent = styled.div`
-    ${({ theme }) => theme.common.diaryContent};
+import * as Css from "@/style/common/Css-style";
+
+export const CalendarContent = styled.div`
+    ${Css.diaryContnet}
     padding: 20px;
 `;
 
-export const controlContent = styled.div`
+export const ControlContent = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -30,7 +32,7 @@ export const controlContent = styled.div`
     }
 `;
 
-export const CalendarContent = styled.div`
+export const CellsContent = styled.div`
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: 2rem repeat(6, 50px);
@@ -39,18 +41,41 @@ export const CalendarContent = styled.div`
     div {
         ${({ theme }) => theme.common.flexCenter};
         border-radius: 4px;
-        transition: all 0.3s;
 
-        &:hover {
-            border: 2px solid ${({ theme }) => theme.colors.greyBorder};
+        &:nth-child(7n + 1) span {
+            color: ${({ theme }) => darken(0.05, theme.colors.warnning)};
+        }
+
+        &:nth-child(7n) span {
+            color: ${({ theme }) => darken(0.05, theme.colors.mainDeep)};
         }
     }
 `;
 
-export const CalendarCel = styled.div<{ nowDays?: boolean; nowDay?: boolean; slelctDay?: boolean }>`
-    color: ${({ nowDays, theme }) => transparentize(nowDays ? 0 : 0.5, theme.colors.mainDark)};
-    cursor: ${({ nowDays }) => nowDays && "pointer"};
+export const DayCell = styled.div`
+    span {
+        color: ${({ theme }) => theme.colors.mainDark};
+    }
+`;
+
+export const NowDateCell = styled.div<{ nowDate?: boolean; diarySelect?: boolean }>`
     border: 2px solid
-        ${({ slelctDay, theme }) => (slelctDay ? theme.colors.mainDeep : "transparent")};
-    background: ${({ nowDay, theme }) => nowDay && theme.colors.greyBackground};
+        ${({ diarySelect, theme }) => (diarySelect ? theme.colors.main : "transparent")};
+    background: ${({ nowDate, theme }) => nowDate && theme.colors.greyBackground};
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+        border: 2px solid ${({ theme }) => theme.colors.greyBorder};
+    }
+
+    span {
+        color: ${({ theme }) => theme.colors.mainDark};
+    }
+`;
+
+export const NoneNowDateCell = styled.div`
+    span {
+        opacity: 0.5;
+    }
 `;
