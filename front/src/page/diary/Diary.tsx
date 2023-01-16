@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import AsideNav from "./AsideNav";
+import BottomNav from "./BottomNav";
 
 import * as Style from "@/style/page/diary/Diary-style";
 
@@ -16,6 +17,7 @@ const Diary = () => {
                 />
                 <Outlet />
             </div>
+            <BottomNav diaryNavCurrent={diaryNavCurrent} setDiaryNavCurrent={setDiaryNavCurrent} />
         </Style.DiaryLayout>
     );
 };

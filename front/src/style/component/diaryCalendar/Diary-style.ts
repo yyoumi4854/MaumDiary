@@ -26,7 +26,7 @@ export const NoneDiaryContent = styled.div`
     }
 
     ${({ theme }) => theme.device.mobile} {
-        height: 300px;
+        height: 280px;
     }
 `;
 
