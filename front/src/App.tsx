@@ -22,7 +22,6 @@ function App() {
     const deferredPeriod = useDeferredValue(period);
 
     if (deferredPeriod === null) {
-        console.log("period", period);
         return null;
     }
 
