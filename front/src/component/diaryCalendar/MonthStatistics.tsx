@@ -1,22 +1,22 @@
 import React from "react";
+import dayjs from "dayjs";
 
 import * as TextStyle from "@/style/common/Text-style";
 import * as Style from "@/style/component/diaryCalendar/MonthStatistics-style";
 
 type Props = {
-    diarySelect: string;
+    dayJs: dayjs.Dayjs;
 };
 
-const MonthStatistics = ({ diarySelect }: Props) => {
-    const selectYear = diarySelect.substring(0, 4);
-    const selectMonth = diarySelect.substring(4, 6);
+const MonthStatistics = ({ dayJs }: Props) => {
+    const now = dayJs;
 
     let arr = [20, 30, 10, 5, 20, 1, 1, 1];
 
     return (
         <Style.MonthStatisticsContent>
             <TextStyle.MediumText textAlign={"center"}>
-                {selectYear}년 {selectMonth}월 마음 통계
+                {now.format("YYYY")}년 {now.format("MM")}월 마음 통계
             </TextStyle.MediumText>
 
             <Style.StatisticsContnet percent={arr}>

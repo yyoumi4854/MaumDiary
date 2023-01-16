@@ -19,7 +19,7 @@ export const MonthStatisticsContent = styled.div`
 
 export const StatisticsContnet = styled.div<{ percent: number[] }>`
     display: flex;
-    width: 80%;
+    width: 90%;
     height: 2rem;
     margin: 1.5rem auto;
     border-radius: 1rem;
@@ -62,6 +62,12 @@ export const StatisticsContnet = styled.div<{ percent: number[] }>`
     span:nth-of-type(8) {
         background: ${({ theme }) => theme.colors.emotionAngry};
         width: ${({ percent }) => `${percent[7]}%`};
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        /* margin: 1.5rem auto; */
+
+        height: 1rem;
     }
 `;
 
@@ -134,6 +140,29 @@ export const EmotionListContent = styled.div`
         dt {
             background: url(${angrySvg}) no-repeat center;
             background-size: contain;
+        }
+    }
+
+    ${({ theme }) => theme.device.desktop} {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px 24px;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        dl {
+            text-align: center;
+            dt {
+                width: 33px;
+                height: 24px;
+                margin: 0 auto;
+            }
+
+            dd {
+                margin-top: 0.5rem;
+            }
         }
     }
 `;

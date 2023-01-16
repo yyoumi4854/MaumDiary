@@ -5,12 +5,13 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import * as Style from "@/style/component/diaryCalendar/Calendar-style";
 
 type Props = {
+    dayJs: dayjs.Dayjs;
+    setDayJs: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
     diarySelect: string;
     setDiarySelect: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Calendar = ({ diarySelect, setDiarySelect }: Props) => {
-    const [dayJs, setDayJs] = useState(dayjs());
+const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect }: Props) => {
     const now = dayJs;
     const nowMonthDate = now.daysInMonth(); // 현재 날짜 몇개인지
     const prevMonthDate = dayJs.subtract(1, "month").daysInMonth(); // 저번달 날짜 몇개인지

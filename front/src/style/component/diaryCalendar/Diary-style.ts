@@ -24,6 +24,10 @@ export const NoneDiaryContent = styled.div`
             }
         }
     }
+
+    ${({ theme }) => theme.device.mobile} {
+        height: 300px;
+    }
 `;
 
 export const DiaryContent = styled.div`
@@ -56,6 +60,10 @@ export const DiaryTopContent = styled.div`
                 height: 4px;
                 border-radius: 50%;
                 background: ${({ theme }) => theme.colors.greyBackground};
+            }
+
+            svg {
+                font-size: 20px;
             }
         }
     }
@@ -91,6 +99,23 @@ export const DiaryTextContent = styled.div`
         line-height: 1.5;
         ${Css.scrollbar}
     }
+
+    ${({ theme }) => theme.device.mobile} {
+        & > div:first-of-type {
+            img {
+                width: 32px;
+            }
+
+            p {
+                margin-left: 1rem;
+            }
+        }
+
+        & > div:last-of-type {
+            height: 220px;
+            margin-top: 1rem;
+        }
+    }
 `;
 
 export const DiaryBottomContent = styled.div`
@@ -111,5 +136,11 @@ export const DiaryBottomContent = styled.div`
         span {
             margin-left: 0.5rem;
         }
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        position: inherit;
+        padding: 0;
+        padding-top: 20px;
     }
 `;

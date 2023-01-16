@@ -16,10 +16,8 @@ export const scrollbar = css`
     }
     &::-webkit-scrollbar-thumb {
         background: ${({ theme }) => theme.colors.main};
-        border-radius: 2px;
     }
     &::-webkit-scrollbar-track {
-        background: ${({ theme }) => theme.colors.greyBackground};
-        border-radius: 2px;
+        background: ${({ theme }) => theme.colors.greyBorder};
     }
 `;
