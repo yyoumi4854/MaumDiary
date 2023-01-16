@@ -9,9 +9,12 @@ import Register from "./page/Register/Register";
 import RecoveryID from "./page/RecoveryID";
 import RecoveryPW from "./page/RecoveryPW";
 import User from "./page/User";
-
-import DynamicBackground from "./component/common/DynamicBackground";
 import Diary from "./page/diary/Diary";
+import DiaryCalendar from "./page/diary/DiaryCalendar";
+import DiaryAll from "./page/diary/DiaryAll";
+import DiaryChat from "./page/diary/DiaryChat";
+import DiaryUserAnalysis from "./page/diary/DiaryUserAnalysis";
+import DynamicBackground from "./component/common/DynamicBackground";
 
 function App() {
     return (
@@ -28,7 +31,12 @@ function App() {
                             <Route path="/recovery/id" element={<RecoveryID />} />
                             <Route path="/recovery/password" element={<RecoveryPW />} />
                             <Route path="/user" element={<User />} />
-                            <Route path="/diary" element={<Diary />} />
+                            <Route path="/diary" element={<Diary />}>
+                                <Route path="calendar" element={<DiaryCalendar />} />
+                                <Route path="all" element={<DiaryAll />} />
+                                <Route path="chat" element={<DiaryChat />} />
+                                <Route path="user/analysis" element={<DiaryUserAnalysis />} />
+                            </Route>
                         </Routes>
                         <Footer />
                     </Router>

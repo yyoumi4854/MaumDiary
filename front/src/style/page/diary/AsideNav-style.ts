@@ -20,26 +20,21 @@ export const ProfileContent = styled.div`
 
 export const NavContent = styled.nav`
     margin-top: 40px;
-
-    ul {
-        li {
-            display: flex;
-            align-items: center;
-            padding: 12px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-
-            svg {
-                font-size: ${({ theme }) => theme.fonts.size.middle};
-            }
-            span {
-                margin-left: 8px;
-            }
-        }
-    }
 `;
 
 export const NavList = styled.li<{ current?: boolean }>`
-    color: ${({ current }) => current && "#fff"};
-    background: ${({ current, theme }) => current && theme.colors.main};
+    a {
+        ${({ theme }) => theme.common.flexCenter}
+        justify-content: flex-start;
+        padding: 12px 16px;
+        border-radius: 4px;
+        background: ${({ current, theme }) => current && theme.colors.main};
+        color: ${({ current }) => current && "#fff"};
+        svg {
+            font-size: ${({ theme }) => theme.fonts.size.middle};
+        }
+        span {
+            margin-left: 8px;
+        }
+    }
 `;
