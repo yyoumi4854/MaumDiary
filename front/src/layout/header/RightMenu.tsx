@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 
-import ChattingLink from "./ChattingLink";
-import ProfileModal from "./ProfileModal";
+import IsLoginMenu from "./IsLoginMenu";
 import UserMenu from "./UserMenu";
 
 import * as Style from "@/style/layout/header/RightMenu-style";
 
 const RightMenu = () => {
-    const [login, setLogin] = useState(true); // 임의로 넣은 값
+    const [isLogin, setisLogin] = useState(true); // 로그인 할때 안할때
 
     return (
         <>
-            {login ? (
+            {isLogin ? (
                 <Style.RightMenuContent>
-                    <ChattingLink />
-                    <ProfileModal />
+                    <IsLoginMenu />
                 </Style.RightMenuContent>
             ) : (
                 <UserMenu />

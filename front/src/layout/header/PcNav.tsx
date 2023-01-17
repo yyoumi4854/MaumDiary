@@ -5,16 +5,19 @@ import * as Style from "@/style/layout/header/Nav-style";
 
 const Nav = () => {
     return (
-        <Style.NavContent className="pc">
+        <Style.PcNavContent className="pc">
             <ul>
                 <li>
                     <Link to="/diary/calendar">일기장</Link>
                 </li>
                 <li>
+                    <Link to="/diary/calendar">일기 쓰기</Link>
+                </li>
+                <li>
                     <a href="#">서비스 소개</a>
                 </li>
             </ul>
-        </Style.NavContent>
+        </Style.PcNavContent>
     );
 };
 

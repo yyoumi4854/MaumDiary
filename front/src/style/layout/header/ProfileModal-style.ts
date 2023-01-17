@@ -1,21 +1,9 @@
 import styled from "styled-components";
 
-export const ProfileToggleContent = styled.div`
-    position: relative;
-
-    button > div {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: lightgray;
-    }
-`;
-
 export const ProfileContent = styled.div`
     position: absolute;
     right: 0;
-    bottom: -208px;
-    min-width: 200px;
+    bottom: -185px;
     height: 200px;
     border-radius: 4px;
     background: #fff;
@@ -32,6 +20,20 @@ export const ProfileContent = styled.div`
         border-right: 8px solid transparent;
         border-bottom: 8px solid #fff;
         border-left: 8px solid transparent;
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        bottom: -188px;
+        height: 180px;
+
+        &::before {
+            top: -12px;
+            right: 6px;
+            border-top: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid #fff;
+            border-left: 6px solid transparent;
+        }
     }
 `;
 
@@ -88,7 +90,7 @@ export const ProfileBottomContent = styled.div`
 
     ${({ theme }) => theme.device.mobile} {
         ul li > * svg {
-            font-size: ${({ theme }) => theme.fonts.size.basicsDesktop};
+            font-size: ${({ theme }) => theme.fonts.size.basicsDesktop} !important;
         }
     }
 `;

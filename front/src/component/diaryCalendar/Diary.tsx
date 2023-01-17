@@ -17,7 +17,7 @@ type Props = {
 };
 
 const Diary = ({ diarySelect }: Props) => {
-    const [isDiary, setIsDiary] = useState(false);
+    const [isDiary, setIsDiary] = useState(true);
 
     const selectYear = diarySelect.substring(0, 4);
     const selectMonth = diarySelect.substring(4, 6);
