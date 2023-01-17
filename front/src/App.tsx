@@ -1,8 +1,5 @@
 import { useDeferredValue } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import dayjs from "dayjs";
-
-import { useQueryClient } from "@tanstack/react-query";
 
 import usePeriodOfDay from "./hooks/usePeriodOfDay";
 import DynamicBackground from "./component/common/DynamicBackground";
@@ -15,13 +12,16 @@ import Register from "./page/Register/Register";
 import RecoveryID from "./page/RecoveryID";
 import RecoveryPW from "./page/RecoveryPW";
 import User from "./page/User";
-import { useRecoilValue } from "recoil";
+import Diary from "./page/diary/Diary";
+import DiaryCalendar from "./page/diary/DiaryCalendar";
+import DiaryAll from "./page/diary/DiaryAll";
+import DiaryChat from "./page/diary/DiaryChat";
+import DiaryUserAnalysis from "./page/diary/DiaryUserAnalysis";
 
 function App() {
-    // const [now, setNow] = useState(dayjs());
     const period = usePeriodOfDay();
 
-    const deferredPeriod = useDeferredValue(period); // 렌더링의 우선순위를 낮춘다. => 쓰로트링, 디바운스 setTimeout useTransision
+    const deferredPeriod = useDeferredValue(period);
 
     if (deferredPeriod === null) {
         return null;
@@ -41,7 +41,12 @@ function App() {
                             <Route path="/recovery/id" element={<RecoveryID />} />
                             <Route path="/recovery/password" element={<RecoveryPW />} />
                             <Route path="/user" element={<User />} />
-                            <Route path="/diary:target"></Route>
+                            <Route path="/diary" element={<Diary />}>
+                                <Route path="calendar" element={<DiaryCalendar />} />
+                                <Route path="all" element={<DiaryAll />} />
+                                <Route path="chat" element={<DiaryChat />} />
+                                <Route path="user/analysis" element={<DiaryUserAnalysis />} />
+                            </Route>
                         </Routes>
                         <Footer />
                     </Router>

@@ -1,4 +1,5 @@
 import { DefaultTheme } from "styled-components";
+import { transparentize } from "polished";
 
 export type colorsType = typeof colors;
 export type fontsType = typeof fonts;
@@ -86,7 +87,6 @@ const common = {
 
 const size = {
     desktop: "1200px",
-    // tablet: "768px",
     // mobile: "600px",
     mobile: "768px",
     userForm: "448px",
@@ -94,7 +94,6 @@ const size = {
 
 const device = {
     desktop: `@media only screen and (max-width: ${size.desktop})`,
-    // tablet: `@media only screen and (max-width: ${size.tablet})`,
     mobile: `@media only screen and (max-width: ${size.mobile})`,
     userForm: `@media only screen and (max-width: ${size.userForm})`,
 };

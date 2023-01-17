@@ -18,6 +18,12 @@ export const HeaderContent = styled.header`
         ${({ theme }) => theme.common.flexCenter};
         justify-content: space-between;
 
+        button {
+            svg {
+                font-size: 24px;
+            }
+        }
+
         h1 img {
             filter: invert(62%) sepia(54%) saturate(627%) hue-rotate(189deg) brightness(103%)
                 contrast(101%);
@@ -28,8 +34,12 @@ export const HeaderContent = styled.header`
         height: 48px;
 
         .inner {
-            h1 img {
-                height: 24px;
+            position: relative;
+            h1 {
+                ${({ theme }) => theme.common.positionCenter}
+                img {
+                    height: 24px;
+                }
             }
         }
     }

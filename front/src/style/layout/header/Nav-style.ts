@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NavContent = styled.nav`
+export const PcNavContent = styled.nav`
     margin-left: 24px;
 
     ul {

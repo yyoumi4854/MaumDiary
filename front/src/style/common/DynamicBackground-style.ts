@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 import { transparentize } from "polished";
 
 import * as Animation from "../common/Animation-style";

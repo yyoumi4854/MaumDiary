@@ -64,7 +64,7 @@ const Global = createGlobalStyle`
     ${({ theme }) => theme.device.desktop}{
         .inner{
             width: 100%;
-            margin: 0 3%;
+            padding: 0 3%;
         }
     }
 
@@ -91,7 +91,7 @@ const Global = createGlobalStyle`
         }
 
         .inner{
-            margin: 0 5%;
+            padding: 0 5%;
         }
     }
 `;

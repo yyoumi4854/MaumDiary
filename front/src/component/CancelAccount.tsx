@@ -5,23 +5,24 @@ import * as FixModal from "@/utils/FixModalScroll";
 import * as TextStyle from "@/style/common/Text-style";
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as UserFormStyle from "@/style/common/UserForm-style";
+import * as Common from "@/style/common/common-style";
 import * as Style from "@/style/component/CancelAccount-style";
 
 import faviconLogo from "@/images/favicon-logo.svg";
 
-type PropsType = {
+type Props = {
     cancelAccountModal: boolean;
     setCancelAccountModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CancelAccount = ({ cancelAccountModal, setCancelAccountModal }: PropsType) => {
+const CancelAccount = ({ cancelAccountModal, setCancelAccountModal }: Props) => {
     useEffect(() => {
         FixModal.disableScroll();
         return FixModal.enableScroll;
-    }, []);
+    });
 
     return (
-        <Style.FixedContent>
+        <Common.FixedContent>
             <Style.CancelAccountContent>
                 <UserFormStyle.TitleContent>
                     <img src={faviconLogo} alt="마음일기 로고" />
@@ -37,7 +38,7 @@ const CancelAccount = ({ cancelAccountModal, setCancelAccountModal }: PropsType)
                     <button>탈퇴</button>
                 </ButtonStyle.ButtonWrap>
             </Style.CancelAccountContent>
-        </Style.FixedContent>
+        </Common.FixedContent>
     );
 };
 
