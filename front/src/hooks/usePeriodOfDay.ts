@@ -4,7 +4,7 @@ import { fetchSunriseAndSunset } from "@/api/openAPI";
 import { useQuery } from "@tanstack/react-query";
 
 import dayjs from "dayjs";
-import { Period } from "@/types";
+import { Period } from "@/types/";
 
 // dawn: 새벽, morning: 오전, afternoon: 오후, evening: 저녁
 const usePeriodOfDay = () => {
