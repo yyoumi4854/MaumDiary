@@ -15,11 +15,13 @@ import Register from "./page/Register/Register";
 import RecoveryID from "./page/RecoveryID";
 import RecoveryPW from "./page/RecoveryPW";
 import User from "./page/User";
+import { useRecoilValue } from "recoil";
 
 function App() {
     // const [now, setNow] = useState(dayjs());
     const period = usePeriodOfDay();
-    const deferredPeriod = useDeferredValue(period);
+
+    const deferredPeriod = useDeferredValue(period); // 렌더링의 우선순위를 낮춘다. => 쓰로트링, 디바운스 setTimeout useTransision
 
     if (deferredPeriod === null) {
         return null;

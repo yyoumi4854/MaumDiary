@@ -4,7 +4,12 @@ export const Container = styled.div`
     ${({ theme }) => theme.common.flexCenter}
     gap: 40px;
 
+    width: 100%;
+    height: fit-content;
+
     margin-bottom: 88px;
+
+    overflow-x: scroll;
 `;
 
 export const TabButton = styled.div`
