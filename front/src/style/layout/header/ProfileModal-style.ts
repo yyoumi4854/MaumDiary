@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const ProfileContent = styled.div`
     position: absolute;
+    top: 46px;
     right: 0;
-    bottom: -185px;
     height: 200px;
     border-radius: 4px;
     background: #fff;
@@ -23,12 +23,12 @@ export const ProfileContent = styled.div`
     }
 
     ${({ theme }) => theme.device.mobile} {
-        bottom: -188px;
+        top: 30px;
         height: 180px;
 
         &::before {
             top: -12px;
-            right: 6px;
+            right: 7px;
             border-top: 6px solid transparent;
             border-right: 6px solid transparent;
             border-bottom: 6px solid #fff;
@@ -41,8 +41,9 @@ export const ProfileTopContent = styled.div`
     display: flex;
     gap: 0 16px;
     width: max-content;
-
+    min-width: 200px;
     padding: 16px;
+
     & > div {
         display: inline-block;
     }
@@ -90,7 +91,7 @@ export const ProfileBottomContent = styled.div`
 
     ${({ theme }) => theme.device.mobile} {
         ul li > * svg {
-            font-size: ${({ theme }) => theme.fonts.size.basicsDesktop} !important;
+            font-size: ${({ theme }) => theme.fonts.size.basicsDesktop};
         }
     }
 `;

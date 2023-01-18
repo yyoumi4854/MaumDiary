@@ -18,7 +18,7 @@ export const HeaderContent = styled.header`
         ${({ theme }) => theme.common.flexCenter};
         justify-content: space-between;
 
-        button {
+        & > button {
             svg {
                 font-size: 24px;
             }
