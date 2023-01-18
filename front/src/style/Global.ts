@@ -4,14 +4,13 @@ import reset from "styled-reset";
 const Global = createGlobalStyle`
     ${reset}
 
-    @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap");
-
     *{
         box-sizing: border-box;
         outline: none;
     }
 
     html{
+        font-family: 'Gaegu', cursive;
         font-family: 'Noto Sans KR', sans-serif;
         letter-spacing: -0.0125rem;
         color: ${({ theme }) => theme.colors.mainDark};
