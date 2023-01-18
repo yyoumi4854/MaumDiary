@@ -14,8 +14,9 @@ const MobileNav = ({ isMobileNavOpen, setIsMobileNavOpen }: Props) => {
 
     const handleCloseModal = (e: MouseEvent<HTMLDivElement>) => {
         const { className } = e.target as any;
-        if (className !== "active1") {
-            console.log("클릭중...");
+
+        if (className.includes("active1") === false) {
+            // console.log("클릭중...");
             setIsMobileNavOpen(() => false);
         }
     };

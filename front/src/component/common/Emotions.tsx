@@ -9,6 +9,8 @@ import sad from "@/images/emotion/sad.svg";
 import hurt from "@/images/emotion/hurt.svg";
 import angry from "@/images/emotion/angry.svg";
 
+import Emotion from "@/utils/emotionIcon";
+
 const Emotions = () => {
     return (
         <Style.Container>
@@ -17,7 +19,7 @@ const Emotions = () => {
                 <p>전체</p>
             </Style.TabButton>
             <Style.TabButton>
-                <Style.Circle url={confidence} />
+                <Style.Circle url={Emotion.confidence} />
                 <p>자신감</p>
             </Style.TabButton>
             <Style.TabButton>
