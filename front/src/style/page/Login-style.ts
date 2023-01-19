@@ -31,8 +31,7 @@ export const EasyLoginContent = styled.div`
     }
 
     a {
-        ${({ theme }) => theme.common.flexCenter}
-        justify-content: space-between;
+        ${({ theme }) => theme.common.flexBetween}
         margin-top: 1rem;
 
         p svg {
