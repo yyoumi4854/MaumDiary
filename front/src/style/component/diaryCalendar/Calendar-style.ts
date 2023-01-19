@@ -9,8 +9,7 @@ export const CalendarContent = styled.div`
 `;
 
 export const ControlContent = styled.div`
-    display: flex;
-    justify-content: space-between;
+    ${({ theme }) => theme.common.flexBetween}
     align-items: flex-end;
 
     button svg {

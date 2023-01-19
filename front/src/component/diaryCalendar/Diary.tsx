@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-    BsExclamationCircle,
-    BsFillHeartFill,
-    BsFillLockFill,
-    BsFillSunFill,
-} from "react-icons/bs";
+import { BsExclamationCircle, BsFillHeartFill, BsFillLockFill, BsSun } from "react-icons/bs";
 import { HiLockClosed, HiLockOpen } from "react-icons/hi";
 
 import * as ButtonStyle from "@/style/common/Button-style";
@@ -33,7 +28,7 @@ const Diary = ({ diarySelect }: Props) => {
                                 {selectYear}년 {selectMonth}월 {selectDate}일
                             </span>
                             <span>
-                                <BsFillSunFill />
+                                <BsSun />
                             </span>
                         </div>
                         <div>

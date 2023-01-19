@@ -11,7 +11,7 @@ const Nav = () => {
                     <Link to="/diary/calendar">일기장</Link>
                 </li>
                 <li>
-                    <Link to="/diary/calendar">일기 쓰기</Link>
+                    <Link to="/diary/write">일기 쓰기</Link>
                 </li>
                 <li>
                     <a href="#">서비스 소개</a>

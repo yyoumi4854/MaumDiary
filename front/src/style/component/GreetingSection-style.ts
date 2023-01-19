@@ -57,8 +57,7 @@ export const GreetingBottom = styled.div`
 `;
 
 export const QuickLink = styled(Link)`
-    ${({ theme }) => theme.common.flexCenter}
-    justify-content: space-between;
+    ${({ theme }) => theme.common.flexBetween}
 
     width: 160px;
     height: 48px;

@@ -9,7 +9,7 @@ const Global = createGlobalStyle`
         outline: none;
     }
 
-    html{
+    html, input, select, textarea{
         font-family: 'Gaegu', cursive;
         font-family: 'Noto Sans KR', sans-serif;
         letter-spacing: -0.0125rem;

@@ -17,6 +17,7 @@ import DiaryCalendar from "./page/diary/DiaryCalendar";
 import DiaryAll from "./page/diary/DiaryAll";
 import DiaryChat from "./page/diary/DiaryChat";
 import DiaryUserAnalysis from "./page/diary/DiaryUserAnalysis";
+import DiaryWrite from "./page/DiaryWrite";
 
 function App() {
     const period = usePeriodOfDay();
@@ -47,6 +48,7 @@ function App() {
                                 <Route path="chat" element={<DiaryChat />} />
                                 <Route path="user/analysis" element={<DiaryUserAnalysis />} />
                             </Route>
+                            <Route path="/diary/write" element={<DiaryWrite />} />
                         </Routes>
                         <Footer />
                     </Router>

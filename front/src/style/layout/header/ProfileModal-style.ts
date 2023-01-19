@@ -16,10 +16,8 @@ export const ProfileContent = styled.div`
         right: 10px;
         width: 0;
         height: 0;
-        border-top: 8px solid transparent;
-        border-right: 8px solid transparent;
+        border: 8px solid transparent;
         border-bottom: 8px solid #fff;
-        border-left: 8px solid transparent;
     }
 
     ${({ theme }) => theme.device.mobile} {
@@ -29,10 +27,8 @@ export const ProfileContent = styled.div`
         &::before {
             top: -12px;
             right: 7px;
-            border-top: 6px solid transparent;
-            border-right: 6px solid transparent;
+            border: 6px solid transparent;
             border-bottom: 6px solid #fff;
-            border-left: 6px solid transparent;
         }
     }
 `;
