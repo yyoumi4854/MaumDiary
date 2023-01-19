@@ -125,8 +125,8 @@ const DiaryWrite = () => {
 
                             <input type="radio" name="emotion" id="anxiety" />
                             <label htmlFor="anxiety">
-                                <span>불안</span>
-                                <span>불안</span>
+                                <span>걱정</span>
+                                <span>걱정</span>
                             </label>
 
                             <input type="radio" name="emotion" id="sad" />

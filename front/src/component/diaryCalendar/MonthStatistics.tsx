@@ -20,14 +20,11 @@ const MonthStatistics = ({ dayJs }: Props) => {
             </TextStyle.MediumText>
 
             <Style.StatisticsContnet percent={arr}>
-                {/* <Style.PercentBox width={"20%"} color={"emotionConfidence"}>
-                    자신감
-                </Style.PercentBox> */}
                 <span>자신감</span>
                 <span>신남</span>
                 <span>감사</span>
                 <span>편안</span>
-                <span>불안</span>
+                <span>걱정</span>
                 <span>슬픔</span>
                 <span>상처</span>
                 <span>분노</span>
@@ -51,7 +48,7 @@ const MonthStatistics = ({ dayJs }: Props) => {
                     <dd>20%</dd>
                 </dl>
                 <dl>
-                    <dt>불안</dt>
+                    <dt>걱정</dt>
                     <dd>20%</dd>
                 </dl>
                 <dl>
