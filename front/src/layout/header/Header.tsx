@@ -11,7 +11,7 @@ import * as Style from "@/style/layout/header/Header-style";
 
 const Header = () => {
     const [headerBackground, setHeaderBackground] = useState(false);
-    const [isMobileNavOpen, setIsMobileNavOpen] = useState(true);
+    const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -24,10 +24,8 @@ const Header = () => {
         setHeaderBackground(window.scrollY ? true : false);
     };
 
-    // console.log("렌더링");
-
     return (
-        <Style.HeaderContent className={headerBackground ? "active" : ""}>
+        <Style.HeaderContent scroll={headerBackground && true}>
             <div className="inner">
                 <button className="mobile" onClick={() => setIsMobileNavOpen(true)}>
                     <BsList />
@@ -41,12 +39,7 @@ const Header = () => {
                 <RightMenu />
             </div>
 
-            {isMobileNavOpen && (
-                <MobileNav
-                    isMobileNavOpen={isMobileNavOpen}
-                    setIsMobileNavOpen={setIsMobileNavOpen}
-                />
-            )}
+            {isMobileNavOpen && <MobileNav setIsMobileNavOpen={setIsMobileNavOpen} />}
         </Style.HeaderContent>
     );
 };
