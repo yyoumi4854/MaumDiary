@@ -21,3 +21,10 @@ export const scrollbar = css`
         background: ${({ theme }) => theme.colors.greyBorder};
     }
 `;
+
+export const appearance = css`
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+`;
