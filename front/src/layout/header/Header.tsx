@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BsList } from "react-icons/bs";
 
 import Logo from "@/component/common/Logo";
-import PcNav from "./PcNav";
+import PCNav from "./PcNav";
 import MobileNav from "./MobileNav";
 import RightMenu from "./RightMenu";
 
@@ -34,7 +34,7 @@ const Header = () => {
                     <Link to="/">
                         <Logo />
                     </Link>
-                    <PcNav />
+                    <PCNav />
                 </Style.LeftContent>
                 <RightMenu />
             </div>
