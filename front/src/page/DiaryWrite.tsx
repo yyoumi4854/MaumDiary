@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, ChangeEvent } from "react";
 import {
     BsSun,
     BsFillCloudSunFill,
@@ -12,6 +12,9 @@ import * as ButtonStyle from "@/style/common/Button-style";
 import * as DiaryFormStyle from "@/style/component/DiaryForm-style";
 
 const DiaryWrite = () => {
+    const [diaryTitle, setDiaryTitle] = useState("");
+    const [diaryDescription, setDiaryDescription] = useState("");
+
     return (
         <div className="content inner">
             <DiaryFormStyle.DiaryFormContent>
@@ -76,77 +79,36 @@ const DiaryWrite = () => {
 
                         <DiaryFormStyle.TextContent>
                             <legend>일기 내용</legend>
-                            <div>
-                                <span>
-                                    <img src="" alt="이미지" />
-                                </span>
-                                <p>
-                                    <input
-                                        type="text"
-                                        name="diaryTitle"
-                                        placeholder="제목을 입력해주세요."
-                                    />
-                                </p>
-                            </div>
+
+                            <input
+                                type="text"
+                                name="diaryTitle"
+                                placeholder="제목을 입력해주세요."
+                                maxLength={20}
+                                value={diaryTitle}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    const { value } = e.target as any;
+                                    setDiaryTitle(value);
+                                }}
+                            />
+                            <p className="textCount">
+                                {diaryTitle.length} <span>/ 20</span>
+                            </p>
+
                             <textarea
                                 name="diaryDescription"
                                 placeholder="내용을 입력해주세요."
+                                maxLength={500}
+                                value={diaryDescription}
+                                onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+                                    const { value } = e.target as any;
+                                    setDiaryDescription(value);
+                                }}
                             ></textarea>
+                            <p className="textCount">
+                                {diaryDescription.length} <span>/ 500</span>
+                            </p>
                         </DiaryFormStyle.TextContent>
-                    </DiaryFormStyle.DiaryFormWrap>
-
-                    <DiaryFormStyle.DiaryFormWrap>
-                        <DiaryFormStyle.EmotionFieldset>
-                            <legend>마음 선택</legend>
-
-                            <input type="radio" name="emotion" id="confidence" />
-                            <label htmlFor="confidence">
-                                <span>자신감</span>
-                                <span>자신감</span>
-                            </label>
-
-                            <input type="radio" name="emotion" id="excite" />
-                            <label htmlFor="excite">
-                                <span>신남</span>
-                                <span>신남</span>
-                            </label>
-
-                            <input type="radio" name="emotion" id="thanks" />
-                            <label htmlFor="thanks">
-                                <span>감사</span>
-                                <span>감사</span>
-                            </label>
-
-                            <input type="radio" name="emotion" id="comfortable" />
-                            <label htmlFor="comfortable">
-                                <span>편안</span>
-                                <span>편안</span>
-                            </label>
-
-                            <input type="radio" name="emotion" id="anxiety" />
-                            <label htmlFor="anxiety">
-                                <span>걱정</span>
-                                <span>걱정</span>
-                            </label>
-
-                            <input type="radio" name="emotion" id="sad" />
-                            <label htmlFor="sad">
-                                <span>슬픔</span>
-                                <span>슬픔</span>
-                            </label>
-
-                            <input type="radio" name="emotion" id="hurt" />
-                            <label htmlFor="hurt">
-                                <span>상처</span>
-                                <span>상처</span>
-                            </label>
-
-                            <input type="radio" name="emotion" id="angry" />
-                            <label htmlFor="angry">
-                                <span>분노</span>
-                                <span>분노</span>
-                            </label>
-                        </DiaryFormStyle.EmotionFieldset>
                     </DiaryFormStyle.DiaryFormWrap>
 
                     <ButtonStyle.ButtonWrap>
