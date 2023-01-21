@@ -1,55 +1,66 @@
-import * as Style from "@/style/common/Emotions-style";
+import { useRef, useState, startTransition } from "react";
 
-import confidence from "@/images/emotion/confidence.svg";
-import excitement from "@/images/emotion/excitement.svg";
-import thanks from "@/images/emotion/thanks.svg";
-import comport from "@/images/emotion/comport.svg";
-import worry from "@/images/emotion/worry.svg";
-import sad from "@/images/emotion/sad.svg";
-import hurt from "@/images/emotion/hurt.svg";
-import angry from "@/images/emotion/angry.svg";
+import * as Style from "@/style/common/Emotions-style";
 
 import Emotion from "@/utils/emotionIcon";
 
 const Emotions = () => {
+    const tabRef = useRef<HTMLDivElement | null>(null);
+    const [left, setLeft] = useState(0);
+
+    const onScroll = () => {
+        startTransition(() => {
+            if (tabRef.current === null) return;
+
+            setLeft(
+                (tabRef.current.scrollLeft /
+                    (tabRef.current.scrollWidth - tabRef.current.clientWidth)) *
+                    50
+            );
+        });
+    };
+
     return (
         <Style.Container>
-            <Style.TabButton>
-                <Style.Circle url={"none"} />
-                <p>전체</p>
-            </Style.TabButton>
-            <Style.TabButton>
-                <Style.Circle url={Emotion.confidence} />
-                <p>자신감</p>
-            </Style.TabButton>
-            <Style.TabButton>
-                <Style.Circle url={excitement} />
-                <p>신남</p>
-            </Style.TabButton>
-            <Style.TabButton>
-                <Style.Circle url={thanks} />
-                <p>감사</p>
-            </Style.TabButton>
-            <Style.TabButton>
-                <Style.Circle url={comport} />
-                <p>편안</p>
-            </Style.TabButton>
-            <Style.TabButton>
-                <Style.Circle url={worry} />
-                <p>불안</p>
-            </Style.TabButton>
-            <Style.TabButton>
-                <Style.Circle url={sad} />
-                <p>슬픔</p>
-            </Style.TabButton>
-            <Style.TabButton>
-                <Style.Circle url={hurt} />
-                <p>상처</p>
-            </Style.TabButton>
-            <Style.TabButton>
-                <Style.Circle url={angry} />
-                <p>분노</p>
-            </Style.TabButton>
+            <Style.Tab ref={tabRef} onScroll={onScroll}>
+                <Style.TabButton>
+                    <Style.Circle url={"none"} />
+                    <p>전체</p>
+                </Style.TabButton>
+                <Style.TabButton>
+                    <Style.Circle url={Emotion.confidence} />
+                    <p>자신감</p>
+                </Style.TabButton>
+                <Style.TabButton>
+                    <Style.Circle url={Emotion.excitement} />
+                    <p>신남</p>
+                </Style.TabButton>
+                <Style.TabButton>
+                    <Style.Circle url={Emotion.thanks} />
+                    <p>감사</p>
+                </Style.TabButton>
+                <Style.TabButton>
+                    <Style.Circle url={Emotion.comport} />
+                    <p>편안</p>
+                </Style.TabButton>
+                <Style.TabButton>
+                    <Style.Circle url={Emotion.worry} />
+                    <p>불안</p>
+                </Style.TabButton>
+                <Style.TabButton>
+                    <Style.Circle url={Emotion.sad} />
+                    <p>슬픔</p>
+                </Style.TabButton>
+                <Style.TabButton>
+                    <Style.Circle url={Emotion.hurt} />
+                    <p>상처</p>
+                </Style.TabButton>
+                <Style.TabButton>
+                    <Style.Circle url={Emotion.angry} />
+                    <p>분노</p>
+                </Style.TabButton>
+            </Style.Tab>
+            <Style.ScrollIndicator left={left} />
         </Style.Container>
     );
 };

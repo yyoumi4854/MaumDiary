@@ -1,18 +1,38 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.section`
     ${({ theme }) => theme.common.flexCenter}
-    gap: 40px;
+    flex-direction: column;
 
     width: 100%;
     height: fit-content;
 
     margin-bottom: 88px;
-
-    overflow-x: scroll;
 `;
 
-export const TabButton = styled.div`
+export const Tab = styled.div`
+    ${({ theme }) => theme.common.flexCenter}
+    gap: 40px;
+
+    width: 100%;
+
+    margin-bottom: 16px;
+
+    & {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        overflow-x: scroll;
+    }
+`;
+
+export const TabButton = styled.button`
     p {
         margin-top: 8px;
 
@@ -20,7 +40,7 @@ export const TabButton = styled.div`
     }
 `;
 
-export const Circle = styled.button<{ url: string }>`
+export const Circle = styled.div<{ url: string }>`
     ${({ theme }) => theme.common.flexCenter};
 
     width: 64px;
@@ -28,6 +48,36 @@ export const Circle = styled.button<{ url: string }>`
 
     border-radius: 50%;
 
-    background: url(${({ url }) => url}) no-repeat center;
+    background: url(${({ url }) => url}) no-repeat center white;
     box-shadow: 0px 4px 4px rgba(119, 119, 119, 0.25);
+`;
+
+export const ScrollIndicator = styled.div<{ left: number }>`
+    position: relative;
+
+    display: none;
+
+    width: 100px;
+    height: 2px;
+
+    margin: auto;
+
+    background: ${({ theme }) => theme.colors.greyBackground};
+
+    &::before {
+        position: absolute;
+        top: 0;
+        left: ${({ left }) => `${left}%`};
+
+        content: "";
+
+        width: 50%;
+        height: 100%;
+
+        background: ${({ theme }) => theme.colors.main};
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        display: block;
+    }
 `;
