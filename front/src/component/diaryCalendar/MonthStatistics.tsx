@@ -4,6 +4,8 @@ import dayjs from "dayjs";
 import * as TextStyle from "@/style/common/Text-style";
 import * as Style from "@/style/component/diaryCalendar/MonthStatistics-style";
 
+import Emotion from "@/utils/emotionIcon";
+
 type Props = {
     dayJs: dayjs.Dayjs;
 };
@@ -31,38 +33,38 @@ const MonthStatistics = ({ dayJs }: Props) => {
             </Style.StatisticsContnet>
 
             <Style.EmotionListContent>
-                <dl>
+                <Style.EmotionList url={Emotion.confidence}>
                     <dt>자신감</dt>
                     <dd>20%</dd>
-                </dl>
-                <dl>
+                </Style.EmotionList>
+                <Style.EmotionList url={Emotion.excitement}>
                     <dt>신남</dt>
                     <dd>20%</dd>
-                </dl>
-                <dl>
+                </Style.EmotionList>
+                <Style.EmotionList url={Emotion.thanks}>
                     <dt>감사</dt>
                     <dd>20%</dd>
-                </dl>
-                <dl>
+                </Style.EmotionList>
+                <Style.EmotionList url={Emotion.comport}>
                     <dt>편안</dt>
                     <dd>20%</dd>
-                </dl>
-                <dl>
+                </Style.EmotionList>
+                <Style.EmotionList url={Emotion.worry}>
                     <dt>걱정</dt>
                     <dd>20%</dd>
-                </dl>
-                <dl>
+                </Style.EmotionList>
+                <Style.EmotionList url={Emotion.sad}>
                     <dt>슬픔</dt>
                     <dd>20%</dd>
-                </dl>
-                <dl>
+                </Style.EmotionList>
+                <Style.EmotionList url={Emotion.worry}>
                     <dt>상처</dt>
                     <dd>20%</dd>
-                </dl>
-                <dl>
+                </Style.EmotionList>
+                <Style.EmotionList url={Emotion.angry}>
                     <dt>분노</dt>
                     <dd>20%</dd>
-                </dl>
+                </Style.EmotionList>
             </Style.EmotionListContent>
         </Style.MonthStatisticsContent>
     );

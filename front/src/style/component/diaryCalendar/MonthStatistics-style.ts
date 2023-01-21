@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 import * as Css from "@/style/common/Css-style";
 
-import Emotion from "@/utils/emotionIcon";
-
 export const MonthStatisticsContent = styled.div`
     grid-column: 1 / 3;
     ${Css.diaryContnet}
@@ -58,8 +56,6 @@ export const StatisticsContnet = styled.div<{ percent: number[] }>`
     }
 
     ${({ theme }) => theme.device.mobile} {
-        /* margin: 1.5rem auto; */
-
         height: 1rem;
     }
 `;
@@ -68,68 +64,6 @@ export const EmotionListContent = styled.div`
     ${({ theme }) => theme.common.flexCenter}
     gap: 0 40px;
 
-    dl {
-        text-align: center;
-        dt {
-            width: 55px;
-            height: 40px;
-            text-indent: -9999px;
-        }
-
-        dd {
-            margin-top: 0.5rem;
-        }
-    }
-
-    dl:nth-child(1) {
-        dt {
-            background: url(${Emotion.confidence}) no-repeat center;
-            background-size: contain;
-        }
-    }
-    dl:nth-child(2) {
-        dt {
-            background: url(${Emotion.excitement}) no-repeat center;
-            background-size: contain;
-        }
-    }
-    dl:nth-child(3) {
-        dt {
-            background: url(${Emotion.thanks}) no-repeat center;
-            background-size: contain;
-        }
-    }
-    dl:nth-child(4) {
-        dt {
-            background: url(${Emotion.comport}) no-repeat center;
-            background-size: contain;
-        }
-    }
-    dl:nth-child(5) {
-        dt {
-            background: url(${Emotion.worry}) no-repeat center;
-            background-size: contain;
-        }
-    }
-    dl:nth-child(6) {
-        dt {
-            background: url(${Emotion.sad}) no-repeat center;
-            background-size: contain;
-        }
-    }
-    dl:nth-child(7) {
-        dt {
-            background: url(${Emotion.hurt}) no-repeat center;
-            background-size: contain;
-        }
-    }
-    dl:nth-child(8) {
-        dt {
-            background: url(${Emotion.angry}) no-repeat center;
-            background-size: contain;
-        }
-    }
-
     ${({ theme }) => theme.device.desktop} {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -137,19 +71,32 @@ export const EmotionListContent = styled.div`
         width: fit-content;
         margin: 0 auto;
     }
+`;
+
+export const EmotionList = styled.dl<{ url: string }>`
+    text-align: center;
+    dt {
+        width: 55px;
+        height: 40px;
+        background: url(${({ url }) => url}) no-repeat center;
+        background-size: contain;
+        text-indent: -9999px;
+    }
+
+    dd {
+        margin-top: 0.5rem;
+    }
 
     ${({ theme }) => theme.device.mobile} {
-        dl {
-            text-align: center;
-            dt {
-                width: 33px;
-                height: 24px;
-                margin: 0 auto;
-            }
+        text-align: center;
+        dt {
+            width: 33px;
+            height: 24px;
+            margin: 0 auto;
+        }
 
-            dd {
-                margin-top: 0.5rem;
-            }
+        dd {
+            margin-top: 0.5rem;
         }
     }
 `;
