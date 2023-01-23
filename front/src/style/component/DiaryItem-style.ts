@@ -18,8 +18,7 @@ export const Container = styled.article`
 `;
 
 export const Header = styled.div`
-    ${({ theme }) => theme.common.flexCenter}
-    justify-content: space-between;
+    ${({ theme }) => theme.common.flexBetween}
 
     height: 96px;
 
@@ -87,8 +86,7 @@ export const Meta = styled.div`
 `;
 
 export const Detail = styled.div`
-    ${({ theme }) => theme.common.flexCenter};
-    justify-content: space-between;
+    ${({ theme }) => theme.common.flexBetween}
 
     height: 56px;
 

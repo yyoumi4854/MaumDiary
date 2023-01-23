@@ -17,7 +17,7 @@ const colors = {
     // greyText: "#9F9F9F",
     // greyBorder: "#D9D9D9",
     greyText: "#888",
-    greyBorder: "#E1E1E1",
+    greyBorder: "#E1E1E1", // -> 나중에 #D9D9D로 바꿀예정
     greyBackground: "#F8F8F8",
 
     // background time
@@ -60,6 +60,12 @@ const common = {
     flexCenter: `
         display: flex;
         justify-content: center;
+        align-items: center;
+    `,
+
+    flexBetween: `
+        display: flex;
+        justify-content: space-between;
         align-items: center;
     `,
 

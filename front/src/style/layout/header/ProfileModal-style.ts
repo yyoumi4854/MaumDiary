@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const ProfileContent = styled.div`
     position: absolute;
+    top: 46px;
     right: 0;
-    bottom: -185px;
     height: 200px;
     border-radius: 4px;
     background: #fff;
@@ -16,23 +16,19 @@ export const ProfileContent = styled.div`
         right: 10px;
         width: 0;
         height: 0;
-        border-top: 8px solid transparent;
-        border-right: 8px solid transparent;
+        border: 8px solid transparent;
         border-bottom: 8px solid #fff;
-        border-left: 8px solid transparent;
     }
 
     ${({ theme }) => theme.device.mobile} {
-        bottom: -188px;
+        top: 30px;
         height: 180px;
 
         &::before {
             top: -12px;
-            right: 6px;
-            border-top: 6px solid transparent;
-            border-right: 6px solid transparent;
+            right: 7px;
+            border: 6px solid transparent;
             border-bottom: 6px solid #fff;
-            border-left: 6px solid transparent;
         }
     }
 `;
@@ -41,8 +37,9 @@ export const ProfileTopContent = styled.div`
     display: flex;
     gap: 0 16px;
     width: max-content;
-
+    min-width: 200px;
     padding: 16px;
+
     & > div {
         display: inline-block;
     }
@@ -90,7 +87,7 @@ export const ProfileBottomContent = styled.div`
 
     ${({ theme }) => theme.device.mobile} {
         ul li > * svg {
-            font-size: ${({ theme }) => theme.fonts.size.basicsDesktop} !important;
+            font-size: ${({ theme }) => theme.fonts.size.basicsDesktop};
         }
     }
 `;

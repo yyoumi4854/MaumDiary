@@ -41,8 +41,7 @@ export const DiaryContent = styled.div`
 `;
 
 export const DiaryTopContent = styled.div`
-    ${({ theme }) => theme.common.flexCenter};
-    justify-content: space-between;
+    ${({ theme }) => theme.common.flexBetween}
 
     & > div {
         ${({ theme }) => theme.common.flexCenter};
@@ -122,8 +121,7 @@ export const DiaryBottomContent = styled.div`
     position: absolute;
     bottom: 0;
     left: 0;
-    display: flex;
-    justify-content: space-between;
+    ${({ theme }) => theme.common.flexBetween}
     align-items: flex-end;
     width: 100%;
     padding: 20px;
