@@ -7,7 +7,8 @@ export const UserImgContent = styled.div`
         position: relative;
         width: 120px;
         height: 120px;
-        margin: 0 auto;
+        /* margin: 0 auto; */
+        ${({ theme }) => theme.common.marginXCenter}
         div {
             border: 6px solid ${({ theme }) => theme.colors.main};
             border-radius: 50%;
@@ -54,7 +55,8 @@ export const ButtonContent = styled.div`
     margin-top: 1.5em;
     button {
         display: block;
-        margin: 0 auto;
+        /* margin: 0 auto; */
+        ${({ theme }) => theme.common.marginXCenter}
         text-decoration: underline;
         font-weight: ${({ theme }) => theme.fonts.weight.light};
         color: ${({ theme }) => theme.colors.greyText};

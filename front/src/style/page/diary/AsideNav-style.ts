@@ -5,7 +5,9 @@ export const ProfileContent = styled.div`
     div {
         width: 120px;
         height: 120px;
-        margin: 0 auto;
+        /* margin: 0 auto; */
+        ${({ theme }) => theme.common.marginXCenter}
+
         border: 6px solid ${({ theme }) => theme.colors.main};
         border-radius: 50%;
         background: lightgray;

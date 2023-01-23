@@ -28,7 +28,9 @@ export const NavList = styled.li<{ current?: boolean }>`
         }
 
         svg {
-            margin: 0 auto;
+            /* margin: 0 auto; */
+            ${({ theme }) => theme.common.marginXCenter}
+
             font-size: 24px;
         }
 

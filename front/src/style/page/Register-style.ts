@@ -38,7 +38,8 @@ export const RegisterStepList = styled.dl<{ hasStep?: boolean }>`
     dt {
         width: 40px;
         height: 40px;
-        margin: 0 auto;
+        /* margin: 0 auto; */
+        ${({ theme }) => theme.common.marginXCenter}
         border-radius: 50%;
         background: ${({ hasStep, theme }) =>
             hasStep ? theme.colors.main : theme.colors.greyBorder};

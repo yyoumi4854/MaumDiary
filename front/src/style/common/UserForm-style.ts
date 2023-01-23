@@ -3,7 +3,8 @@ import styled, { UserFormStyle } from "styled-components";
 export const UserFormContent = styled.div`
     .userFormInner {
         width: 400px;
-        margin: 0 auto;
+        /* margin: 0 auto; */
+        ${({ theme }) => theme.common.marginXCenter}
         padding: 160px 0;
     }
 
