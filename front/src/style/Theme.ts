@@ -83,6 +83,14 @@ const common = {
         left: 0;
         transform: translateY(-50%);
     `,
+
+    marginXCenter: `
+        margin: 0 auto;
+    `,
+
+    marginYCenter: `
+        margin: auto 0;
+    `,
 };
 
 const size = {
