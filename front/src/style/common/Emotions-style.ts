@@ -7,7 +7,11 @@ export const Container = styled.section`
     width: 100%;
     height: fit-content;
 
-    margin-bottom: 88px;
+    margin-bottom: 64px;
+
+    ${({ theme }) => theme.device.mobile} {
+        margin-bottom: 20px;
+    }
 `;
 
 export const Tab = styled.div`
@@ -17,6 +21,7 @@ export const Tab = styled.div`
     width: 100%;
 
     margin-bottom: 16px;
+    overflow-x: scroll;
 
     & {
         -ms-overflow-style: none;
@@ -28,7 +33,6 @@ export const Tab = styled.div`
     }
 
     ${({ theme }) => theme.device.mobile} {
-        overflow-x: scroll;
     }
 `;
 
@@ -59,8 +63,6 @@ export const ScrollIndicator = styled.div<{ left: number }>`
 
     width: 100px;
     height: 2px;
-
-    margin: auto;
 
     background: ${({ theme }) => theme.colors.greyBackground};
 

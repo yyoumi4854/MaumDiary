@@ -26,7 +26,7 @@ const GreetingSection = ({ period }: Props) => {
                 <Style.GreetingMessage white={period === "evening"}>
                     {user === null ? (
                         <>
-                            <h2>나의 하루 한줄 마음 기록하기</h2> <br />
+                            <h2>나의 하루 한줄 마음 기록하기</h2>
                             <p>
                                 마음일기는 하루 하루 자신의 감정을 기록하고 <br />
                                 사람들과 마음을 나눌 수 있는 서비스 입니다.

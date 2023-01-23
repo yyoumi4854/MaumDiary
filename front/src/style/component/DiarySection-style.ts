@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-    height: 1271px;
+    padding-bottom: 143px;
+
+    ${({ theme }) => theme.device.mobile} {
+        padding-bottom: 80px;
+    }
 `;
 
 export const Title = styled.div`
@@ -21,5 +25,24 @@ export const Title = styled.div`
 
     p {
         font-size: ${({ theme }) => theme.fonts.size.basicsDesktop};
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        width: 171px;
+        height: 67px;
+
+        ${({ theme }) => theme.common.marginXCenter}
+        margin-bottom: 24px;
+
+        h2 {
+            margin-bottom: 8px;
+
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 10px;
+            line-height: 2;
+        }
     }
 `;

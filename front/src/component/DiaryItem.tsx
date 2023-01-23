@@ -1,5 +1,3 @@
-import { BsArrowUpShort, BsArrowDownShort } from "react-icons/bs";
-//BsArrowDownShort
 import * as Style from "@/style/component/DiaryItem-style";
 
 import confidence from "@/images/emotion/confidence.svg";
@@ -12,11 +10,13 @@ const DiaryItem = () => {
                     <img src={confidence} alt="감정" />
                     <p>오늘 할일 목표 달성!!</p>
                 </Style.Title>
-                <Style.HeaderMeta>
-                    <p>2017년 12월 21일</p>
-                    <p>☀️</p>
-                    <button>{/* <BsArrowDownShort /> */}</button>
-                </Style.HeaderMeta>
+                <Style.Meta>
+                    <div>
+                        <p className="day">2017년 12월 21일</p>
+                        <p>☀️</p>
+                    </div>
+                    <button />
+                </Style.Meta>
             </Style.Header>
             <Style.Detail>
                 <div>

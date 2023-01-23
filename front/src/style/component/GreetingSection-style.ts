@@ -15,7 +15,7 @@ export const Greeting = styled.div`
     top: 280px;
     left: 0;
 
-    width: 337px;
+    max-width: 337px;
     height: 264px;
 
     h1 {
@@ -26,12 +26,14 @@ export const Greeting = styled.div`
         filter: invert(62%) sepia(54%) saturate(627%) hue-rotate(189deg) brightness(103%)
             contrast(101%);
     }
+
+    ${({ theme }) => theme.device.mobile} {
+        width: 100%;
+    }
 `;
 
 export const GreetingMessage = styled.div<{ white: boolean }>`
     height: fit-content;
-
-    font-size: ${({ theme }) => theme.fonts.size.basicsDesktop};
 
     // global.ts에 있는 색상을 바꿀 수 있게 재셜계
     color: ${({ white }) => white === true && "white"};
@@ -46,7 +48,15 @@ export const GreetingMessage = styled.div<{ white: boolean }>`
     p {
         height: 48px;
 
+        font-size: ${({ theme }) => theme.fonts.size.basicsDesktop};
         line-height: 1.5;
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        /* width: 241px;
+        height: 90px; */
+
+        font-size: 20px;
     }
 `;
 
