@@ -2,13 +2,6 @@ import styled, { css } from "styled-components";
 
 import * as Css from "@/style/common/Css-style";
 
-const appearance = css`
-    -o-appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-`;
-
 const selectBox = css`
     height: 32px;
     padding: 4px 16px;
@@ -52,10 +45,18 @@ export const DiaryFormWrap = styled.div`
 
 export const TopContent = styled.div`
     ${({ theme }) => theme.common.flexBetween}
+
+    ${({ theme }) => theme.device.mobile} {
+        display: block;
+    }
 `;
 
 export const TopLeftContent = styled.div`
     ${({ theme }) => theme.common.flexCenter}
+    ${({ theme }) => theme.device.mobile} {
+        display: block;
+        text-align: center;
+    }
 `;
 
 export const WeatherFieldset = styled.fieldset`
@@ -79,7 +80,7 @@ export const WeatherFieldset = styled.fieldset`
 
     input[type="radio"] {
         display: none;
-        ${appearance}
+        ${Css.appearance}
     }
 
     input[type="radio"]:checked + label {
@@ -89,13 +90,18 @@ export const WeatherFieldset = styled.fieldset`
             }
         }
     }
+
+    ${({ theme }) => theme.device.mobile} {
+        width: fit-content;
+        margin: 1rem auto;
+    }
 `;
 
 export const isPublicFieldset = styled.fieldset`
     position: relative;
 
     select {
-        ${appearance}
+        ${Css.appearance}
 
         ${selectBox}
         padding-right: 36px;
@@ -113,30 +119,20 @@ export const isPublicFieldset = styled.fieldset`
         border: 6px solid transparent;
         border-top: 6px solid ${({ theme }) => theme.colors.greyBorder};
     }
+
+    ${({ theme }) => theme.device.mobile} {
+        width: fit-content;
+        margin: 0 auto;
+    }
 `;
 
 export const TextContent = styled.div`
     margin-top: 20px;
 
-    div {
-        display: grid;
-        grid-template-columns: 64px 1fr;
-        gap: 0 20px;
-
-        span {
-            width: 64px;
-            height: 64px;
-            background: lightgray;
-        }
-
-        p {
-            line-height: 64px;
-        }
-    }
-
     input {
         ${textBox}
         font-weight: ${({ theme }) => theme.fonts.weight.medium};
+        width: 100%;
     }
 
     textarea {
@@ -145,45 +141,32 @@ export const TextContent = styled.div`
         ${textBox}
         line-height: 1.5;
         resize: none;
+        ${Css.scrollbar}
     }
-`;
 
-export const EmotionFieldset = styled.fieldset`
-    ${({ theme }) => theme.common.flexCenter}
-    gap: 0 24px;
-    width: 90%;
-    margin: 0 auto;
-
-    label {
-        text-align: center;
-        cursor: pointer;
-
+    p.textCount {
+        display: block;
+        margin-top: 8px;
+        text-align: right;
+        font-size: ${({ theme }) => theme.fonts.size.small};
         span {
-            display: block;
-        }
-
-        span:first-of-type {
-            width: 64px;
-            height: 64px;
-            background: lightgray;
-        }
-
-        span:last-of-type {
-            margin-top: 8px;
             font-weight: ${({ theme }) => theme.fonts.weight.light};
             color: ${({ theme }) => theme.colors.greyText};
         }
     }
 
-    input[type="radio"] {
-        display: none;
-        ${appearance}
-    }
+    ${({ theme }) => theme.device.mobile} {
+        & > div {
+            display: block;
 
-    input[type="radio"]:checked + label {
-        span:last-of-type {
-            font-weight: ${({ theme }) => theme.fonts.weight.medium};
-            color: ${({ theme }) => theme.colors.main};
+            & > span {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+
+        input {
+            margin-top: 20px;
         }
     }
 `;

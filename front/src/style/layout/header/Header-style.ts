@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderContent = styled.header`
+export const HeaderContent = styled.header<{ scroll: boolean }>`
     display: flex;
     position: sticky;
     top: 0;
@@ -9,10 +9,12 @@ export const HeaderContent = styled.header`
     transition: all 0.2s;
     z-index: 10;
 
-    &.active {
+    ${({ scroll }) =>
+        scroll &&
+        `
         background: #fff;
         box-shadow: 0px 2px 8px rgba(71, 83, 103, 0.1);
-    }
+    `}
 
     .inner {
         ${({ theme }) => theme.common.flexBetween}
@@ -22,11 +24,6 @@ export const HeaderContent = styled.header`
                 font-size: 24px;
             }
         }
-
-        h1 img {
-            filter: invert(62%) sepia(54%) saturate(627%) hue-rotate(189deg) brightness(103%)
-                contrast(101%);
-        }
     }
 
     ${({ theme }) => theme.device.mobile} {
@@ -34,12 +31,6 @@ export const HeaderContent = styled.header`
 
         .inner {
             position: relative;
-            h1 {
-                ${({ theme }) => theme.common.positionCenter}
-                img {
-                    height: 24px;
-                }
-            }
         }
     }
 `;

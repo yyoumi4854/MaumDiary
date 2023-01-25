@@ -21,9 +21,5 @@ export const FooterContent = styled.footer`
 
     ${({ theme }) => theme.device.mobile} {
         height: 160px;
-
-        h1 img {
-            height: 24px;
-        }
     }
 `;

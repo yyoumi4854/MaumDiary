@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import * as Css from "@/style/common/Css-style";
+
 export const BottomNavContent = styled.nav`
     position: fixed;
     bottom: 0;
@@ -18,6 +20,7 @@ export const NavList = styled.li<{ current?: boolean }>`
     ${({ theme }) => theme.common.flexCenter}
 
     a {
+        position: relative;
         width: 100%;
         padding: 8px;
         text-align: center;
@@ -34,10 +37,17 @@ export const NavList = styled.li<{ current?: boolean }>`
             font-size: 24px;
         }
 
-        span {
+        span:first-of-type {
             margin-top: 8px;
             font-weight: ${({ theme, current }) => current && theme.fonts.weight.medium};
             font-size: ${({ theme }) => theme.fonts.size.small};
+
+            & + span {
+                position: absolute;
+                top: 2px;
+                left: 52%;
+                ${Css.chattingCount}
+            }
         }
     }
 `;

@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
-
 import logo from "@/images/logo.svg";
+import * as Style from "@/style/common/Logo-style";
 
 const Logo = () => {
     return (
-        <h1>
+        <Style.LogoContent>
             <img src={logo} alt="마음일기 로고" />
-        </h1>
+        </Style.LogoContent>
     );
 };
 

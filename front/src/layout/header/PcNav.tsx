@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import * as Style from "@/style/layout/header/Nav-style";
+import * as Style from "@/style/layout/header/PCNav-style";
 
-const Nav = () => {
+const PCNav = () => {
     return (
-        <Style.PcNavContent className="pc">
+        <Style.PCNavContent className="pc">
             <ul>
                 <li>
                     <Link to="/diary/calendar">일기장</Link>
@@ -17,8 +17,8 @@ const Nav = () => {
                     <a href="#">서비스 소개</a>
                 </li>
             </ul>
-        </Style.PcNavContent>
+        </Style.PCNavContent>
     );
 };
 
-export default Nav;
+export default PCNav;
