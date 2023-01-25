@@ -179,7 +179,7 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect }: Props) => {
                     {cells}
                 </Style.CellsContent>
             </Style.CalendarContent>
-            {/* <DiaryDelete /> */}
+            <DiaryDelete />
         </>
     );
 };

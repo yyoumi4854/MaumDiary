@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import * as FixModal from "@/utils/FixModalScroll";
 
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as Common from "@/style/common/common-style";
 import * as Style from "@/style/component/Modal-style";
 
 const DiaryDelete = () => {
+    useEffect(() => {
+        FixModal.disableScroll();
+        return FixModal.enableScroll;
+    });
+
     return (
         <Common.FixedContent>
             <Style.ModalContent lineHeight={true} margin={"0 0 2.5em"}>
