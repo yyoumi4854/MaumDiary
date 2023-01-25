@@ -24,11 +24,6 @@ export const HeaderContent = styled.header<{ scroll: boolean }>`
                 font-size: 24px;
             }
         }
-
-        h1 img {
-            filter: invert(62%) sepia(54%) saturate(627%) hue-rotate(189deg) brightness(103%)
-                contrast(101%);
-        }
     }
 
     ${({ theme }) => theme.device.mobile} {
@@ -36,12 +31,6 @@ export const HeaderContent = styled.header<{ scroll: boolean }>`
 
         .inner {
             position: relative;
-            h1 {
-                ${({ theme }) => theme.common.positionCenter}
-                img {
-                    height: 24px;
-                }
-            }
         }
     }
 `;

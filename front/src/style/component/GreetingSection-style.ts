@@ -21,11 +21,6 @@ export const Greeting = styled.div`
     h1 {
         margin-bottom: 24px;
     }
-
-    h1 img {
-        filter: invert(62%) sepia(54%) saturate(627%) hue-rotate(189deg) brightness(103%)
-            contrast(101%);
-    }
 `;
 
 export const GreetingMessage = styled.div<{ white: boolean }>`
