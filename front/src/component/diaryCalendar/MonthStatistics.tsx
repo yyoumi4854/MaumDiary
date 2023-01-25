@@ -57,7 +57,7 @@ const MonthStatistics = ({ dayJs }: Props) => {
                     <dt>슬픔</dt>
                     <dd>20%</dd>
                 </Style.EmotionList>
-                <Style.EmotionList url={Emotion.worry}>
+                <Style.EmotionList url={Emotion.hurt}>
                     <dt>상처</dt>
                     <dd>20%</dd>
                 </Style.EmotionList>

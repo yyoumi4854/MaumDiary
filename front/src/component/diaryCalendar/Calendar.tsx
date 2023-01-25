@@ -2,6 +2,8 @@ import React, { MouseEvent } from "react";
 import dayjs from "dayjs";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
+import DiaryDelete from "../common/DiaryDelete";
+
 import * as Style from "@/style/component/diaryCalendar/Calendar-style";
 
 type Props = {
@@ -177,6 +179,7 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect }: Props) => {
                     {cells}
                 </Style.CellsContent>
             </Style.CalendarContent>
+            {/* <DiaryDelete /> */}
         </>
     );
 };
