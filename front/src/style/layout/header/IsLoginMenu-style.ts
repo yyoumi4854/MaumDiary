@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import * as Css from "@/style/common/Css-style";
+
 export const IsLoginMenuContent = styled.div`
     & > ul {
         ${({ theme }) => theme.common.flexCenter};
@@ -31,11 +33,7 @@ export const ChattingList = styled.li`
             position: absolute;
             top: 0px;
             right: -8px;
-            padding: 4px;
-            border-radius: 50%;
-            background: ${({ theme }) => theme.colors.main};
-            color: #fff;
-            font-size: ${({ theme }) => theme.fonts.size.small};
+            ${Css.chattingCount}
         }
     }
 `;

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import * as Css from "@/style/common/Css-style";
+
 export const ProfileContent = styled.div`
     text-align: center;
     div {
@@ -26,6 +28,7 @@ export const NavList = styled.li<{ current?: boolean }>`
     a {
         ${({ theme }) => theme.common.flexCenter}
         justify-content: flex-start;
+        position: relative;
         padding: 12px 16px;
         border-radius: 4px;
         background: ${({ current, theme }) => current && theme.colors.main};
@@ -33,8 +36,14 @@ export const NavList = styled.li<{ current?: boolean }>`
         svg {
             font-size: ${({ theme }) => theme.fonts.size.middle};
         }
-        span {
+        span:first-of-type {
             margin-left: 8px;
+            & + span {
+                ${({ theme }) => theme.common.positionYCenter}
+                left: inherit;
+                right: 16px;
+                ${Css.chattingCount}
+            }
         }
     }
 `;

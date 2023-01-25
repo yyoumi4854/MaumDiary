@@ -34,6 +34,7 @@ const BottomNav = () => {
                         <Link to="/diary/chat">
                             <BsFillChatFill />
                             <span>채팅</span>
+                            <span>10</span>
                         </Link>
                     </Style.NavList>
                     <Style.NavList current={location.pathname.includes("analysis") && true}>
