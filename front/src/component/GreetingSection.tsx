@@ -32,7 +32,7 @@ const GreetingSection = ({ period }: Props) => {
                                 사람들과 마음을 나눌 수 있는 서비스 입니다.
                             </p>
                             <Style.GreetingBottom>
-                                <Style.QuickLink to="#">
+                                <Style.QuickLink to="/login">
                                     로그인
                                     <BsChevronRight />
                                 </Style.QuickLink>
