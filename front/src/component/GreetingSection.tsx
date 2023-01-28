@@ -44,9 +44,17 @@ const GreetingSection = ({ period }: Props) => {
                         </>
                     ) : (
                         <>
-                            <span>겨울감자</span>님, <br />
-                            어떤 하루를 보내셨나요? <br />
-                            오늘의 마음을 기록해 보세요!
+                            <h2>{"겨울감자"}님,</h2>
+                            <p>
+                                어떤 하루를 보내셨나요? <br />
+                                오늘의 마음을 기록해 보세요!
+                            </p>
+                            <Style.GreetingBottom>
+                                <Style.QuickLink to="#">
+                                    오늘 일기 쓰기
+                                    <BsChevronRight />
+                                </Style.QuickLink>
+                            </Style.GreetingBottom>
                         </>
                     )}
                 </Style.GreetingMessage>

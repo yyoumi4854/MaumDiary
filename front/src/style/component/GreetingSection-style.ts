@@ -68,6 +68,7 @@ export const GreetingBottom = styled.div`
     margin-top: 80px;
 
     ${({ theme }) => theme.common.flexCenter}
+    justify-content: flex-start;
 `;
 
 export const QuickLink = styled(Link)`
