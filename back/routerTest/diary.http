@@ -43,15 +43,15 @@ Content-Type: application/json
 
 
 ### 모든 일기 조회
-get {{url}}/diaries/all?count=10&page=1&emotion=전체&privatediary
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdDExMSIsImlhdCI6MTY3MDQ3MDc1MywiZXhwIjoxNjcwNDcyNTUzfQ.zict85tshEbI7eefZIMmAPQU0ntw6p2e6Q_S8dtkTeQ
+get {{url}}/diaries/all?count=10&page=1&emotion=all&privatediary=false
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdDQiLCJpYXQiOjE2NzQ5MTk4ODAsImV4cCI6MTY3NDkyMTY4MH0.0G9gMuH-osmK6Gw-HZ8_RxuNBTR13aA2nz4CMOtpcew
 RefreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjcwNDcwNzUzLCJleHAiOjE2NzA0ODE1NTN9.vwSCDDjajagqUEK3mrtxLgUJVtpPCjI-iTpG7_iCNNI
 Content-Type: application/json
 
 ### 일기 작성 api
 post {{url}}/diaries/write
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdDQiLCJpYXQiOjE2NzM3NzUwNTYsImV4cCI6MTY3Mzc3Njg1Nn0.gdhNHVasvZUgiifDj-T_O9WpECMgaVIE-jP17xGNDos
-RefreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjczNzc1MDU2LCJleHAiOjE2NzM3ODU4NTZ9.TCBr7hqUSMc0a8UMFsrp31Xx_JHKTutZkhhGPD0V9rY
+RefreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjc0OTE5ODgwLCJleHAiOjE2NzQ5MzA2ODB9.wVp0OgSI0ZOI1WGFQhCIHsfx0gKLNG7OUPHEh0N-8VM
 Content-Type: application/json
 
 {
