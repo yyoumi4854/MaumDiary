@@ -2,10 +2,8 @@ import type { QueryClient } from "@tanstack/react-query";
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 
 import { Period } from "@/types";
-import Header from "@/layout/header/Header";
-import Footer from "@/layout/footer/Footer";
 import Main from "@/layout/Main";
-import Home from "./Home";
+import Home, { loader as homeLoader } from "./Home";
 import Login from "./Login";
 import Register from "./Register/Register";
 import RecoveryID from "./RecoveryID";
@@ -18,25 +16,16 @@ import DiaryChat from "./diary/DiaryChat";
 import DiaryUserAnalysis from "./diary/DiaryUserAnalysis";
 import DiaryWrite from "./DiaryWrite";
 
-const loader =
-    (queryClient: QueryClient) =>
-    async ({ params, request }: any) => {
-        // console.dir(queryClient);
-        console.log("hi");
-
-        if (queryClient) {
-            return null;
-        }
-        return { hi: "hi" };
-    };
-
-// TODO: Home Loader 만들기
 const router = (period: Period, queryClient: QueryClient) =>
     createBrowserRouter(
         createRoutesFromElements(
-            <Route path="/" element={<Main period={period} />}>
+            <Route
+                path="/"
+                element={<Main period={period} />}
+                errorElement={<div>에러가 났어용!</div>}
+            >
                 <Route
-                    loader={loader(queryClient)}
+                    loader={homeLoader(queryClient)}
                     index={true}
                     element={<Home period={period} />}
                 />
