@@ -6,7 +6,11 @@ import * as Animation from "../common/Animation-style";
 export const GreetingSection = styled.section`
     position: relative;
 
-    height: 817px;
+    height: calc(100vh - 60px);
+
+    ${({ theme }) => theme.device.mobile} {
+        height: calc(100vh - 48px);
+    }
 `;
 
 export const Greeting = styled.div`

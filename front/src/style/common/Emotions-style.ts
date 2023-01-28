@@ -67,11 +67,11 @@ export const ScrollIndicator = styled.div<{ left: number }>`
     background: ${({ theme }) => theme.colors.greyBackground};
 
     &::before {
+        content: "";
+
         position: absolute;
         top: 0;
         left: ${({ left }) => `${left}%`};
-
-        content: "";
 
         width: 50%;
         height: 100%;
