@@ -24,8 +24,6 @@ const Header = () => {
         setHeaderBackground(window.scrollY ? true : false);
     };
 
-    // console.log("렌더링");
-
     return (
         <Style.HeaderContent className={headerBackground ? "active" : ""}>
             <div className="inner">

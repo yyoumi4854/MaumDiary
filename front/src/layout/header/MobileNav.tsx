@@ -21,8 +21,6 @@ const MobileNav = ({ isMobileNavOpen, setIsMobileNavOpen }: Props) => {
         }
     };
 
-    console.log("렌더링됨");
-
     return (
         <Common.FixedContent className="mobile" onClick={handleCloseModal}>
             <Style.MobileNavContent ref={mobileNavContentRef} className="active1">

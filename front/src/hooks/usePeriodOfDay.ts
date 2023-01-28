@@ -29,23 +29,15 @@ const usePeriodOfDay = () => {
             const numberedNow = Number(dayjs().format("HHmm"));
 
             if (numberedNow < data.sunrise) {
-                // return "dawn";
-                // period = "dawn";
                 setPeriod("dawn");
             } else if (numberedNow < 1200) {
-                // return "morning";
-                // period = "mornig";
                 setPeriod("morning");
             } else if (numberedNow < data.sunset) {
-                // return "afternoon";
-                // period = "afternoon";
                 setPeriod("afternoon");
             } else {
-                // return "evening";
-                // period = "evening";
                 setPeriod("evening");
             }
-        }, 500);
+        }, 1000);
 
         return () => clearInterval(checker);
     });
