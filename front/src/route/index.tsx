@@ -1,6 +1,7 @@
-import { Period } from "@/types";
+import type { QueryClient } from "@tanstack/react-query";
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 
+import { Period } from "@/types";
 import Header from "@/layout/header/Header";
 import Footer from "@/layout/footer/Footer";
 import Main from "@/layout/Main";
@@ -17,12 +18,28 @@ import DiaryChat from "./diary/DiaryChat";
 import DiaryUserAnalysis from "./diary/DiaryUserAnalysis";
 import DiaryWrite from "./DiaryWrite";
 
-const router = (period: Period) =>
+const loader =
+    (queryClient: QueryClient) =>
+    async ({ params, request }: any) => {
+        // console.dir(queryClient);
+        console.log("hi");
+
+        if (queryClient) {
+            return null;
+        }
+        return { hi: "hi" };
+    };
+
+// TODO: Home Loader 만들기
+const router = (period: Period, queryClient: QueryClient) =>
     createBrowserRouter(
         createRoutesFromElements(
-            <Route element={<Main period={period} />}>
-                {/* <Header /> */}
-                <Route path="/" element={<Home period={period} />} />
+            <Route path="/" element={<Main period={period} />}>
+                <Route
+                    loader={loader(queryClient)}
+                    index={true}
+                    element={<Home period={period} />}
+                />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/recovery/id" element={<RecoveryID />} />
@@ -35,7 +52,6 @@ const router = (period: Period) =>
                     <Route path="user/analysis" element={<DiaryUserAnalysis />} />
                 </Route>
                 <Route path="/diary/write" element={<DiaryWrite />} />
-                {/* <Footer /> */}
             </Route>
         )
     );

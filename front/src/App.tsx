@@ -1,4 +1,5 @@
 import { useDeferredValue } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { RouterProvider } from "react-router-dom";
 
 import usePeriodOfDay from "./hooks/usePeriodOfDay";
@@ -6,19 +7,18 @@ import DynamicBackground from "./component/common/DynamicBackground";
 import router from "./route";
 
 function App() {
-    const period = usePeriodOfDay();
+    const period = useDeferredValue(usePeriodOfDay());
+    const queryClient = useQueryClient();
 
-    const deferredPeriod = useDeferredValue(period);
-
-    if (deferredPeriod === null) {
+    if (period === null) {
         return null;
     }
 
-    const route = router(deferredPeriod);
+    const route = router(period, queryClient);
 
     return (
         <>
-            <DynamicBackground period={deferredPeriod} />
+            <DynamicBackground period={period} />
             <RouterProvider router={route} />
         </>
     );
