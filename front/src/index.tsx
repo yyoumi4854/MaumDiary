@@ -9,7 +9,13 @@ import App from "./App";
 import theme from "./style/Theme";
 import Global from "./style/Global";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: 3,
+        },
+    },
+});
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>

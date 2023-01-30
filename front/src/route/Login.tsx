@@ -1,7 +1,9 @@
-import React from "react";
+import { useRef, MouseEvent } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { BsChevronRight } from "react-icons/bs";
 
+import { login } from "@/api/account";
 import * as TextStyle from "@/style/common/Text-style";
 import * as FormStyle from "@/style/common/Form-style";
 import * as ButtonStyle from "@/style/common/Button-style";
@@ -11,6 +13,24 @@ import * as Style from "@/style/page/Login-style";
 import faviconLogo from "@/images/favicon-logo.svg";
 
 const Login = () => {
+    const userIDRef = useRef<HTMLInputElement | null>(null);
+    const passwordRef = useRef<HTMLInputElement | null>(null);
+
+    const mutation = useMutation({
+        mutationFn: login,
+        onSuccess: (data, variables, context) => {
+            console.log(data, variables, context);
+        },
+    });
+
+    const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
+        if (userIDRef.current === null || passwordRef.current === null) return;
+
+        mutation.mutate({ userID: userIDRef.current.value, password: passwordRef.current.value });
+    };
+
     return (
         <UserFormStyle.UserFormContent className="content">
             <div className="userFormInner">
@@ -24,14 +44,19 @@ const Login = () => {
                         type="password"
                         placeholder="아이디"
                         marginBottom="1em"
+                        ref={userIDRef}
                     />
-                    <FormStyle.BasicsInputText type="password" placeholder="비밀번호" />
+                    <FormStyle.BasicsInputText
+                        type="password"
+                        placeholder="비밀번호"
+                        ref={passwordRef}
+                    />
                     <FormStyle.MessageText warnning={true}>
                         비밀번호가 틀렸습니다.
                     </FormStyle.MessageText>
                 </UserFormStyle.InputWrap>
 
-                <ButtonStyle.LongButton>로그인</ButtonStyle.LongButton>
+                <ButtonStyle.LongButton onClick={onClick}>로그인</ButtonStyle.LongButton>
 
                 <UserFormStyle.userFomMenu>
                     <ul>
