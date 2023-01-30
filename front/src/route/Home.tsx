@@ -1,5 +1,4 @@
 import { QueryClient } from "@tanstack/react-query";
-import { useLoaderData } from "react-router-dom";
 
 import { Period } from "@/types";
 import { DIARY } from "@/constant/QUERY_KEY";
@@ -25,8 +24,6 @@ export const loader = (queryClient: QueryClient) => async () => {
 };
 
 const Home = ({ period }: Props) => {
-    const diaryList = useLoaderData();
-    console.log(diaryList);
     return (
         <Style.HomeContainer className="inner">
             <GreetingSection period={period} />

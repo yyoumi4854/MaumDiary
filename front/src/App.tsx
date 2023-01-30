@@ -1,4 +1,4 @@
-import { useDeferredValue } from "react";
+import { useDeferredValue, Suspense } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { RouterProvider } from "react-router-dom";
 
@@ -19,7 +19,9 @@ function App() {
     return (
         <>
             <DynamicBackground period={period} />
-            <RouterProvider router={route} />
+            <Suspense fallback={<div>로딩중이여유~</div>}>
+                <RouterProvider router={route} />
+            </Suspense>
         </>
     );
 }

@@ -1,15 +1,5 @@
 import instance from ".";
-
-interface Diary {
-    id: number;
-    title: string;
-    description: string;
-    emotion: string;
-    view: number;
-    user_model_id: number;
-    private: boolean;
-    updatedAt: string;
-}
+import { Diary } from "@/types";
 
 export const fetchDiaryList = async () => {
     const result = await instance.get<Diary[]>(

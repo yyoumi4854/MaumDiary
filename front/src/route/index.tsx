@@ -21,11 +21,7 @@ const router = (period: Period, queryClient: QueryClient) =>
     // 닉네임 유니크하게 만들지 의논하기
     createBrowserRouter(
         createRoutesFromElements(
-            <Route
-                path="/"
-                element={<Main period={period} />}
-                errorElement={<div>에러가 났어용!</div>}
-            >
+            <Route path="/" element={<Main period={period} />} errorElement={<div></div>}>
                 <Route
                     loader={homeLoader(queryClient)}
                     index={true}

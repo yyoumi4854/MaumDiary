@@ -1,18 +1,26 @@
 import * as Style from "@/style/component/DiaryItem-style";
 
-import confidence from "@/images/emotion/confidence.svg";
+import { Diary } from "@/types";
+import emotionIcon from "@/utils/emotionIcon";
+import dayjs from "dayjs";
 
-const DiaryItem = () => {
+interface Props {
+    diary: Diary;
+}
+
+const DiaryItem = ({ diary }: Props) => {
+    const { emotion, title, description, updatedAt } = diary;
+
     return (
         <Style.Container>
             <Style.Header>
                 <Style.Title>
-                    <img src={confidence} alt="감정" />
-                    <p>오늘 할일 목표 달성!!</p>
+                    <img src={emotionIcon[emotion]} alt="감정" />
+                    <p>{title}</p>
                 </Style.Title>
                 <Style.Meta>
                     <div>
-                        <p className="day">2017년 12월 21일</p>
+                        <p className="day">{dayjs(updatedAt).format("YYYY년 MM월 DD일")}</p>
                         <p>☀️</p>
                     </div>
                     <button />
