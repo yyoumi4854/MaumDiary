@@ -26,10 +26,10 @@ const colors = {
 
     // emotion
     emotionConfidence: "#FED723",
-    emotionExcite: "#FEA723",
+    emotionExcitement: "#FEA723",
     emotionThanks: "#F8B7C9",
-    emotionComfortable: "#D4EDF9",
-    emotionAnxiety: "#9EA2A7",
+    emotionComfort: "#D4EDF9",
+    emotionWorry: "#9EA2A7",
     emotionSad: "#87ABEB",
     emotionHurt: "#C9ADE2",
     emotionAngry: "#E25F50",

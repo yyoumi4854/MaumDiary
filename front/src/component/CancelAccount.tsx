@@ -6,7 +6,7 @@ import * as TextStyle from "@/style/common/Text-style";
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as UserFormStyle from "@/style/common/UserForm-style";
 import * as Common from "@/style/common/common-style";
-import * as Style from "@/style/component/CancelAccount-style";
+import * as Style from "@/style/component/Modal-style";
 
 import faviconLogo from "@/images/favicon-logo.svg";
 
@@ -23,7 +23,7 @@ const CancelAccount = ({ cancelAccountModal, setCancelAccountModal }: Props) => 
 
     return (
         <Common.FixedContent>
-            <Style.CancelAccountContent>
+            <Style.ModalContent margin={"2.5rem 0 4rem"}>
                 <UserFormStyle.TitleContent>
                     <img src={faviconLogo} alt="마음일기 로고" />
                     <TextStyle.TitleText textAlign="center">회원 탈퇴</TextStyle.TitleText>
@@ -37,7 +37,7 @@ const CancelAccount = ({ cancelAccountModal, setCancelAccountModal }: Props) => 
                     <button onClick={() => setCancelAccountModal(false)}>취소</button>
                     <button>탈퇴</button>
                 </ButtonStyle.ButtonWrap>
-            </Style.CancelAccountContent>
+            </Style.ModalContent>
         </Common.FixedContent>
     );
 };

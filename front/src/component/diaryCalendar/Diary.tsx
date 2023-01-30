@@ -5,7 +5,7 @@ import { HiLockClosed, HiLockOpen } from "react-icons/hi";
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as Style from "@/style/component/diaryCalendar/Diary-style";
 
-import confidence from "@/images/emotion/confidence.svg";
+import Emotion from "@/utils/emotionIcon";
 
 type Props = {
     diarySelect: string;
@@ -39,7 +39,7 @@ const Diary = ({ diarySelect }: Props) => {
 
                     <Style.DiaryTextContent>
                         <div>
-                            <img src={confidence} alt="신남" />
+                            <img src={Emotion.confidence} alt="신남" />
                             <p>오늘 할일 목표 달성!!!</p>
                         </div>
                         <div>

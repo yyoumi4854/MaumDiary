@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BsList } from "react-icons/bs";
 
 import Logo from "@/component/common/Logo";
-import PcNav from "./PcNav";
+import PCNav from "./PCNav";
 import MobileNav from "./MobileNav";
 import RightMenu from "./RightMenu";
 
@@ -11,7 +11,7 @@ import * as Style from "@/style/layout/header/Header-style";
 
 const Header = () => {
     const [headerBackground, setHeaderBackground] = useState(false);
-    const [isMobileNavOpen, setIsMobileNavOpen] = useState(true);
+    const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -25,7 +25,7 @@ const Header = () => {
     };
 
     return (
-        <Style.HeaderContent className={headerBackground ? "active" : ""}>
+        <Style.HeaderContent scroll={headerBackground && true}>
             <div className="inner">
                 <button className="mobile" onClick={() => setIsMobileNavOpen(true)}>
                     <BsList />
@@ -34,17 +34,12 @@ const Header = () => {
                     <Link to="/">
                         <Logo />
                     </Link>
-                    <PcNav />
+                    <PCNav />
                 </Style.LeftContent>
                 <RightMenu />
             </div>
 
-            {isMobileNavOpen && (
-                <MobileNav
-                    isMobileNavOpen={isMobileNavOpen}
-                    setIsMobileNavOpen={setIsMobileNavOpen}
-                />
-            )}
+            {isMobileNavOpen && <MobileNav setIsMobileNavOpen={setIsMobileNavOpen} />}
         </Style.HeaderContent>
     );
 };

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CancelAccountContent = styled.div`
+export const ModalContent = styled.div<{ lineHeight?: boolean; margin?: string }>`
     ${({ theme }) => theme.common.positionXCenter};
     top: 30%;
     width: 400px;
@@ -9,8 +9,9 @@ export const CancelAccountContent = styled.div`
     background: #fff;
 
     p {
-        margin: 2.5rem 0 4rem;
+        margin: ${({ margin }) => margin};
         text-align: center;
+        line-height: ${({ lineHeight }) => lineHeight && 1.5};
 
         span {
             font-weight: ${({ theme }) => theme.fonts.weight.bold};

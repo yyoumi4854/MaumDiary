@@ -58,7 +58,7 @@ export const DiaryTopContent = styled.div`
                 width: 4px;
                 height: 4px;
                 border-radius: 50%;
-                background: ${({ theme }) => theme.colors.greyBackground};
+                background: ${({ theme }) => theme.colors.mainDark};
             }
 
             svg {
