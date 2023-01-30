@@ -20,8 +20,8 @@ const ColorByPeriod = {
 
 const Main = ({ period }: Props) => {
     return (
-        <Style.MainContainer background={ColorByPeriod[period]}>
-            <div style={{ position: "relative", zIndex: 10 }}>
+        <Style.MainContainer background={ColorByPeriod[period]} period={period}>
+            <div>
                 <Header />
                 <Outlet context={period} />
                 <Footer />
