@@ -20,3 +20,11 @@ export interface Diary {
     private: boolean;
     updatedAt: string;
 }
+
+export interface FetchingDiaryListOption {
+    user: "true" | "false";
+    count: number;
+    page: number;
+    emotion: "all" | Emotion;
+    lock: "true" | "false";
+}

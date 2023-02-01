@@ -40,7 +40,7 @@ const Emotions = () => {
                     <p>감사</p>
                 </Style.TabButton>
                 <Style.TabButton>
-                    <Style.Circle url={Emotion.comport} />
+                    <Style.Circle url={Emotion.comfort} />
                     <p>편안</p>
                 </Style.TabButton>
                 <Style.TabButton>

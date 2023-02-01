@@ -13,8 +13,9 @@ interface Props {
 }
 
 const getDiaryList = () => ({
-    queryKey: [DIARY.LIST],
-    queryFn: fetchDiaryList,
+    queryKey: [DIARY.LIST, { user: "true", count: 10, page: 1, emotion: "all", lock: "true" }],
+    queryFn: () =>
+        fetchDiaryList({ user: "false", count: 10, page: 1, emotion: "all", lock: "false" }),
 });
 
 export const loader = (queryClient: QueryClient) => async () => {
