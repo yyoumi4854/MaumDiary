@@ -8,6 +8,6 @@ export const MainContainer = styled.main<{ background: string; period: string }>
     & > div {
         position: relative;
         z-index: 10;
-        color: ${({ period }) => (period !== "" ? "red" : "white")};
+        /* color: ${({ period }) => (period !== "" ? "red" : "white")}; */
     }
 `;

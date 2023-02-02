@@ -6,8 +6,8 @@ POST {{url}}/account/login
 Content-Type: application/json
 
 {
-    "userID": "test4",
-    "password": "test4"
+    "userID": "test8",
+    "password": "test8"
 }
 ###logout
 delete {{url}}/account
@@ -50,8 +50,8 @@ Content-Type: application/json
 
 ### 일기 작성 api
 post {{url}}/diaries/write
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdDQiLCJpYXQiOjE2NzM3NzUwNTYsImV4cCI6MTY3Mzc3Njg1Nn0.gdhNHVasvZUgiifDj-T_O9WpECMgaVIE-jP17xGNDos
-RefreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjc0OTE5ODgwLCJleHAiOjE2NzQ5MzA2ODB9.wVp0OgSI0ZOI1WGFQhCIHsfx0gKLNG7OUPHEh0N-8VM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdDgiLCJpYXQiOjE2NzUwNjk5NjMsImV4cCI6MTY3NTA3MTc2M30.RRctxyeoAwKgbk3UaHckv82x6Qls5nu9vtg-E6_FCDQ
+RefreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjc1MDY5OTYzLCJleHAiOjE2NzUwODA3NjN9.tB0zlZK-8vJC3zABwAdR7ZOpmp9kxGinUXPwcOVNZNY
 Content-Type: application/json
 
 {
