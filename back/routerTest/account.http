@@ -11,10 +11,10 @@ POST {{URL}}/new
 Content-Type: application/json
 
 {
-    "userID": "test4",
-    "password": "test4",
-    "email": "test4@test.com",
-    "nickname": "test2"
+    "userID": "test8",
+    "password": "test8",
+    "email": "test8@test.com",
+    "nickname": "test8"
 }
 
 

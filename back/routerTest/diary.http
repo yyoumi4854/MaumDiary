@@ -8,8 +8,8 @@ POST {{url}}/account/login
 Content-Type: application/json
 
 {
-    "userID": "test4",
-    "password": "test4"
+    "userID": "test8",
+    "password": "test8"
 }
 ###logout
 delete {{url}}/account
