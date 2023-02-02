@@ -45,29 +45,8 @@ class DiaryService {
         return { result: true };
     }
 
-    async getAllDiaryByDate(userID: string, datetime: Date, datetime2: Date) {
-        const postData = await this.prisma.diary.findMany({
-            where: {
-                user: {
-                    Account: {
-                        userID: userID,
-                    },
-                },
-                createdAt: {
-                    gte: datetime,
-                    lte: datetime2,
-                },
-            },
-        });
-        if (postData === null) {
-            throw new AppError("NotFindError");
-        }
-        await this.prisma.$disconnect();
-        return postData;
-    }
-
     async getDiaryList(count: number, page: number, lock: boolean, emotion: string) {
-        const postDatas = await this.prisma.diary.findMany({
+        const result = await this.prisma.diary.findMany({
             take: Number(count),
             skip: (Number(page) - 1) * Number(count),
             where: {
@@ -79,19 +58,19 @@ class DiaryService {
                 title: true,
                 description: true,
                 emotion: true,
-                likes: true,
                 lock: true,
+                likes: true,
+                weather: true,
                 createdAt: true,
-                updatedAt: true,
             },
             orderBy: [{ createdAt: "desc" }],
         });
 
-        if (postDatas === null) {
+        if (result === null) {
             throw new AppError("NotFindError");
         }
         await this.prisma.$disconnect();
-        return postDatas;
+        return result;
     }
 
     async getUserDiaryList(userID: string, count: number, page: number) {

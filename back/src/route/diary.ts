@@ -115,43 +115,9 @@ diaryRouter.get(
     "/period/all",
     auth,
     wrapRouter(async (req: Req, res: Res) => {
-        // const now = new Date();
-        // const year = now.getFullYear();
-        // const month = now.getMonth() + 1;
-        // const date = now.getDate();
-
-        // const day = `${year}-${month >= 10 ? month : "0" + month}-${
-        //     date >= 10 ? date : "0" + date
-        // }`;
-
-        // // week 기간 설정
-        // const weekStart = new Date(day);
-        // weekStart.setDate(new Date().getDate() - 7);
-
-        // const weekEnd = new Date(weekStart);
-        // weekEnd.setDate(weekStart.getDate() + 1);
-
-        // // month 기간 설정
-        // const monthStart = new Date(day);
-        // monthStart.setMonth(new Date().getMonth() - 1);
-
-        // const monthEnd = new Date(monthStart);
-        // monthEnd.setDate(monthStart.getDate() + 1);
-
-        // // year 기간 설정
-        // const yearStart = new Date(day);
-        // yearStart.setFullYear(new Date().getFullYear() - 1);
-
-        // const yearEnd = new Date(yearStart);
-        // yearEnd.setDate(yearStart.getDate() + 1);
-
         const week = dayjs().subtract(1, "week");
         const month = dayjs().subtract(1, "month");
         const year = dayjs().subtract(1, "year");
-
-        console.log(week.format("YYYY-MM-DD"));
-        console.log(month.format("YYYY-MM-DD"));
-        console.log(year.format("YYYY-MM-DD"));
 
         const result = await Promise.all([
             diaryService.getDiaryByPeriod(req.userID!, week),
