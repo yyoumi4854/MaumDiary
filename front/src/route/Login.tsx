@@ -1,8 +1,10 @@
 import { useRef, MouseEvent } from "react";
+import { useSetRecoilState } from "recoil";
 import { useNavigate, Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BsChevronRight } from "react-icons/bs";
 
+import { userAtom } from "@/recoil/user";
 import { fetchUserData, login } from "@/api/account";
 import * as TextStyle from "@/style/common/Text-style";
 import * as FormStyle from "@/style/common/Form-style";
@@ -17,19 +19,24 @@ const Login = () => {
     const userIDRef = useRef<HTMLInputElement | null>(null);
     const passwordRef = useRef<HTMLInputElement | null>(null);
 
-    const navigate = useNavigate();
-
     const queryClient = useQueryClient();
+
+    const setUserData = useSetRecoilState(userAtom);
+
+    const navigate = useNavigate();
 
     const mutation = useMutation({
         mutationFn: login,
         onSuccess: () => {
-            queryClient.fetchQuery({
-                queryKey: [ACCOUNT.USER],
-                queryFn: fetchUserData,
-                cacheTime: 0,
-            });
-            localStorage.setItem("isLogin", "true");
+            queryClient
+                .fetchQuery({
+                    queryKey: [ACCOUNT.USER],
+                    queryFn: fetchUserData,
+                    cacheTime: 0,
+                })
+                .then((result) => {
+                    setUserData(result.data);
+                });
 
             navigate("/");
         },

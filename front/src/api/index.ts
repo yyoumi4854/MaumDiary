@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const instance = axios.create();
+const instance = axios.create({
+    withCredentials: true,
+});
 
 // TODO: must implement request-intercepter for jwt authorization
 

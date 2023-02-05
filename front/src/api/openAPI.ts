@@ -10,7 +10,9 @@ export const fetchSunriseAndSunset = async () => {
 
     const URL = `${endpoint}?serviceKey=${serviceKey}&locdate=${locdate}&location=${location}`;
 
-    const result = await instance.get(URL);
+    const result = await instance.get(URL, {
+        withCredentials: false,
+    });
     const { sunrise, sunset } = result.data.response.body.items.item;
 
     return { sunrise: Number(sunrise), sunset: Number(sunset) };
