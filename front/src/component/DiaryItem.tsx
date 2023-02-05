@@ -9,7 +9,7 @@ interface Props {
 }
 
 const DiaryItem = ({ diary }: Props) => {
-    const { emotion, title, description, updatedAt } = diary;
+    const { title, description, emotion, lock, likes, weather, createdAt } = diary;
 
     return (
         <Style.Container>
@@ -20,7 +20,7 @@ const DiaryItem = ({ diary }: Props) => {
                 </Style.Title>
                 <Style.Meta>
                     <div>
-                        <p className="day">{dayjs(updatedAt).format("YYYY년 MM월 DD일")}</p>
+                        <p className="day">{dayjs(createdAt).format("YYYY년 MM월 DD일")}</p>
                         <p>☀️</p>
                     </div>
                     <button />
@@ -29,7 +29,7 @@ const DiaryItem = ({ diary }: Props) => {
             <Style.Detail>
                 <div>
                     <p>by 겨울감자</p>
-                    <p>공감 7</p>
+                    <p>공감 {likes}</p>
                 </div>
             </Style.Detail>
         </Style.Container>
