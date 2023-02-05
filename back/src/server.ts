@@ -1,6 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import http from "http";
 import { Socket } from "socket.io";
 import socket from "socket.io";
@@ -20,7 +21,16 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+    cors({
+        origin: "http://localhost:3001",
+        credentials: true,
+        optionsSuccessStatus: 200,
+    })
+);
+
+app.use(cookieParser());
+
 app.use("/api/users", userRouter);
 app.use("/api/account", accountRouter);
 app.use("/api/diaries", diaryRouter);
