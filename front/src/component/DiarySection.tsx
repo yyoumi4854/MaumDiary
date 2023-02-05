@@ -9,7 +9,7 @@ import * as Style from "@/style/component/DiarySection-style";
 const DiarySection = () => {
     const diaryList = useLoaderData() as Diary[];
 
-    console.log(diaryList);
+    // console.log(diaryList);
     return (
         <Style.Container>
             <Style.Title>

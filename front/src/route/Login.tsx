@@ -1,9 +1,9 @@
 import { useRef, MouseEvent } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BsChevronRight } from "react-icons/bs";
 
-import { login } from "@/api/account";
+import { fetchUserData, login } from "@/api/account";
 import * as TextStyle from "@/style/common/Text-style";
 import * as FormStyle from "@/style/common/Form-style";
 import * as ButtonStyle from "@/style/common/Button-style";
@@ -11,15 +11,27 @@ import * as UserFormStyle from "@/style/common/UserForm-style";
 import * as Style from "@/style/page/Login-style";
 
 import faviconLogo from "@/images/favicon-logo.svg";
+import { ACCOUNT } from "@/constant/QUERY_KEY";
 
 const Login = () => {
     const userIDRef = useRef<HTMLInputElement | null>(null);
     const passwordRef = useRef<HTMLInputElement | null>(null);
 
+    const navigate = useNavigate();
+
+    const queryClient = useQueryClient();
+
     const mutation = useMutation({
         mutationFn: login,
-        onSuccess: (data, variables, context) => {
-            console.log(data, variables, context);
+        onSuccess: () => {
+            queryClient.fetchQuery({
+                queryKey: [ACCOUNT.USER],
+                queryFn: fetchUserData,
+                cacheTime: 0,
+            });
+            localStorage.setItem("isLogin", "true");
+
+            navigate("/");
         },
     });
 

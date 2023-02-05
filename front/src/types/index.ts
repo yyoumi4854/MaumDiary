@@ -1,3 +1,11 @@
+export interface USER_DATA {
+    User: {
+        nickname: string;
+        id: string;
+    };
+    certified_account: boolean;
+}
+
 export type Period = "dawn" | "morning" | "afternoon" | "evening";
 
 export type Emotion =
@@ -15,10 +23,10 @@ export interface Diary {
     title: string;
     description: string;
     emotion: Emotion;
-    view: number;
-    user_model_id: number;
-    private: boolean;
-    updatedAt: string;
+    lock: boolean;
+    likes: number;
+    weather: string;
+    createdAt: string;
 }
 
 export interface FetchingDiaryListOption {

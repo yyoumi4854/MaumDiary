@@ -9,7 +9,10 @@ export const fetchDiaryList = async ({
     lock,
 }: FetchingDiaryListOption) => {
     const result = await instance.get<Diary[]>(
-        `http://localhost:3002/api/diaries/all?user=${user}&count=${count}&page=${page}&emotion=${emotion}&lock=${lock}`
+        `http://localhost:3002/api/diaries/all?user=${user}&count=${count}&page=${page}&emotion=${emotion}&lock=${lock}`,
+        {
+            withCredentials: true,
+        }
     );
 
     return result.data;

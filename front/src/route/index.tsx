@@ -1,4 +1,4 @@
-import type { QueryClient } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 
 import { Period } from "@/types";
@@ -23,8 +23,8 @@ const router = (period: Period, queryClient: QueryClient) =>
         createRoutesFromElements(
             <Route path="/" element={<Main period={period} />} errorElement={<div></div>}>
                 <Route
-                    loader={homeLoader(queryClient)}
                     index={true}
+                    loader={homeLoader(queryClient)}
                     element={<Home period={period} />}
                 />
                 <Route path="/login" element={<Login />} />
