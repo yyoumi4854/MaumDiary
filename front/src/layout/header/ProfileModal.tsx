@@ -1,10 +1,26 @@
-import React from "react";
+import { MouseEvent } from "react";
+import { useResetRecoilState } from "recoil";
+import { useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { BsPerson, BsPower } from "react-icons/bs";
+
+import { userAtom } from "@/recoil/user";
+import { logout } from "@/api/account";
 
 import * as Style from "@/style/layout/header/ProfileModal-style";
 
 const ProfileModal = () => {
+    const resetUserData = useResetRecoilState(userAtom);
+
+    const mutation = useMutation(logout);
+
+    const onLogout = (e: MouseEvent<HTMLButtonElement>) => {
+        if (localStorage.getItem("user") !== null) {
+            mutation.mutate();
+            resetUserData();
+        }
+    };
+
     return (
         <Style.ProfileContent>
             <Style.ProfileTopContent>
@@ -23,7 +39,7 @@ const ProfileModal = () => {
                         </Link>
                     </li>
                     <li>
-                        <button>
+                        <button onClick={onLogout}>
                             <BsPower />
                             <span>로그아웃</span>
                         </button>

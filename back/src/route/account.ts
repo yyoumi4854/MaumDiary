@@ -71,6 +71,8 @@ accountRouter.delete(
     wrapRouter(async (req: Req, res: Res) => {
         const result = await accountService.logout(req.userID!);
 
+        res.cookie("refreshToken", "", { maxAge: -1 });
+        res.cookie("accessToken", "", { maxAge: -1 });
         return { statusCode: 200, content: result };
     })
 );

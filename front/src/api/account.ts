@@ -10,6 +10,12 @@ export const login = async ({ userID, password }: { userID: string; password: st
     return result;
 };
 
+export const logout = async () => {
+    const result = await instance.delete("http://localhost:3002/api/account");
+
+    return result;
+};
+
 export const fetchUserData = async () => {
     const result = await instance.get<USER_DATA>("http://localhost:3002/api/account");
 
