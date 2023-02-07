@@ -1,8 +1,7 @@
 import React, { MouseEvent } from "react";
+
 import dayjs from "dayjs";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-
-import DiaryDelete from "../common/DiaryDelete";
 
 import * as Style from "@/style/component/diaryCalendar/Calendar-style";
 
@@ -12,68 +11,10 @@ type Props = {
     diarySelect: string;
     setDiarySelect: React.Dispatch<React.SetStateAction<string>>;
 };
+
 const day = ["SUN", "MUN", "TUE", "WEN", "THU", "FRI", "SAT"];
 
 const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect }: Props) => {
-    // const now = dayJs;
-    // const nowMonthDate = now.daysInMonth(); // 현재 날짜 몇개인지
-    // const prevMonthDate = dayJs.subtract(1, "month").daysInMonth(); // 저번달 날짜 몇개인지
-    // const firstDay = now.date(1).day(); // 첫번째 날짜의 요일
-
-    // const onClick = (e: MouseEvent<HTMLDivElement>) => {
-    //     const { innerText } = e.target as any;
-    //     setDiarySelect(
-    //         String(now.format(`YYYYMM${Number(innerText) < 10 ? `0${innerText}` : innerText}`))
-    //     );
-    // };
-
-    // const createCalendar = () => {
-    //     const result = [];
-    //     let prevDate = prevMonthDate - firstDay + 1;
-    //     let date = 1;
-    //     let nextDate = 1;
-
-    //     let dateCell = 0;
-    //     while (dateCell < 42) {
-    //         if (prevDate <= prevMonthDate) {
-    //             result.push(
-    //                 <Style.NoneNowDateCell key={dateCell}>
-    //                     <span>{prevDate++}</span>
-    //                 </Style.NoneNowDateCell>
-    //             );
-    //         } else if (date <= nowMonthDate) {
-    //             result.push(
-    //                 <Style.NowDateCell
-    //                     key={dateCell}
-    //                     nowDate={dayjs().format("YYYYMMDD") === now.format(`YYYYMM${date}`) && true}
-    //                     onClick={onClick}
-    //                     diarySelect={
-    //                         diarySelect ===
-    //                             String(dayjs().format(`YYYYMM${date < 10 ? `0${date}` : date}`)) &&
-    //                         true // 일 선택
-    //                     }
-    //                 >
-    //                     <span>{now.format(`${date}`)}</span>
-    //                 </Style.NowDateCell>
-    //             );
-    //             date++;
-    //         } else {
-    //             result.push(
-    //                 <Style.NoneNowDateCell key={dateCell}>
-    //                     <span>{nextDate++}</span>
-    //                 </Style.NoneNowDateCell>
-    //             );
-    //         }
-    //         dateCell++;
-    //     }
-
-    //     return result;
-    // };
-
-    // 여기 아래부터가 제가 저의 방식대로 만들어본 코드입니다!
-    // 혹시나 문제가 있으면 언제든 알려주시면 감사하겠습니다!
-    // 또한 궁금한 점 또한 무엇이든 물어보셔도 괜찮습니다!
-
     // // state의 메모리 주소를 그대로 넣어주는게 아니라 clone을 통해 복사본을 만들어줌
     const currentDay = dayJs.clone();
 
@@ -153,9 +94,6 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect }: Props) => {
                         {/* 여기도 주석을 해제해주셔야 됩니다!*/}
                         <span>{currentDay.format("YYYY")}</span>
                         <strong>{currentDay.format("MMMM").toUpperCase()}</strong>
-
-                        {/* <span>{now.format("YYYY")}</span>
-                        <strong>{now.format("MMMM").toUpperCase()}</strong> */}
                     </div>
                     <button
                         onClick={() => {
@@ -172,9 +110,6 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect }: Props) => {
                             <span>{date}</span>
                         </Style.DayCell>
                     ))}
-
-                    {/* {createCalendar()} */}
-
                     {/* 이 친구가 신버전 입니다! */}
                     {cells}
                 </Style.CellsContent>

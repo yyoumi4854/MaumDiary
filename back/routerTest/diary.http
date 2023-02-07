@@ -1,6 +1,6 @@
 @url = http://localhost:3002/api
-@access = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdDQiLCJpYXQiOjE2NzUyNzk4NzEsImV4cCI6MTY3NTI4MTY3MX0.8h_ZBLvtzsc-tOI8Cz293AZbnJ0HNf3-XelGlF0krOk
-@refresh = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjc1Mjc5ODcyLCJleHAiOjE2NzUyOTA2NzJ9.3EKxcUSueY1W7G8VlbnS4uRc097Gym-K5BXHU_E3zS4
+@access = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidGVzdDgiLCJpYXQiOjE2NzU3NDMyOTMsImV4cCI6MTY3NTc0NTA5M30.tFTYtWWOmcidxKH-e2en5U4v7ZldYl7IiDhP_r0VtRc
+@refresh = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiIiwiaWF0IjoxNjc1NzQzMjkzLCJleHAiOjE2NzU3NTQwOTN9.uLHY4fKYyv9zRU2dUaWCTSfMG2_aDzd1kJgvBx9x7WM
 
 #############################3#토큰 발급용 로그인,로그아웃##########################
 ###login
@@ -49,10 +49,10 @@ RefreshToken: {{refresh}}
 Content-Type: application/json
 
 {
-  "title": "진짜 일기에용",
-  "description":"진짜 일기라니까용",
+  "title": "진짜 일기에용_5일",
+  "description":"진짜 일기라니까용33",
   "weather": "cloudy",
-  "lock":false,
+  "lock":false
 }
 
 ### 유저가 쓴 일기를 달 단위로 조회
