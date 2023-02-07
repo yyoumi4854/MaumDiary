@@ -62,6 +62,8 @@ class DiaryService {
                 likes: true,
                 weather: true,
                 createdAt: true,
+                updatedAt: true,
+                author: true,
             },
             orderBy: [{ createdAt: "desc" }],
         });

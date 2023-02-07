@@ -27,6 +27,8 @@ export interface Diary {
     likes: number;
     weather: string;
     createdAt: string;
+    updatedAt: string;
+    author: string;
 }
 
 export interface FetchingDiaryListOption {

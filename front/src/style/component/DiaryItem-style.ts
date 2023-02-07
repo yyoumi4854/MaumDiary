@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const Container = styled.article`
     width: 100%;
 
-    padding: 0 40px;
-
     background: rgba(255, 255, 255, 0.6);
     border-radius: 8px;
 
@@ -22,13 +20,13 @@ export const Header = styled.div`
 
     height: 96px;
 
-    border-bottom: 1px solid ${({ theme }) => theme.colors.greyBorder};
+    padding: 0 24px 24px 24px;
 
     ${({ theme }) => theme.device.mobile} {
         height: 39px;
     }
 `;
-export const Title = styled.div`
+export const LeftPart = styled.div`
     ${({ theme }) => theme.common.flexCenter}
 
     img {
@@ -49,7 +47,7 @@ export const Title = styled.div`
         }
     }
 `;
-export const Meta = styled.div`
+export const RightPart = styled.div`
     ${({ theme }) => theme.common.flexCenter}
 
     div {
@@ -76,6 +74,13 @@ export const Meta = styled.div`
         border-bottom: 6px solid transparent;
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
+
+        &.open {
+            margin-top: 0;
+            margin-bottom: 6px;
+
+            transform: rotate(180deg);
+        }
     }
 
     ${({ theme }) => theme.device.mobile} {
@@ -85,10 +90,21 @@ export const Meta = styled.div`
     }
 `;
 
-export const Detail = styled.div`
+export const Content = styled.div<{ open: boolean }>`
+    display: ${({ open }) => (open ? "block" : "none")};
+
+    width: 727px;
+
+    padding: 0 24px;
+    margin-bottom: 24px;
+`;
+
+export const Footer = styled.div`
     ${({ theme }) => theme.common.flexBetween}
 
     height: 56px;
+
+    padding: 0 40px;
 
     div {
         ${({ theme }) => theme.common.flexCenter}
@@ -101,6 +117,8 @@ export const Detail = styled.div`
             font-size: ${({ theme }) => theme.fonts.size.basicsMobile};
         }
     }
+
+    border-top: 1px solid ${({ theme }) => theme.colors.greyBorder};
 
     ${({ theme }) => theme.device.mobile} {
         height: 40px;
