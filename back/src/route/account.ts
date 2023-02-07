@@ -46,10 +46,15 @@ accountRouter.post(
         }
 
         const result = await accountService.login(userID, password);
-        res.cookie("accessToken", result.accessToken, { httpOnly: true });
-        res.cookie("refreshToken", result.refreshToken, { httpOnly: true });
 
-        return { statusCode: 200, content: true };
+        if (result !== null) {
+            res.cookie("accessToken", result.accessToken, { httpOnly: true });
+            res.cookie("refreshToken", result.refreshToken, { httpOnly: true });
+
+            return { statusCode: 200, content: true };
+        } else {
+            return { statusCode: 200, content: false };
+        }
     })
 );
 

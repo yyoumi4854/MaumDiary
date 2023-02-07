@@ -17,8 +17,6 @@ import DiaryUserAnalysis from "./diary/DiaryUserAnalysis";
 import DiaryWrite from "./DiaryWrite";
 
 const router = (period: Period, queryClient: QueryClient) =>
-    // TODO: rootLoaderFn에 유저의 데이터 가져오는 로직 만들기
-    // 닉네임 유니크하게 만들지 의논하기
     createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" element={<Main period={period} />} errorElement={<div></div>}>
