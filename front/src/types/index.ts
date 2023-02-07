@@ -28,3 +28,8 @@ export interface FetchingDiaryListOption {
     emotion: "all" | Emotion;
     lock: "true" | "false";
 }
+
+export interface FectchMonthDiaryList {
+    year: number;
+    month: number;
+}

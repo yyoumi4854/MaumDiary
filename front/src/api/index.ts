@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const instance = axios.create();
+const instance = axios.create({
+    baseURL: "http://localhost:3002/api",
+});
 
 // TODO: must implement request-intercepter for jwt authorization
 

@@ -10,7 +10,7 @@ import RecoveryID from "./RecoveryID";
 import RecoveryPW from "./RecoveryPW";
 import User from "./User";
 import Diary from "./diary/Diary";
-import DiaryCalendar from "./diary/DiaryCalendar";
+import DiaryCalendar, { loader as calendarLoader } from "./diary/DiaryCalendar";
 import DiaryAll from "./diary/DiaryAll";
 import DiaryChat from "./diary/DiaryChat";
 import DiaryUserAnalysis from "./diary/DiaryUserAnalysis";
@@ -33,7 +33,11 @@ const router = (period: Period, queryClient: QueryClient) =>
                 <Route path="/recovery/password" element={<RecoveryPW />} />
                 <Route path="/user" element={<User />} />
                 <Route path="/diary" element={<Diary />}>
-                    <Route path="calendar" element={<DiaryCalendar />} />
+                    <Route
+                        path="calendar"
+                        loader={calendarLoader(queryClient)}
+                        element={<DiaryCalendar />}
+                    />
                     <Route path="all" element={<DiaryAll />} />
                     <Route path="chat" element={<DiaryChat />} />
                     <Route path="user/analysis" element={<DiaryUserAnalysis />} />
