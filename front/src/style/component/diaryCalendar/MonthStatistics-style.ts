@@ -8,7 +8,9 @@ export const MonthStatisticsContent = styled.div`
     padding: 20px;
 `;
 
-export const StatisticsContnet = styled.div<{ percent: number[] }>`
+export const StatisticsContnet = styled.div<{
+    emotionCount: { [key: string]: number };
+}>`
     display: flex;
     width: 90%;
     height: 2rem;
@@ -24,35 +26,35 @@ export const StatisticsContnet = styled.div<{ percent: number[] }>`
 
     span:nth-of-type(1) {
         background: ${({ theme }) => theme.colors.emotionConfidence};
-        width: ${({ percent }) => `${percent[0]}%`};
+        flex-grow: ${({ emotionCount }) => emotionCount["confidence"]};
     }
     span:nth-of-type(2) {
         background: ${({ theme }) => theme.colors.emotionExcitement};
-        width: ${({ percent }) => `${percent[1]}%`};
+        flex-grow: ${({ emotionCount }) => emotionCount["excitement"]};
     }
     span:nth-of-type(3) {
         background: ${({ theme }) => theme.colors.emotionThanks};
-        width: ${({ percent }) => `${percent[2]}%`};
+        flex-grow: ${({ emotionCount }) => emotionCount["thanks"]};
     }
     span:nth-of-type(4) {
         background: ${({ theme }) => theme.colors.emotionComfort};
-        width: ${({ percent }) => `${percent[3]}%`};
+        flex-grow: ${({ emotionCount }) => emotionCount["comfort"]};
     }
     span:nth-of-type(5) {
         background: ${({ theme }) => theme.colors.emotionWorry};
-        width: ${({ percent }) => `${percent[4]}%`};
+        flex-grow: ${({ emotionCount }) => emotionCount["worry"]};
     }
     span:nth-of-type(6) {
         background: ${({ theme }) => theme.colors.emotionSad};
-        width: ${({ percent }) => `${percent[5]}%`};
+        flex-grow: ${({ emotionCount }) => emotionCount["sad"]};
     }
     span:nth-of-type(7) {
         background: ${({ theme }) => theme.colors.emotionHurt};
-        width: ${({ percent }) => `${percent[6]}%`};
+        flex-grow: ${({ emotionCount }) => emotionCount["hurt"]};
     }
     span:nth-of-type(8) {
         background: ${({ theme }) => theme.colors.emotionAngry};
-        width: ${({ percent }) => `${percent[7]}%`};
+        flex-grow: ${({ emotionCount }) => emotionCount["angry"]};
     }
 
     ${({ theme }) => theme.device.mobile} {
