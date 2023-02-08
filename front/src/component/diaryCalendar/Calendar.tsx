@@ -1,20 +1,25 @@
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import dayjs from "dayjs";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 import * as Style from "@/style/component/diaryCalendar/Calendar-style";
+import { fetchMonthDiaryList } from "@/api/diary";
+import { MONTH_DIARY } from "@/constant/QUERY_KEY";
 
 type Props = {
     dayJs: dayjs.Dayjs;
     setDayJs: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
     diarySelect: string;
     setDiarySelect: React.Dispatch<React.SetStateAction<string>>;
+    setIsOn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const day = ["SUN", "MUN", "TUE", "WEN", "THU", "FRI", "SAT"];
 
-const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect }: Props) => {
+// 여기서 emotion값을 가지고 와서 넣어줘야 된다.
+const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn }: Props) => {
     // // state의 메모리 주소를 그대로 넣어주는게 아니라 clone을 통해 복사본을 만들어줌
     const currentDay = dayJs.clone();
 
@@ -86,6 +91,7 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect }: Props) => {
                     <button
                         onClick={() => {
                             setDayJs(dayJs.clone().subtract(1, "month"));
+                            setIsOn(true);
                         }}
                     >
                         <BsChevronLeft />
@@ -98,6 +104,7 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect }: Props) => {
                     <button
                         onClick={() => {
                             setDayJs(dayJs.clone().add(1, "month"));
+                            setIsOn(true);
                         }}
                     >
                         <BsChevronRight />

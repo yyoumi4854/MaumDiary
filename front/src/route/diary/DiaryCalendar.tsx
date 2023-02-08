@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { QueryClient } from "@tanstack/react-query";
-import { useLoaderData } from "react-router-dom";
+import { QueryClient, useQuery } from "@tanstack/react-query";
 
 import dayjs from "dayjs";
 
@@ -8,14 +7,13 @@ import Calendar from "@/component/diaryCalendar/Calendar";
 import Diary from "@/component/diaryCalendar/Diary";
 import { fetchMonthDiaryList } from "@/api/diary";
 import { MONTH_DIARY } from "@/constant/QUERY_KEY";
-import { Diary as DiaryType } from "@/types";
 
 import * as Style from "@/style/page/diary/DiaryCalendar-style";
 import MonthStatistics from "@/component/diaryCalendar/MonthStatistics";
 
 const getMonthDiaryList = () => ({
-    queryKey: [MONTH_DIARY.LIST, { year: dayjs().year(), month: dayjs().month() }],
-    queryFn: () => fetchMonthDiaryList({ year: dayjs().year(), month: dayjs().month() }),
+    queryKey: [MONTH_DIARY.LIST, { year: dayjs().year(), month: dayjs().month() + 1 }],
+    queryFn: () => fetchMonthDiaryList({ year: dayjs().year(), month: dayjs().month() + 1 }),
 });
 
 export const loader = (queryClient: QueryClient) => async () => {
@@ -26,9 +24,17 @@ export const loader = (queryClient: QueryClient) => async () => {
 const DiaryCalendar = () => {
     const [dayJs, setDayJs] = useState(dayjs());
     const [diarySelect, setDiarySelect] = useState(String(dayjs().format(`YYYYMMDD`)));
-    const MonthDiaryList = useLoaderData();
 
-    console.log("MonthDiaryList", MonthDiaryList);
+    const [isOn, setIsOn] = useState(false);
+    const { data } = useQuery({
+        queryKey: [MONTH_DIARY.LIST, { year: dayJs.year(), month: dayJs.month() + 1 }],
+        queryFn: () => fetchMonthDiaryList({ year: dayJs.year(), month: dayJs.month() + 1 }),
+        enabled: isOn,
+
+        onSuccess: () => {
+            setIsOn(false);
+        },
+    });
 
     return (
         <Style.DiaryCalendarContent>
@@ -37,9 +43,10 @@ const DiaryCalendar = () => {
                 setDayJs={setDayJs}
                 diarySelect={diarySelect}
                 setDiarySelect={setDiarySelect}
+                setIsOn={setIsOn}
             />
             <Diary diarySelect={diarySelect} />
-            <MonthStatistics dayJs={dayJs} />
+            <MonthStatistics dayJs={dayJs} data={data} />
         </Style.DiaryCalendarContent>
     );
 };
