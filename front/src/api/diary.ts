@@ -18,7 +18,9 @@ export const fetchDiaryList = async ({
 // [캘린더]
 // 유저가 쓴 일기를 달 단위로 조회
 export const fetchMonthDiaryList = async ({ year, month }: Type.FectchMonthDiaryList) => {
-    const result = await instance.get(`/diaries/user/?year=${year}&month=${month}`);
+    const result = await instance.get<{ [key: number]: Type.Diary }>(
+        `/diaries/user/?year=${year}&month=${month}`
+    );
 
     return result.data;
 };

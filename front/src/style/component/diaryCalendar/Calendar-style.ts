@@ -57,7 +57,8 @@ export const DayCell = styled.div`
     }
 `;
 
-export const NowDateCell = styled.div<{ nowDate?: boolean; diarySelect?: boolean }>`
+export const NowDateCell = styled.div<{ nowDate?: boolean; diarySelect?: boolean; url?: string }>`
+    position: relative;
     border: 2px solid
         ${({ diarySelect, theme }) => (diarySelect ? theme.colors.main : "transparent")};
     background: ${({ nowDate, theme }) => nowDate && theme.colors.greyBackground};
@@ -70,6 +71,17 @@ export const NowDateCell = styled.div<{ nowDate?: boolean; diarySelect?: boolean
 
     span {
         color: ${({ theme }) => theme.colors.mainDark};
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 16px;
+        background: url(${({ url }) => url}) no-repeat center right;
+        background-size: contain;
     }
 `;
 

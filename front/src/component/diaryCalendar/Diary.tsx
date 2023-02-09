@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-import { BsExclamationCircle, BsFillHeartFill, BsFillLockFill, BsSun } from "react-icons/bs";
+
+import { Diary as DiaryType } from "@/types";
+import { BsFillHeartFill, BsExclamationCircle } from "react-icons/bs";
 import { HiLockClosed, HiLockOpen } from "react-icons/hi";
+import dayjs from "dayjs";
+
+import { weather } from "@/utils/weather";
 
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as Style from "@/style/component/diaryCalendar/Diary-style";
@@ -9,57 +14,53 @@ import Emotion from "@/utils/emotionIcon";
 
 type Props = {
     diarySelect: string;
+    selectedDiary?: DiaryType;
 };
 
-const Diary = ({ diarySelect }: Props) => {
-    const [isDiary, setIsDiary] = useState(true);
-
-    const selectYear = diarySelect.substring(0, 4);
-    const selectMonth = diarySelect.substring(4, 6);
-    const selectDate = diarySelect.substring(6, 8);
-
+const Diary = ({ diarySelect, selectedDiary }: Props) => {
     return (
         <>
-            {isDiary ? (
+            {selectedDiary ? (
                 <Style.DiaryContent>
                     <Style.DiaryTopContent>
                         <div>
                             <span>
-                                {selectYear}년 {selectMonth}월 {selectDate}일
+                                {dayjs(diarySelect).year()}년 {dayjs(diarySelect).month() + 1}월{" "}
+                                {dayjs(diarySelect).date()}일
                             </span>
-                            <span>
-                                <BsSun />
-                            </span>
+                            <span>{weather[selectedDiary.weather]}</span>
                         </div>
                         <div>
-                            <HiLockClosed />
-                            <span>비공개</span>
+                            {selectedDiary.lock ? (
+                                <>
+                                    <HiLockClosed />
+                                    <span>비공개</span>
+                                </>
+                            ) : (
+                                <>
+                                    <HiLockOpen />
+                                    <span>공개</span>
+                                </>
+                            )}
                         </div>
                     </Style.DiaryTopContent>
 
                     <Style.DiaryTextContent>
                         <div>
-                            <img src={Emotion.confidence} alt="신남" />
-                            <p>오늘 할일 목표 달성!!!</p>
+                            <img src={Emotion[selectedDiary.emotion]} alt={selectedDiary.emotion} />
+                            <p>{selectedDiary.title}</p>
                         </div>
-                        <div>
-                            오늘 할 목표를 완료했다~!!! 완전 뿌듯하고 해낼 수 있다는 자신감을 얻은
-                            것 같다. 이전에는 항상 목표를 못채웠었는데 이제는 시간을 잡고 차근차근
-                            할일을 해낸다는 뿌듯함 때문인지 더 열심히 하게 되는 것 같다. 내일도
-                            힘내야겠다.!! 늘 할 목표를 완료했다~!!! 완전 뿌듯하고 해낼 수 있다는
-                            자신감을 얻은 것 같다. 이전에는 항상 목표를 못채웠었는데 이제는 시간을
-                            잡고 차근차근 할일을 해낸다는 뿌듯함 때문인지 더 열심히 하게 되는 것
-                            같다. 내일도 힘내야겠다.!! 늘 할 목표를 완료했다~!!! 완전 뿌듯하고 해낼
-                            수 있다는 자신감을 얻은 것 같다. 이전에는 항상 목표를 못채웠었는데
-                            이제는 시간을 잡고 차근차근 할일을 해낸다는 뿌듯함 때문인지 더 열심히
-                            하게 되는 것 같다. 내일도 힘내야겠다.!!
-                        </div>
+                        <div>{selectedDiary.description}</div>
                     </Style.DiaryTextContent>
 
                     <Style.DiaryBottomContent>
                         <div>
-                            <BsFillHeartFill />
-                            <span>공감 7</span>
+                            {selectedDiary.likes > 0 && (
+                                <>
+                                    <BsFillHeartFill />
+                                    <span>공감 {selectedDiary.likes}</span>
+                                </>
+                            )}
                         </div>
                         <ButtonStyle.ButtonWrap>
                             <button>삭제</button>
@@ -73,7 +74,8 @@ const Diary = ({ diarySelect }: Props) => {
                         <BsExclamationCircle />
                         <p>
                             <span>
-                                {selectYear}년 {selectMonth}월 {selectDate}일
+                                {dayjs(diarySelect).year()}년 {dayjs(diarySelect).month() + 1}월{" "}
+                                {dayjs(diarySelect).date()}일
                             </span>
                             에 작성된 글이 없습니다.
                             <br />

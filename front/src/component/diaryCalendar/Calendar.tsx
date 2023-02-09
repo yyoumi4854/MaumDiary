@@ -1,12 +1,12 @@
 import React, { MouseEvent, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-
 import dayjs from "dayjs";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
+import { Diary } from "@/types";
+
 import * as Style from "@/style/component/diaryCalendar/Calendar-style";
-import { fetchMonthDiaryList } from "@/api/diary";
-import { MONTH_DIARY } from "@/constant/QUERY_KEY";
+
+import EmotionIMG from "@/utils/emotionIcon";
 
 type Props = {
     dayJs: dayjs.Dayjs;
@@ -14,12 +14,12 @@ type Props = {
     diarySelect: string;
     setDiarySelect: React.Dispatch<React.SetStateAction<string>>;
     setIsOn: React.Dispatch<React.SetStateAction<boolean>>;
+    data: { [key: number]: Diary };
 };
 
 const day = ["SUN", "MUN", "TUE", "WEN", "THU", "FRI", "SAT"];
 
-// 여기서 emotion값을 가지고 와서 넣어줘야 된다.
-const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn }: Props) => {
+const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn, data }: Props) => {
     // // state의 메모리 주소를 그대로 넣어주는게 아니라 clone을 통해 복사본을 만들어줌
     const currentDay = dayJs.clone();
 
@@ -72,12 +72,13 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn }: Pro
                     key={idx}
                     // currenDay 즉 달력을 구성한 날짜는 오늘이다. 그리고 dayjs()는 오늘을 반환한다. 둘을 isSame으로 비교한다.
                     nowDate={currentDay.isSame(dayjs().date(date).format("YYYY-MM-DD"), "day")}
-                    onClick={onClick}
                     // currentDay의 복사본을 만들어서 셀마다의 날짜로 설정후, 선택된 날짜하고 같은지 비교한다.
+                    onClick={onClick}
                     diarySelect={currentDay
                         .clone()
                         .date(date)
                         .isSame(dayjs(diarySelect).format("YYYY-MM-DD"), "day")}
+                    url={data && data[date] && EmotionIMG[data[date].emotion]}
                 >
                     <span>{currentDay.format(`${date}`)}</span>
                 </Style.NowDateCell>
@@ -97,7 +98,6 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn }: Pro
                         <BsChevronLeft />
                     </button>
                     <div>
-                        {/* 여기도 주석을 해제해주셔야 됩니다!*/}
                         <span>{currentDay.format("YYYY")}</span>
                         <strong>{currentDay.format("MMMM").toUpperCase()}</strong>
                     </div>
@@ -117,7 +117,6 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn }: Pro
                             <span>{date}</span>
                         </Style.DayCell>
                     ))}
-                    {/* 이 친구가 신버전 입니다! */}
                     {cells}
                 </Style.CellsContent>
             </Style.CalendarContent>

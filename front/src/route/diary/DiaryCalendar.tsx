@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { QueryClient, useQuery } from "@tanstack/react-query";
-
 import dayjs from "dayjs";
 
 import Calendar from "@/component/diaryCalendar/Calendar";
@@ -26,7 +25,7 @@ const DiaryCalendar = () => {
     const [diarySelect, setDiarySelect] = useState(String(dayjs().format(`YYYYMMDD`)));
 
     const [isOn, setIsOn] = useState(false);
-    const { data } = useQuery({
+    const { data, isSuccess } = useQuery({
         queryKey: [MONTH_DIARY.LIST, { year: dayJs.year(), month: dayJs.month() + 1 }],
         queryFn: () => fetchMonthDiaryList({ year: dayJs.year(), month: dayJs.month() + 1 }),
         enabled: isOn,
@@ -35,6 +34,7 @@ const DiaryCalendar = () => {
             setIsOn(false);
         },
     });
+    if (!isSuccess) return null;
 
     return (
         <Style.DiaryCalendarContent>
@@ -44,8 +44,9 @@ const DiaryCalendar = () => {
                 diarySelect={diarySelect}
                 setDiarySelect={setDiarySelect}
                 setIsOn={setIsOn}
+                data={data}
             />
-            <Diary diarySelect={diarySelect} />
+            <Diary diarySelect={diarySelect} selectedDiary={data[dayjs(diarySelect).date()]} />
             <MonthStatistics dayJs={dayJs} data={data} />
         </Style.DiaryCalendarContent>
     );

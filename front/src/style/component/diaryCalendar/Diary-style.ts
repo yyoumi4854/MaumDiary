@@ -82,7 +82,8 @@ export const DiaryTextContent = styled.div`
         align-items: center;
 
         img {
-            width: 48px;
+            width: 56px;
+            height: 48px;
             object-fit: contain;
         }
 

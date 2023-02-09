@@ -18,6 +18,8 @@ export type Emotion =
     | "hurt"
     | "angry";
 
+export type Weather = "sunny" | "cloudAndSun" | "cloudy" | "rainy" | "snowy";
+
 export interface Diary {
     id: number;
     title: string;
@@ -25,7 +27,7 @@ export interface Diary {
     emotion: Emotion;
     lock: boolean;
     likes: number;
-    weather: string;
+    weather: Weather;
     createdAt: string;
 }
 

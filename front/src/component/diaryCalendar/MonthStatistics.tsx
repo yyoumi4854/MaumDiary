@@ -2,6 +2,7 @@ import React from "react";
 import dayjs from "dayjs";
 
 import { Diary } from "@/types";
+
 import * as TextStyle from "@/style/common/Text-style";
 import * as Style from "@/style/component/diaryCalendar/MonthStatistics-style";
 
@@ -9,22 +10,22 @@ import EmotionIMG from "@/utils/emotionIcon";
 
 type Props = {
     dayJs: dayjs.Dayjs;
-    data?: Diary[];
-};
-
-const emotionCount = {
-    confidence: 0,
-    excitement: 0,
-    thanks: 0,
-    comfort: 0,
-    worry: 0,
-    sad: 0,
-    hurt: 0,
-    angry: 0,
+    data: { [key: number]: Diary };
 };
 
 const MonthStatistics = ({ dayJs, data }: Props) => {
     const currentDay = dayJs.clone();
+
+    const emotionCount = {
+        confidence: 0,
+        excitement: 0,
+        thanks: 0,
+        comfort: 0,
+        worry: 0,
+        sad: 0,
+        hurt: 0,
+        angry: 0,
+    };
 
     if (data) {
         Object.values(data).forEach((diary) => emotionCount[diary.emotion]++);
