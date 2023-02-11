@@ -30,15 +30,15 @@ export const LeftPart = styled.div`
     ${({ theme }) => theme.common.flexCenter}
 
     img {
-        width: 24px;
-        height: 23px;
+        width: 48px;
+        height: 48px;
     }
 
     p {
-        margin-left: 17.8px;
+        margin-left: 16px;
 
         font-size: ${({ theme }) => theme.fonts.size.basicsDesktop};
-        font-weight: ${({ theme }) => theme.fonts.weight.bold};
+        font-weight: ${({ theme }) => theme.fonts.weight.medium};
 
         ${({ theme }) => theme.device.mobile} {
             margin-left: 8px;
@@ -52,19 +52,35 @@ export const RightPart = styled.div`
 
     div {
         ${({ theme }) => theme.common.flexCenter}
+        gap: 8px;
 
         margin-right: 8px;
 
         .day {
-            margin-right: 16px;
+            position: relative;
 
+            width: 120px;
             font-size: ${({ theme }) => theme.fonts.size.basicsMobile};
+            font-weight: ${({ theme }) => theme.fonts.weight.light};
             color: #888888;
+
+            &::after {
+                content: "";
+
+                position: absolute;
+
+                top: 6px;
+                right: 0;
+
+                width: 4px;
+                height: 4px;
+
+                background: ${({ theme }) => theme.colors.greyText};
+            }
         }
     }
 
     button {
-        /* margin: 7.5px 0 0 8px; */
         margin-top: 6px;
 
         width: 0;
@@ -111,6 +127,12 @@ export const Footer = styled.div`
 
         & > p {
             margin-right: 8px;
+        }
+
+        & .by {
+            margin-right: 4px;
+
+            color: ${({ theme }) => theme.colors.greyText};
         }
 
         p {

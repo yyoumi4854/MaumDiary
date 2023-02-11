@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-    padding-bottom: 143px;
+    margin: 160px 0;
 
     ${({ theme }) => theme.device.mobile} {
         padding-bottom: 80px;
@@ -48,7 +48,6 @@ export const Title = styled.div`
 `;
 
 export const DiaryContainer = styled.div`
-    /* height: 100vh; */
     height: 50vh;
 
     overflow-y: scroll;

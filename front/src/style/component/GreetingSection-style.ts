@@ -6,17 +6,13 @@ import * as Animation from "../common/Animation-style";
 export const GreetingSection = styled.section`
     position: relative;
 
-    height: calc(100vh - 60px);
-
-    ${({ theme }) => theme.device.mobile} {
-        height: calc(100vh - 48px);
-    }
+    height: 100vh;
 `;
 
 export const Greeting = styled.div`
     position: absolute;
 
-    top: 280px;
+    top: 25%;
     left: 0;
 
     max-width: 337px;
@@ -85,10 +81,14 @@ export const QuickLink = styled(Link)`
         margin-left: 16px;
     }
 
-    &:hover p svg {
-        -webkit-animation: ${Animation.MoveBackwardArrow} 1.5s infinite;
-        -moz-animation: ${Animation.MoveBackwardArrow} 1.5s infinite;
-        -o-animation: ${Animation.MoveBackwardArrow} 1.5s infinite;
-        animation: ${Animation.MoveBackwardArrow} 1.5s infinite;
+    &:hover {
+        background: ${({ theme }) => theme.colors.mainDeep};
+
+        svg {
+            -webkit-animation: ${Animation.MoveBackwardArrow} 1.5s infinite;
+            -moz-animation: ${Animation.MoveBackwardArrow} 1.5s infinite;
+            -o-animation: ${Animation.MoveBackwardArrow} 1.5s infinite;
+            animation: ${Animation.MoveBackwardArrow} 1.5s infinite;
+        }
     }
 `;

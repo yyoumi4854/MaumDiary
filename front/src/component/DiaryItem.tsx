@@ -36,7 +36,8 @@ const DiaryItem = ({ diary }: Props) => {
             <Style.Content open={open}>{description}</Style.Content>
             <Style.Footer>
                 <div>
-                    <p>by {author}</p>
+                    <p className="by">by</p>
+                    <p>{author}</p>
                     <p>공감 {likes}</p>
                 </div>
             </Style.Footer>
