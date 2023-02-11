@@ -2,18 +2,23 @@ import instance from ".";
 import { Diary, FetchingDiaryListOption } from "@/types";
 
 export const fetchDiaryList = async ({
-    user = "false",
-    count = 10,
+    user,
+    count,
     page,
-    emotion = "all",
-    lock = "false",
+    emotion,
+    lock,
 }: FetchingDiaryListOption) => {
-    const result = await instance.get<Diary[]>(
+    const result = await instance.get<{ maxParam: number; diaryList: Diary[] }>(
         `http://localhost:3002/api/diaries/all?user=${user}&count=${count}&page=${page}&emotion=${emotion}&lock=${lock}`,
         {
             withCredentials: true,
         }
     );
 
-    return result.data;
+    return {
+        count,
+        nextParam: page + 1,
+        maxParam: result.data.maxParam,
+        diaryList: result.data.diaryList,
+    };
 };
