@@ -3,7 +3,7 @@ import { QueryClient, useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
 import Calendar from "@/component/diaryCalendar/Calendar";
-import Diary from "@/component/diaryCalendar/Diary";
+import Diary from "@/component/diaryCalendar/diary/Diary";
 import { fetchMonthDiaryList } from "@/api/diary";
 import { MONTH_DIARY } from "@/constant/QUERY_KEY";
 

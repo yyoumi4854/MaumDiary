@@ -24,3 +24,10 @@ export const fetchMonthDiaryList = async ({ year, month }: Type.FectchMonthDiary
 
     return result.data;
 };
+
+// 삭제
+export const deleteDiary = async ({ id }: Type.DeleteDiary) => {
+    const result = await instance.delete(`/diaries/${id}`);
+
+    return result;
+};
