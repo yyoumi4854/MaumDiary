@@ -2,6 +2,7 @@ import { useRef, useState, startTransition } from "react";
 
 import * as Style from "@/style/common/Emotions-style";
 
+import faviconLogo from "@/images/favicon-logo.svg";
 import Emotion from "@/utils/emotionIcon";
 
 const Emotions = () => {
@@ -24,7 +25,7 @@ const Emotions = () => {
         <Style.Container>
             <Style.Tab ref={tabRef} onScroll={onScroll}>
                 <Style.TabButton>
-                    <Style.Circle url={"none"} />
+                    <Style.Circle url={faviconLogo} />
                     <p>전체</p>
                 </Style.TabButton>
                 <Style.TabButton>
