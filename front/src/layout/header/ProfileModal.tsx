@@ -35,7 +35,7 @@ const ProfileModal = () => {
                     <li>
                         <Link to="/user">
                             <BsPerson />
-                            <span>내정보</span>
+                            <span>내 정보</span>
                         </Link>
                     </li>
                     <li>

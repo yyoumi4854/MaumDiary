@@ -6,20 +6,20 @@ import { Diary } from "@/types";
 
 import * as Style from "@/style/component/diaryCalendar/Calendar-style";
 
-import EmotionIMG from "@/utils/emotionIcon";
+import EmotionIcon from "@/utils/emotionIcon";
 
 type Props = {
     dayJs: dayjs.Dayjs;
     setDayJs: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
     diarySelect: string;
     setDiarySelect: React.Dispatch<React.SetStateAction<string>>;
-    setIsOn: React.Dispatch<React.SetStateAction<boolean>>;
+    // setIsOn: React.Dispatch<React.SetStateAction<boolean>>;
     data: { [key: number]: Diary };
 };
 
 const day = ["SUN", "MUN", "TUE", "WEN", "THU", "FRI", "SAT"];
 
-const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn, data }: Props) => {
+const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, data }: Props) => {
     // // state의 메모리 주소를 그대로 넣어주는게 아니라 clone을 통해 복사본을 만들어줌
     const currentDay = dayJs.clone();
 
@@ -34,6 +34,7 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn, data 
 
     const onClick = (e: MouseEvent<HTMLDivElement>) => {
         const { innerText } = e.target as any;
+        e.preventDefault();
 
         // 현재 년과 달을 가진 dayjs에 클릭한 셀의 일을 설정하고 YYYYMMDD 포맷으로 설정함
         setDiarySelect(currentDay.date(Number(innerText)).format("YYYYMMDD"));
@@ -78,7 +79,7 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn, data 
                         .clone()
                         .date(date)
                         .isSame(dayjs(diarySelect).format("YYYY-MM-DD"), "day")}
-                    url={data && data[date] && EmotionIMG[data[date].emotion]}
+                    url={data[date] && EmotionIcon[data[date].emotion]}
                 >
                     <span>{currentDay.format(`${date}`)}</span>
                 </Style.NowDateCell>
@@ -92,7 +93,7 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn, data 
                     <button
                         onClick={() => {
                             setDayJs(dayJs.clone().subtract(1, "month"));
-                            setIsOn(true);
+                            // setIsOn(() => true);
                         }}
                     >
                         <BsChevronLeft />
@@ -104,7 +105,7 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn, data 
                     <button
                         onClick={() => {
                             setDayJs(dayJs.clone().add(1, "month"));
-                            setIsOn(true);
+                            // setIsOn(() => true);
                         }}
                     >
                         <BsChevronRight />
@@ -120,7 +121,6 @@ const Calendar = ({ dayJs, setDayJs, diarySelect, setDiarySelect, setIsOn, data 
                     {cells}
                 </Style.CellsContent>
             </Style.CalendarContent>
-            {/* <DiaryDelete /> */}
         </>
     );
 };
