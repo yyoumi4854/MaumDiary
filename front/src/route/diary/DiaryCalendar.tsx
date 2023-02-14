@@ -23,19 +23,19 @@ export const loader = (queryClient: QueryClient) => async () => {
 const DiaryCalendar = () => {
     const [dayJs, setDayJs] = useState(dayjs());
     const [diarySelect, setDiarySelect] = useState(String(dayjs().format(`YYYYMMDD`)));
-
-    const [isOn, setIsOn] = useState(false);
+    // seletedDay atom으로 만들기
+    // const [isOn, setIsOn] = useState(true);
     const { data, isSuccess } = useQuery({
         queryKey: [MONTH_DIARY.LIST, { year: dayJs.year(), month: dayJs.month() + 1 }],
         queryFn: () => fetchMonthDiaryList({ year: dayJs.year(), month: dayJs.month() + 1 }),
-        enabled: isOn,
+        // enabled: isOn,
 
-        onSuccess: () => {
-            setIsOn(false);
-        },
+        // onSuccess: () => {
+        //     setIsOn(() => false);
+        // },
     });
+    console.log("렌더링됨");
     if (!isSuccess) return null;
-
     return (
         <Style.DiaryCalendarContent>
             <Calendar
@@ -43,7 +43,7 @@ const DiaryCalendar = () => {
                 setDayJs={setDayJs}
                 diarySelect={diarySelect}
                 setDiarySelect={setDiarySelect}
-                setIsOn={setIsOn}
+                // setIsOn={setIsOn}
                 data={data}
             />
             <Diary diarySelect={diarySelect} selectedDiary={data[dayjs(diarySelect).date()]} />

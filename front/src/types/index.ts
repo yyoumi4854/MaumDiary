@@ -43,3 +43,7 @@ export interface FectchMonthDiaryList {
     year: number;
     month: number;
 }
+
+export interface DeleteDiary {
+    id: number;
+}

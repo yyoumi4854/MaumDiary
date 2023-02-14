@@ -26,16 +26,8 @@ const DiaryDelete = ({ diarySelect, selectedDiary, setIsDelete }: Props) => {
     const mutation = useMutation({
         mutationFn: deleteDiary,
         onSuccess: () => {
-            queryClient.fetchQuery({
-                queryKey: [
-                    MONTH_DIARY.LIST,
-                    { year: dayjs(diarySelect).year(), month: dayjs(diarySelect).month() + 1 },
-                ],
-                queryFn: () =>
-                    fetchMonthDiaryList({
-                        year: dayjs(diarySelect).year(),
-                        month: dayjs(diarySelect).month() + 1,
-                    }),
+            return queryClient.refetchQueries({
+                queryKey: [MONTH_DIARY.LIST],
             });
         },
     });
