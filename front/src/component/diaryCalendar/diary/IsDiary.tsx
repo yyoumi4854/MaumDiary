@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useRecoilValue } from "recoil";
 import dayjs from "dayjs";
 import { HiLockClosed, HiLockOpen } from "react-icons/hi";
 import { BsFillHeartFill } from "react-icons/bs";
 
+import { selectedDayAtom } from "@/recoil/selectedDay";
 import { Diary as DiaryType } from "@/types";
 import { weather } from "@/utils/weather";
 import Emotion from "@/utils/emotionIcon";
@@ -12,11 +14,12 @@ import * as ButtonStyle from "@/style/common/Button-style";
 import * as Style from "@/style/component/diaryCalendar/diary/IsDiary-style";
 
 export type IsDiaryProps = {
-    diarySelect: string;
     selectedDiary: DiaryType;
 };
 
-const IsDiary = ({ diarySelect, selectedDiary }: IsDiaryProps) => {
+const IsDiary = ({ selectedDiary }: IsDiaryProps) => {
+    const selectDay = useRecoilValue(selectedDayAtom);
+
     const [isDelete, setIsDelete] = useState(false);
     return (
         <>
@@ -24,8 +27,8 @@ const IsDiary = ({ diarySelect, selectedDiary }: IsDiaryProps) => {
                 <Style.DiaryTopContent>
                     <div>
                         <span>
-                            {dayjs(diarySelect).year()}년 {dayjs(diarySelect).month() + 1}월{" "}
-                            {dayjs(diarySelect).date()}일
+                            {dayjs(selectDay).year()}년 {dayjs(selectDay).month() + 1}월{" "}
+                            {dayjs(selectDay).date()}일
                         </span>
                         <span>{weather[selectedDiary.weather]}</span>
                     </div>
@@ -68,13 +71,7 @@ const IsDiary = ({ diarySelect, selectedDiary }: IsDiaryProps) => {
                 </Style.DiaryBottomContent>
             </Style.DiaryContent>
 
-            {isDelete && (
-                <DiaryDelete
-                    diarySelect={diarySelect}
-                    selectedDiary={selectedDiary}
-                    setIsDelete={setIsDelete}
-                />
-            )}
+            {isDelete && <DiaryDelete selectedDiary={selectedDiary} setIsDelete={setIsDelete} />}
         </>
     );
 };

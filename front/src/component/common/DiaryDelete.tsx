@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import dayjs from "dayjs";
+import { useRecoilValue } from "recoil";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import dayjs from "dayjs";
 
+import { selectedDayAtom } from "@/recoil/selectedDay";
 import * as FixModal from "@/utils/FixModalScroll";
 import { IsDiaryProps } from "../diaryCalendar/diary/IsDiary";
-import { deleteDiary, fetchMonthDiaryList } from "@/api/diary";
+import { deleteDiary } from "@/api/diary";
 import { MONTH_DIARY } from "@/constant/QUERY_KEY";
 
 import * as ButtonStyle from "@/style/common/Button-style";
@@ -15,11 +17,8 @@ type Props = IsDiaryProps & {
     setIsDelete: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const DiaryDelete = ({ diarySelect, selectedDiary, setIsDelete }: Props) => {
-    useEffect(() => {
-        FixModal.disableScroll();
-        return FixModal.enableScroll;
-    });
+const DiaryDelete = ({ selectedDiary, setIsDelete }: Props) => {
+    const selectDay = useRecoilValue(selectedDayAtom);
 
     const queryClient = useQueryClient();
 
@@ -32,13 +31,18 @@ const DiaryDelete = ({ diarySelect, selectedDiary, setIsDelete }: Props) => {
         },
     });
 
+    useEffect(() => {
+        FixModal.disableScroll();
+        return FixModal.enableScroll;
+    });
+
     return (
         <Common.FixedContent>
             <Style.ModalContent lineHeight={true} margin={"0 0 2.5em"}>
                 <p>
                     <span>
-                        {dayjs(diarySelect).year()}년 {dayjs(diarySelect).month() + 1}월{" "}
-                        {dayjs(diarySelect).date()}일
+                        {dayjs(selectDay).year()}년 {dayjs(selectDay).month() + 1}월{" "}
+                        {dayjs(selectDay).date()}일
                     </span>{" "}
                     일기를
                     <br />

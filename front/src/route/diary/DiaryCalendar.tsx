@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useRecoilValue } from "recoil";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
+import { selectedDayAtom } from "@/recoil/selectedDay";
 import Calendar from "@/component/diaryCalendar/Calendar";
 import Diary from "@/component/diaryCalendar/diary/Diary";
 import { fetchMonthDiaryList } from "@/api/diary";
@@ -21,9 +23,9 @@ export const loader = (queryClient: QueryClient) => async () => {
 };
 
 const DiaryCalendar = () => {
+    const selectDay = useRecoilValue(selectedDayAtom);
+
     const [dayJs, setDayJs] = useState(dayjs());
-    const [diarySelect, setDiarySelect] = useState(String(dayjs().format(`YYYYMMDD`)));
-    // seletedDay atom으로 만들기
     // const [isOn, setIsOn] = useState(true);
     const { data, isSuccess } = useQuery({
         queryKey: [MONTH_DIARY.LIST, { year: dayJs.year(), month: dayJs.month() + 1 }],
@@ -34,19 +36,17 @@ const DiaryCalendar = () => {
         //     setIsOn(() => false);
         // },
     });
-    console.log("렌더링됨");
     if (!isSuccess) return null;
+
     return (
         <Style.DiaryCalendarContent>
             <Calendar
                 dayJs={dayJs}
                 setDayJs={setDayJs}
-                diarySelect={diarySelect}
-                setDiarySelect={setDiarySelect}
                 // setIsOn={setIsOn}
                 data={data}
             />
-            <Diary diarySelect={diarySelect} selectedDiary={data[dayjs(diarySelect).date()]} />
+            <Diary selectedDiary={data[dayjs(selectDay).date()]} />
             <MonthStatistics dayJs={dayJs} data={data} />
         </Style.DiaryCalendarContent>
     );

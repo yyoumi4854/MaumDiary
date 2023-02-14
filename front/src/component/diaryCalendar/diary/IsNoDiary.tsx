@@ -1,29 +1,35 @@
 import React from "react";
-import dayjs from "dayjs";
+import { useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
 import { BsExclamationCircle } from "react-icons/bs";
+import dayjs from "dayjs";
+
+import { selectedDayAtom } from "@/recoil/selectedDay";
 
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as Style from "@/style/component/diaryCalendar/diary/IsNoDiary-style";
 
-type Props = {
-    diarySelect: string;
-};
+const IsNoDiary = () => {
+    const selectDay = useRecoilValue(selectedDayAtom);
 
-const IsNoDiary = ({ diarySelect }: Props) => {
+    const navigate = useNavigate();
+
     return (
         <Style.IsNoDiaryContent>
             <div>
                 <BsExclamationCircle />
                 <p>
                     <span>
-                        {dayjs(diarySelect).year()}년 {dayjs(diarySelect).month() + 1}월{" "}
-                        {dayjs(diarySelect).date()}일
+                        {dayjs(selectDay).year()}년 {dayjs(selectDay).month() + 1}월{" "}
+                        {dayjs(selectDay).date()}일
                     </span>
                     에 작성된 글이 없습니다.
                     <br />
                     어떤 하루를 보냈는지 기록해 보세요!
                 </p>
-                <ButtonStyle.MediumButton>일기쓰러 가기</ButtonStyle.MediumButton>
+                <ButtonStyle.MediumButton onClick={() => navigate("/diary/write")}>
+                    일기쓰러 가기
+                </ButtonStyle.MediumButton>
             </div>
         </Style.IsNoDiaryContent>
     );
