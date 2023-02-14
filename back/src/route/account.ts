@@ -1,4 +1,6 @@
 import { Router, Request as Req, Response as Res } from "express";
+import axios from "axios";
+
 import wrapRouter from "../lib/wrapRouter";
 import tokenService from "../services/tokenService";
 import auth from "../middleware/auth";
@@ -69,10 +71,52 @@ accountRouter.get(
     })
 );
 
+accountRouter.get(
+    "/kakao",
+    wrapRouter(async (req: Req, res: Res) => {
+        const { code } = req.query;
+
+        console.log(code);
+
+        axios
+            .post(
+                "https://kauth.kakao.com/oauth/token",
+                {
+                    grant_type: "authorization_code",
+                    client_id: "984bda20eb902967e5088317c9f5c468",
+                    redirect_uri: "http://localhost:3002/api/account/kakao",
+                    code,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                    },
+                }
+            )
+            .then((res) => {
+                console.log("성공함!");
+                console.log(res.data);
+                axios
+                    .get("https://kapi.kakao.com/v2/user/me", {
+                        headers: {
+                            Authorization: `Bearer ${res.data.access_token}`,
+                            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+                        },
+                    })
+                    .then((res) => console.log("성공함!!!", res));
+            })
+            .catch((error) => {
+                console.log("에러남!!!!!");
+                console.log(error);
+            });
+
+        return { statusCode: 200, content: "hi" };
+    })
+);
+
 // 로그아웃
 accountRouter.delete(
     "/",
-    auth,
     wrapRouter(async (req: Req, res: Res) => {
         const result = await accountService.logout(req.userID!);
 
