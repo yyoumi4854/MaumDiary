@@ -1,8 +1,6 @@
-import { useRef, useEffect, MouseEvent } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useRef, useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { Diary } from "@/types";
 import { DIARY } from "@/constant/QUERY_KEY";
 import { fetchDiaryList } from "@/api/diary";
 import Emotions from "./common/Emotions";
@@ -11,10 +9,7 @@ import DiaryItem from "./DiaryItem";
 import * as Style from "@/style/component/DiarySection-style";
 
 const DiarySection = () => {
-    // const divRef = useRef<HTMLDivElement | null>(null);
-    // const { diaryList } = useLoaderData() as { maxPageParam: number; diaryList: Diary[] };
-
-    const diaryContainerRef = useRef<HTMLDivElement | null>(null);
+    const observedDivRef = useRef<HTMLDivElement | null>(null);
 
     const { data, fetchNextPage, hasNextPage, status, isFetchingNextPage } = useInfiniteQuery(
         [DIARY.LIST],
@@ -36,38 +31,26 @@ const DiarySection = () => {
         }
     );
 
-    // useEffect(() => {
-    //     if (divRef.current === null) return;
+    useEffect(() => {
+        if (observedDivRef.current === null || hasNextPage === false) return;
 
-    //     // const sample = divRef.current;
+        const observedDiv = observedDivRef.current;
 
-    //     // if (hasNextPage === false) return;
-    //     // const observer = new IntersectionObserver(
-    //     //     ([element]) => {
-    //     //         if (element.isIntersecting) {
-    //     //             console.log("무려 실행이 됨");
-    //     //             fetchNextPage();
-    //     //         }
-    //     //     },
-    //     //     {
-    //     //         threshold: 0,
-    //     //     }
-    //     // );
+        const observer = new IntersectionObserver(
+            ([element]) => {
+                if (element.isIntersecting) {
+                    fetchNextPage();
+                }
+            },
+            {
+                threshold: 0.3,
+            }
+        );
 
-    //     // observer.observe(sample);
+        observer.observe(observedDiv);
 
-    //     // return () => observer.unobserve(sample);
-    // }, [fetchNextPage]);
-
-    const onScroll = () => {
-        if (diaryContainerRef.current === null || hasNextPage === false) return;
-
-        const { scrollHeight, clientHeight, scrollTop } = diaryContainerRef.current;
-
-        if (scrollTop / (scrollHeight - clientHeight) >= 0.7) {
-            fetchNextPage();
-        }
-    };
+        return () => observer.unobserve(observedDiv);
+    }, [hasNextPage]);
 
     if (status !== "success") {
         return null;
@@ -81,12 +64,11 @@ const DiarySection = () => {
             </Style.Title>
             <Emotions />
 
-            <Style.DiaryContainer ref={diaryContainerRef} onScroll={onScroll}>
-                {data.pages.map((page) =>
-                    page.diaryList.map((diary, idx) => <DiaryItem key={idx} diary={diary} />)
-                )}
-                {isFetchingNextPage && <div>무려 로 딩 중 임</div>}
-            </Style.DiaryContainer>
+            {data.pages.map((page) =>
+                page.diaryList.map((diary, idx) => <DiaryItem key={idx} diary={diary} />)
+            )}
+            {isFetchingNextPage && <div>무려 로 딩 중 임</div>}
+            <div ref={observedDivRef}>이거 보면 무려 다음 페이지가 불러와짐</div>
         </Style.Container>
     );
 };

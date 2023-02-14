@@ -46,9 +46,3 @@ export const Title = styled.div`
         }
     }
 `;
-
-export const DiaryContainer = styled.div`
-    height: 50vh;
-
-    overflow-y: scroll;
-`;
