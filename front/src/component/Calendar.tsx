@@ -8,10 +8,10 @@ import { fetchMonthDiaryList } from "@/api/diary";
 
 import * as Common from "@/style/common/common-style";
 import * as ButtonStyle from "@/style/common/Button-style";
-import * as Style from "@/style/component/WriteAndEditorCalendar-style";
+import * as Style from "@/style/component/Calendar-style";
 import useCalendar from "../hooks/useCalendar";
 
-const WriteAndEditorCalendar = () => {
+const Calendar = () => {
     const navigate = useNavigate();
 
     const [dayJs, setDayJs] = useState(dayjs());
@@ -30,8 +30,12 @@ const WriteAndEditorCalendar = () => {
             <Style.CalendarWarp>
                 <Style.CalendarContent>{calendar}</Style.CalendarContent>
 
-                {/* 해당 날짜에 일기를 썼습니다. 다른 날짜를 선택해 주세요. */}
-                <div>문구</div>
+                {/* 해당 날짜에는 일기를 썼습니다. 다른 날짜를 선택해 주세요. */}
+                <div>
+                    해당 날짜에는 일기를 썼습니다.
+                    <br />
+                    다른 날짜를 선택해 주세요.
+                </div>
 
                 {/* 취소: 이전에 선택한 날짜 그대로, 선택: 다시 선택한 날짜로 */}
                 <ButtonStyle.ButtonWrap>
@@ -43,4 +47,4 @@ const WriteAndEditorCalendar = () => {
     );
 };
 
-export default WriteAndEditorCalendar;
+export default Calendar;

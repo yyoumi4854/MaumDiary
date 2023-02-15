@@ -1,4 +1,5 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
+import { useRecoilValue, useRecoilState } from "recoil";
 import {
     BsSun,
     BsFillCloudSunFill,
@@ -6,21 +7,39 @@ import {
     BsFillCloudRainHeavyFill,
     BsSnow2,
 } from "react-icons/bs";
+import dayjs from "dayjs";
 
-import WriteAndEditorCalendar from "@/component/WriteAndEditorCalendar";
+import { selectedDayAtom } from "@/recoil/selectedDay";
+import { isSelectedDayAtom } from "@/recoil/isSelectedDay";
+import Calendar from "@/component/Calendar";
 
 import * as TextStyle from "@/style/common/Text-style";
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as DiaryFormStyle from "@/style/component/DiaryForm-style";
 
 const DiaryWrite = () => {
+    const selectDay = useRecoilValue(selectedDayAtom);
+    const [isSelectDay, setIsSelectDay] = useRecoilState(isSelectedDayAtom);
+    // isNoCalendar = true/false
+
     const [diaryTitle, setDiaryTitle] = useState("");
     const [diaryDescription, setDiaryDescription] = useState("");
+
+    console.log(selectDay);
+
+    useEffect(() => {
+        if (isSelectDay) setIsSelectDay(true);
+        return () => {
+            setIsSelectDay(false);
+        };
+    }, []);
+
+    console.log(isSelectDay);
 
     return (
         <>
             {/* 캘린더에서 왔는지 확인하기 */}
-            <WriteAndEditorCalendar />
+            {!isSelectDay && <Calendar />}
             <div className="content inner">
                 <DiaryFormStyle.DiaryFormContent>
                     <TextStyle.MediumText>일기 쓰기</TextStyle.MediumText>
@@ -30,7 +49,11 @@ const DiaryWrite = () => {
                             <DiaryFormStyle.TopContent>
                                 <DiaryFormStyle.TopLeftContent>
                                     <div>
-                                        <button>2023년 01월 23일</button>
+                                        <button>
+                                            {dayjs(selectDay).year()}년{" "}
+                                            {dayjs(selectDay).month() + 1}월{" "}
+                                            {dayjs(selectDay).date()}일
+                                        </button>
                                     </div>
 
                                     <DiaryFormStyle.WeatherFieldset>
