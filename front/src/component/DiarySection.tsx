@@ -1,6 +1,7 @@
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect, MouseEvent } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+import { Emotion } from "@/types";
 import { DIARY } from "@/constant/QUERY_KEY";
 import { fetchDiaryList } from "@/api/diary";
 import Emotions from "./common/Emotions";
@@ -9,16 +10,18 @@ import DiaryItem from "./DiaryItem";
 import * as Style from "@/style/component/DiarySection-style";
 
 const DiarySection = () => {
+    const [selectedEmotion, setSelectedEmotion] = useState<"all" | Emotion>("all");
+
     const observedDivRef = useRef<HTMLDivElement | null>(null);
 
     const { data, fetchNextPage, hasNextPage, status, isFetchingNextPage } = useInfiniteQuery(
-        [DIARY.LIST],
+        [DIARY.LIST, selectedEmotion],
         ({ pageParam = 1 }) =>
             fetchDiaryList({
                 user: "false",
                 count: 4,
                 page: pageParam,
-                emotion: "all",
+                emotion: selectedEmotion,
                 lock: "false",
             }),
         {
@@ -56,13 +59,19 @@ const DiarySection = () => {
         return null;
     }
 
+    const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+        const { name } = e.currentTarget as unknown as { name: Emotion };
+
+        setSelectedEmotion(() => name);
+    };
+
     return (
         <Style.Container>
             <Style.Title>
                 <h2>마음 일기</h2>
                 <p>사람들이 어떠한 마음을 가지고 있는지 카테고리 별로 알아보아요.</p>
             </Style.Title>
-            <Emotions />
+            <Emotions onClick={onClick} />
 
             {data.pages.map((page) =>
                 page.diaryList.map((diary, idx) => <DiaryItem key={idx} diary={diary} />)
