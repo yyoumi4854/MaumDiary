@@ -13,7 +13,13 @@ import * as ButtonStyle from "@/style/common/Button-style";
 import * as Style from "@/style/component/Calendar-style";
 import useCalendar from "../hooks/useCalendar";
 
-const Calendar = () => {
+interface Props {
+    setIsCalendar: React.Dispatch<React.SetStateAction<boolean>>;
+    changeDay: boolean;
+    setChangeDay: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Calendar = ({ setIsCalendar, changeDay, setChangeDay }: Props) => {
     const selectDay = useRecoilValue(selectedDayAtom);
 
     const navigate = useNavigate();
@@ -28,28 +34,56 @@ const Calendar = () => {
     if (!isSuccess) return null;
 
     const calendar = useCalendar(dayJs, setDayJs, data);
-
-    console.log(selectDay); // 20230213
-    // data로 해당날짜가 일기를 썼는지 판단을 해야됨
-    console.log(data[dayjs(selectDay).date()]);
+    const dayUp = dayJs.format() < dayjs(selectDay).format();
+    const wroteDiary = data[dayjs(selectDay).date()];
 
     return (
         <Common.FixedContent>
             <Style.CalendarWarp>
                 <Style.CalendarContent>{calendar}</Style.CalendarContent>
 
-                {/* 해당 날짜에는 일기를 썼습니다. 다른 날짜를 선택해 주세요. */}
-                {/* 현재 날짜보다 이전날짜를 선택해 주세요. */}
                 <Style.WarnningTextContent>
-                    해당 날짜에는 일기를 썼습니다.
-                    <br />
-                    <span>다른 날짜</span>를 선택해 주세요.
+                    {dayUp && (
+                        <>
+                            현재 날짜보다 <span>이전날짜</span>를 선택해 주세요.
+                        </>
+                    )}
+                    {wroteDiary && (
+                        <>
+                            해당 날짜에는 일기를 썼습니다.
+                            <br />
+                            <span>다른 날짜</span>를 선택해 주세요.
+                        </>
+                    )}
                 </Style.WarnningTextContent>
 
-                {/* 취소: 이전에 선택한 날짜 그대로, 선택: 다시 선택한 날짜로 */}
                 <ButtonStyle.ButtonWrap>
-                    <button onClick={() => navigate(-1)}>나가기</button>
-                    <button>일기쓰기</button>
+                    {changeDay ? (
+                        <>
+                            <button onClick={() => setIsCalendar(false)}>닫기</button>
+                            <button
+                                disabled={!(!dayUp && !wroteDiary)}
+                                onClick={() => {
+                                    setChangeDay(false);
+                                    setIsCalendar(false);
+                                }}
+                            >
+                                바꾸기
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button onClick={() => navigate(-1)}>나가기</button>
+                            <button
+                                disabled={!(!dayUp && !wroteDiary)}
+                                onClick={() => {
+                                    setIsCalendar(false);
+                                }}
+                            >
+                                일기쓰기
+                            </button>
+                        </>
+                    )}
                 </ButtonStyle.ButtonWrap>
             </Style.CalendarWarp>
         </Common.FixedContent>

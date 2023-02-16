@@ -12,7 +12,6 @@ import EmotionIcon from "@/utils/emotionIcon";
 
 const day = ["SUN", "MUN", "TUE", "WEN", "THU", "FRI", "SAT"];
 
-// 공용 캘린더
 const useCalendar = (
     dayJs: dayjs.Dayjs,
     setDayJs: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>,

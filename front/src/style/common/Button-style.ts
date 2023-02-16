@@ -54,5 +54,6 @@ export const ButtonWrap = styled.div`
     button:last-of-type {
         margin-left: 0.5rem;
         ${mainColorButton}
+        ${disabled}
     }
 `;

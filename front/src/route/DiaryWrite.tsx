@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import {
     BsSun,
     BsFillCloudSunFill,
@@ -21,15 +21,22 @@ const DiaryWrite = () => {
     const selectDay = useRecoilValue(selectedDayAtom);
 
     const location = useLocation();
-    // console.log(location);
-    // console.log(location.state); // null:캘린더 나오기, isNoDiary: 캘린더 안나오기
 
     const [diaryTitle, setDiaryTitle] = useState("");
     const [diaryDescription, setDiaryDescription] = useState("");
+    // const [isCalendar, setIsCalendar] = useState(location.state ?? false);
+    const [isCalendar, setIsCalendar] = useState(location.state !== "isNoDiary");
+    const [changeDay, setChangeDay] = useState(false);
 
     return (
         <>
-            {location.state !== "isNoDiary" && <Calendar />}
+            {isCalendar && (
+                <Calendar
+                    setIsCalendar={setIsCalendar}
+                    changeDay={changeDay}
+                    setChangeDay={setChangeDay}
+                />
+            )}
             <div className="content inner">
                 <DiaryFormStyle.DiaryFormContent>
                     <TextStyle.MediumText>일기 쓰기</TextStyle.MediumText>
@@ -39,7 +46,13 @@ const DiaryWrite = () => {
                             <DiaryFormStyle.TopContent>
                                 <DiaryFormStyle.TopLeftContent>
                                     <div>
-                                        <button>
+                                        <button
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setIsCalendar(true);
+                                                setChangeDay(true);
+                                            }}
+                                        >
                                             {dayjs(selectDay).year()}년{" "}
                                             {dayjs(selectDay).month() + 1}월{" "}
                                             {dayjs(selectDay).date()}일
