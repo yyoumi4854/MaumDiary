@@ -10,36 +10,26 @@ import {
 import dayjs from "dayjs";
 
 import { selectedDayAtom } from "@/recoil/selectedDay";
-import { isSelectedDayAtom } from "@/recoil/isSelectedDay";
 import Calendar from "@/component/Calendar";
 
 import * as TextStyle from "@/style/common/Text-style";
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as DiaryFormStyle from "@/style/component/DiaryForm-style";
+import { useLocation } from "react-router-dom";
 
 const DiaryWrite = () => {
     const selectDay = useRecoilValue(selectedDayAtom);
-    const [isSelectDay, setIsSelectDay] = useRecoilState(isSelectedDayAtom);
-    // isNoCalendar = true/false
+
+    const location = useLocation();
+    // console.log(location);
+    // console.log(location.state); // null:캘린더 나오기, isNoDiary: 캘린더 안나오기
 
     const [diaryTitle, setDiaryTitle] = useState("");
     const [diaryDescription, setDiaryDescription] = useState("");
 
-    console.log(selectDay);
-
-    useEffect(() => {
-        if (isSelectDay) setIsSelectDay(true);
-        return () => {
-            setIsSelectDay(false);
-        };
-    }, []);
-
-    console.log(isSelectDay);
-
     return (
         <>
-            {/* 캘린더에서 왔는지 확인하기 */}
-            {!isSelectDay && <Calendar />}
+            {location.state !== "isNoDiary" && <Calendar />}
             <div className="content inner">
                 <DiaryFormStyle.DiaryFormContent>
                     <TextStyle.MediumText>일기 쓰기</TextStyle.MediumText>

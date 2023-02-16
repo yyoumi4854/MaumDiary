@@ -1,18 +1,16 @@
 import React from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { BsExclamationCircle } from "react-icons/bs";
 import dayjs from "dayjs";
 
 import { selectedDayAtom } from "@/recoil/selectedDay";
-import { isSelectedDayAtom } from "@/recoil/isSelectedDay";
 
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as Style from "@/style/component/diaryCalendar/diary/IsNoDiary-style";
 
 const IsNoDiary = () => {
     const selectDay = useRecoilValue(selectedDayAtom);
-    const setIsSelectDay = useSetRecoilState(isSelectedDayAtom);
 
     const navigate = useNavigate();
 
@@ -31,8 +29,7 @@ const IsNoDiary = () => {
                 </p>
                 <ButtonStyle.MediumButton
                     onClick={() => {
-                        navigate("/diary/write");
-                        setIsSelectDay(true);
+                        navigate("/diary/write", { state: "isNoDiary" });
                     }}
                 >
                     일기쓰러 가기
