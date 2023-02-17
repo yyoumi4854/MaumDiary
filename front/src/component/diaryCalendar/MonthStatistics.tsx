@@ -8,10 +8,10 @@ import * as Style from "@/style/component/diaryCalendar/MonthStatistics-style";
 
 import EmotionIcon from "@/utils/emotionIcon";
 
-type Props = {
+interface Props {
     dayJs: dayjs.Dayjs;
     data: { [key: number]: Diary };
-};
+}
 
 const MonthStatistics = ({ dayJs, data }: Props) => {
     const currentDay = dayJs.clone();

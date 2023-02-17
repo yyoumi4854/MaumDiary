@@ -10,10 +10,10 @@ import * as Style from "@/style/component/Modal-style";
 
 import faviconLogo from "@/images/favicon-logo.svg";
 
-type Props = {
+interface Props {
     cancelAccountModal: boolean;
     setCancelAccountModal: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 const CancelAccount = ({ cancelAccountModal, setCancelAccountModal }: Props) => {
     useEffect(() => {

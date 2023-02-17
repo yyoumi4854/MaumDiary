@@ -6,9 +6,9 @@ import * as FixModal from "@/utils/FixModalScroll";
 import * as Style from "@/style/layout/header/MobileNav-style";
 import * as Common from "@/style/common/common-style";
 
-type Props = {
+interface Props {
     setIsMobileNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 const MobileNav = ({ setIsMobileNavOpen }: Props) => {
     useEffect(() => {

@@ -6,11 +6,11 @@ import useCalendar from "@/hooks/useCalendar";
 
 import * as Style from "@/style/component/diaryCalendar/Calendar-style";
 
-type Props = {
+interface Props {
     dayJs: dayjs.Dayjs;
     setDayJs: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>;
     data: { [key: number]: Diary };
-};
+}
 
 const Calendar = ({ dayJs, setDayJs, data }: Props) => {
     const calendar = useCalendar(dayJs, setDayJs, data);

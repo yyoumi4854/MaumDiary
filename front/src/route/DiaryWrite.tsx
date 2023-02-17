@@ -212,7 +212,14 @@ const DiaryWrite = () => {
                         </DiaryFormStyle.DiaryFormWrap>
 
                         <ButtonStyle.ButtonWrap>
-                            <button>취소</button>
+                            <button
+                                onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                                    e.preventDefault();
+                                    navigate("/");
+                                }}
+                            >
+                                취소
+                            </button>
                             <button disabled={submit ? false : true}>확인</button>
                         </ButtonStyle.ButtonWrap>
                     </form>

@@ -13,9 +13,9 @@ import * as ButtonStyle from "@/style/common/Button-style";
 import * as Common from "@/style/common/common-style";
 import * as Style from "@/style/component/Modal-style";
 
-type Props = IsDiaryProps & {
+interface Props extends IsDiaryProps {
     setIsDelete: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 const DiaryDelete = ({ selectedDiary, setIsDelete }: Props) => {
     const selectDay = useRecoilValue(selectedDayAtom);
