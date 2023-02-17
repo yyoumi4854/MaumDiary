@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, ChangeEvent, MouseEvent } from "react";
 import { useRecoilValue } from "recoil";
 import {
     BsSun,
@@ -10,23 +10,68 @@ import {
 import dayjs from "dayjs";
 
 import { selectedDayAtom } from "@/recoil/selectedDay";
+import { MONTH_DIARY } from "@/constant/QUERY_KEY";
 import Calendar from "@/component/Calendar";
 
 import * as TextStyle from "@/style/common/Text-style";
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as DiaryFormStyle from "@/style/component/DiaryForm-style";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Weather } from "@/types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { writeDiary } from "@/api/diary";
 
 const DiaryWrite = () => {
     const selectDay = useRecoilValue(selectedDayAtom);
 
     const location = useLocation();
+    const navigate = useNavigate();
 
-    const [diaryTitle, setDiaryTitle] = useState("");
-    const [diaryDescription, setDiaryDescription] = useState("");
-    // const [isCalendar, setIsCalendar] = useState(location.state ?? false);
+    // 캘린더 모달
     const [isCalendar, setIsCalendar] = useState(location.state !== "isNoDiary");
     const [changeDay, setChangeDay] = useState(false);
+
+    // 일기쓰기 (제목, 내용, 날씨, 공개여부, 날짜)
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [weather, setWeather] = useState<Weather | undefined>();
+    const [lock, setLock] = useState(true); // true: 비공개, flase: 공개
+    const createdAt = dayjs(selectDay);
+    const submit = title && description && weather;
+
+    const onClickWeather = (e: MouseEvent<HTMLInputElement>) => {
+        const { id } = e.target as any;
+        setWeather(id);
+    };
+
+    const onClickLock = (e: MouseEvent<HTMLSelectElement>) => {
+        const { value } = e.target as any;
+        setLock(value === "private" ? true : false);
+    };
+
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation({
+        mutationFn: writeDiary,
+        onSuccess: () => {
+            navigate("/diary/calendar");
+            return queryClient.refetchQueries({
+                queryKey: [MONTH_DIARY.LIST],
+            });
+        },
+    });
+
+    const onSubmit = (e: MouseEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!submit) return;
+        mutation.mutate({
+            title: title,
+            description: description,
+            weather: weather,
+            lock: lock,
+            createdAt: String(createdAt),
+        });
+    };
 
     return (
         <>
@@ -41,56 +86,80 @@ const DiaryWrite = () => {
                 <DiaryFormStyle.DiaryFormContent>
                     <TextStyle.MediumText>일기 쓰기</TextStyle.MediumText>
 
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <DiaryFormStyle.DiaryFormWrap>
                             <DiaryFormStyle.TopContent>
                                 <DiaryFormStyle.TopLeftContent>
                                     <div>
                                         <button
-                                            onClick={(e) => {
+                                            onClick={(e: MouseEvent<HTMLButtonElement>) => {
                                                 e.preventDefault();
                                                 setIsCalendar(true);
                                                 setChangeDay(true);
                                             }}
                                         >
-                                            {dayjs(selectDay).year()}년{" "}
-                                            {dayjs(selectDay).month() + 1}월{" "}
-                                            {dayjs(selectDay).date()}일
+                                            {createdAt.year()}년 {createdAt.month() + 1}월{" "}
+                                            {createdAt.date()}일
                                         </button>
                                     </div>
 
                                     <DiaryFormStyle.WeatherFieldset>
                                         <legend>날씨 선택</legend>
 
-                                        <input type="radio" name="weather" id="clear" />
+                                        <input
+                                            type="radio"
+                                            name="weather"
+                                            id="clear"
+                                            onClick={onClickWeather}
+                                        />
                                         <label htmlFor="clear">
                                             <span>
                                                 <BsSun />
                                             </span>
                                         </label>
 
-                                        <input type="radio" name="weather" id="partlyCloudy" />
+                                        <input
+                                            type="radio"
+                                            name="weather"
+                                            id="partlyCloudy"
+                                            onClick={onClickWeather}
+                                        />
                                         <label htmlFor="partlyCloudy">
                                             <span>
                                                 <BsFillCloudSunFill />
                                             </span>
                                         </label>
 
-                                        <input type="radio" name="weather" id="cloudy" />
+                                        <input
+                                            type="radio"
+                                            name="weather"
+                                            id="cloudy"
+                                            onClick={onClickWeather}
+                                        />
                                         <label htmlFor="cloudy">
                                             <span>
                                                 <BsFillCloudyFill />
                                             </span>
                                         </label>
 
-                                        <input type="radio" name="weather" id="rain" />
+                                        <input
+                                            type="radio"
+                                            name="weather"
+                                            id="rain"
+                                            onClick={onClickWeather}
+                                        />
                                         <label htmlFor="rain">
                                             <span>
                                                 <BsFillCloudRainHeavyFill />
                                             </span>
                                         </label>
 
-                                        <input type="radio" name="weather" id="snow" />
+                                        <input
+                                            type="radio"
+                                            name="weather"
+                                            id="snow"
+                                            onClick={onClickWeather}
+                                        />
                                         <label htmlFor="snow">
                                             <span>
                                                 <BsSnow2 />
@@ -101,7 +170,7 @@ const DiaryWrite = () => {
 
                                 <DiaryFormStyle.isPublicFieldset>
                                     <legend>공개 여부</legend>
-                                    <select name="isPublic" id="">
+                                    <select name="lock" onClick={onClickLock}>
                                         <option value="private">비공개</option>
                                         <option value="public">공개</option>
                                     </select>
@@ -116,35 +185,35 @@ const DiaryWrite = () => {
                                     name="diaryTitle"
                                     placeholder="제목을 입력해주세요."
                                     maxLength={20}
-                                    value={diaryTitle}
+                                    value={title}
                                     onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                         const { value } = e.target as any;
-                                        setDiaryTitle(value);
+                                        setTitle(value);
                                     }}
                                 />
                                 <p className="textCount">
-                                    {diaryTitle.length} <span>/ 20</span>
+                                    {title.length} <span>/ 20</span>
                                 </p>
 
                                 <textarea
                                     name="diaryDescription"
                                     placeholder="내용을 입력해주세요."
                                     maxLength={500}
-                                    value={diaryDescription}
+                                    value={description}
                                     onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                                         const { value } = e.target as any;
-                                        setDiaryDescription(value);
+                                        setDescription(value);
                                     }}
                                 ></textarea>
                                 <p className="textCount">
-                                    {diaryDescription.length} <span>/ 500</span>
+                                    {description.length} <span>/ 500</span>
                                 </p>
                             </DiaryFormStyle.TextContent>
                         </DiaryFormStyle.DiaryFormWrap>
 
                         <ButtonStyle.ButtonWrap>
                             <button>취소</button>
-                            <button>확인</button>
+                            <button disabled={submit ? false : true}>확인</button>
                         </ButtonStyle.ButtonWrap>
                     </form>
                 </DiaryFormStyle.DiaryFormContent>

@@ -69,6 +69,7 @@ export const DiaryTextContent = styled.div`
         height: 220px;
         margin-top: 1.5rem;
         line-height: 1.5;
+        white-space: pre-line;
         ${Css.scrollbar}
     }
 

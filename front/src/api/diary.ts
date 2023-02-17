@@ -25,7 +25,26 @@ export const fetchMonthDiaryList = async ({ year, month }: Type.FectchMonthDiary
     return result.data;
 };
 
-// 삭제
+// 일기 작성
+export const writeDiary = async ({
+    title,
+    description,
+    weather,
+    lock,
+    createdAt,
+}: Type.WriteDiary) => {
+    const result = await instance.post("/diaries", {
+        title,
+        description,
+        weather,
+        lock,
+        createdAt,
+    });
+
+    return result;
+};
+
+// 일기 삭제
 export const deleteDiary = async ({ id }: Type.DeleteDiary) => {
     const result = await instance.delete(`/diaries/${id}`);
 

@@ -44,6 +44,14 @@ export interface FectchMonthDiaryList {
     month: number;
 }
 
+export interface WriteDiary {
+    title: string;
+    description: string;
+    weather: Weather;
+    lock: boolean;
+    createdAt: string;
+}
+
 export interface DeleteDiary {
     id: number;
 }

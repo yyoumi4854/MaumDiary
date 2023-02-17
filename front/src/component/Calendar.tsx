@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, MouseEvent } from "react";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -33,8 +33,10 @@ const Calendar = ({ setIsCalendar, changeDay, setChangeDay }: Props) => {
     });
     if (!isSuccess) return null;
 
+    // 캘린더 날짜 선택 조건
+    const currentDay = dayjs().format();
     const calendar = useCalendar(dayJs, setDayJs, data);
-    const dayUp = dayJs.format() < dayjs(selectDay).format();
+    const dayUp = currentDay < dayjs(selectDay).format(); // true
     const wroteDiary = data[dayjs(selectDay).date()];
 
     return (
@@ -63,7 +65,8 @@ const Calendar = ({ setIsCalendar, changeDay, setChangeDay }: Props) => {
                             <button onClick={() => setIsCalendar(false)}>닫기</button>
                             <button
                                 disabled={!(!dayUp && !wroteDiary)}
-                                onClick={() => {
+                                onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                                    e.preventDefault();
                                     setChangeDay(false);
                                     setIsCalendar(false);
                                 }}
@@ -76,7 +79,8 @@ const Calendar = ({ setIsCalendar, changeDay, setChangeDay }: Props) => {
                             <button onClick={() => navigate(-1)}>나가기</button>
                             <button
                                 disabled={!(!dayUp && !wroteDiary)}
-                                onClick={() => {
+                                onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                                    e.preventDefault();
                                     setIsCalendar(false);
                                 }}
                             >
