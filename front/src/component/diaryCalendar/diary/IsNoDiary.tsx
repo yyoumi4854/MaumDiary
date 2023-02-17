@@ -12,6 +12,11 @@ import * as Style from "@/style/component/diaryCalendar/diary/IsNoDiary-style";
 const IsNoDiary = () => {
     const selectDay = useRecoilValue(selectedDayAtom);
 
+    const currentDay = dayjs().format();
+    const dayUp = currentDay < dayjs(selectDay).format();
+
+    console.log(currentDay);
+
     const navigate = useNavigate();
 
     return (
@@ -27,13 +32,15 @@ const IsNoDiary = () => {
                     <br />
                     어떤 하루를 보냈는지 기록해 보세요!
                 </p>
-                <ButtonStyle.MediumButton
-                    onClick={() => {
-                        navigate("/diary/write", { state: "isNoDiary" });
-                    }}
-                >
-                    일기쓰러 가기
-                </ButtonStyle.MediumButton>
+                {!dayUp && (
+                    <ButtonStyle.MediumButton
+                        onClick={() => {
+                            navigate("/diary/write", { state: "isNoDiary" });
+                        }}
+                    >
+                        일기쓰러 가기
+                    </ButtonStyle.MediumButton>
+                )}
             </div>
         </Style.IsNoDiaryContent>
     );

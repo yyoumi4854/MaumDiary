@@ -36,7 +36,7 @@ const Calendar = ({ setIsCalendar, changeDay, setChangeDay }: Props) => {
     // 캘린더 날짜 선택 조건
     const currentDay = dayjs().format();
     const calendar = useCalendar(dayJs, setDayJs, data);
-    const dayUp = currentDay < dayjs(selectDay).format(); // true
+    const dayUp = currentDay < dayjs(selectDay).format();
     const wroteDiary = data[dayjs(selectDay).date()];
 
     return (
