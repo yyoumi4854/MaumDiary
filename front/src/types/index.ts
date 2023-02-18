@@ -52,6 +52,15 @@ export interface WriteDiary {
     createdAt: string;
 }
 
+export interface EditorDiary {
+    id: number;
+    title: string;
+    description: string;
+    weather: Weather;
+    emotion: Emotion;
+    lock: boolean;
+}
+
 export interface DeleteDiary {
     id: number;
 }

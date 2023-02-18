@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
+import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { HiLockClosed, HiLockOpen } from "react-icons/hi";
 import { BsFillHeartFill } from "react-icons/bs";
@@ -20,7 +21,10 @@ export type IsDiaryProps = {
 const IsDiary = ({ selectedDiary }: IsDiaryProps) => {
     const selectDay = useRecoilValue(selectedDayAtom);
 
+    const navigate = useNavigate();
+
     const [isDelete, setIsDelete] = useState(false);
+
     return (
         <>
             <Style.DiaryContent>
@@ -66,7 +70,9 @@ const IsDiary = ({ selectedDiary }: IsDiaryProps) => {
                     </div>
                     <ButtonStyle.ButtonWrap>
                         <button onClick={() => setIsDelete(true)}>삭제</button>
-                        <button>수정</button>
+                        <button onClick={() => navigate("/diary/editor", { state: selectedDiary })}>
+                            수정
+                        </button>
                     </ButtonStyle.ButtonWrap>
                 </Style.DiaryBottomContent>
             </Style.DiaryContent>

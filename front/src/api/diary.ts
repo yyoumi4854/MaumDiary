@@ -44,6 +44,26 @@ export const writeDiary = async ({
     return result;
 };
 
+// 일기 수정
+export const editorDiary = async ({
+    id,
+    title,
+    description,
+    weather,
+    emotion,
+    lock,
+}: Type.EditorDiary) => {
+    const result = await instance.patch(`/diaries/${id}`, {
+        title,
+        description,
+        weather,
+        emotion,
+        lock,
+    });
+
+    return result;
+};
+
 // 일기 삭제
 export const deleteDiary = async ({ id }: Type.DeleteDiary) => {
     const result = await instance.delete(`/diaries/${id}`);

@@ -12,12 +12,10 @@ import * as Style from "@/style/component/diaryCalendar/diary/IsNoDiary-style";
 const IsNoDiary = () => {
     const selectDay = useRecoilValue(selectedDayAtom);
 
+    const navigate = useNavigate();
+
     const currentDay = dayjs().format();
     const dayUp = currentDay < dayjs(selectDay).format();
-
-    console.log(currentDay);
-
-    const navigate = useNavigate();
 
     return (
         <Style.IsNoDiaryContent>

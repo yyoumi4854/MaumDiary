@@ -1,19 +1,20 @@
 import React, { useState, ChangeEvent, MouseEvent } from "react";
 import { useRecoilValue } from "recoil";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
 import { selectedDayAtom } from "@/recoil/selectedDay";
 import { Weather, Emotion } from "@/types";
 import { weather as weatherIcon } from "@/utils/weather";
 import { emotionIcon } from "@/utils/emotionIcon";
+import { editorDiary } from "@/api/diary";
+import { MONTH_DIARY } from "@/constant/QUERY_KEY";
 
 import * as TextStyle from "@/style/common/Text-style";
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as DiaryFormStyle from "@/style/component/DiaryForm-style";
 import * as Style from "@/style/page/DiaryEditor-style";
-
-// console.log(Emotion[Emotion]);
 
 const DiaryEditor = () => {
     const selectDay = useRecoilValue(selectedDayAtom);
@@ -25,19 +26,35 @@ const DiaryEditor = () => {
     const [title, setTitle] = useState(location.state.title);
     const [description, setDescription] = useState(location.state.description);
     const [weather, setWeather] = useState<Weather>(location.state.weather);
-    const [lock, setLock] = useState(location.state.lock); // true: 비공개, flase: 공개
     const [emotion, setEmotion] = useState<Emotion>(location.state.emotion);
+    const [lock, setLock] = useState(location.state.lock); // true: 비공개, false: 공개
     const createdAt = dayjs(selectDay);
 
     const submit = title && description && weather;
 
-    // console.log(location.state.weather === "snowy" && true);
-    // console.log(Object.keys(weatherIcon));
-    // console.log(Object.entries(weatherIcon));
+    const queryClient = useQueryClient();
 
-    const onClickWeather = (e: MouseEvent<HTMLInputElement>) => {
-        const { id } = e.target as any;
-        setWeather(id);
+    const mutation = useMutation({
+        mutationFn: editorDiary,
+        onSuccess: () => {
+            navigate("/diary/calendar");
+            return queryClient.refetchQueries({
+                queryKey: [MONTH_DIARY.LIST],
+            });
+        },
+    });
+
+    const onSubmit = (e: MouseEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!submit) return;
+        mutation.mutate({
+            id: location.state.id,
+            title: title,
+            description: description,
+            weather: weather,
+            emotion: emotion,
+            lock: lock,
+        });
     };
 
     return (
@@ -45,7 +62,7 @@ const DiaryEditor = () => {
             <DiaryFormStyle.DiaryFormContent>
                 <TextStyle.MediumText>일기 쓰기</TextStyle.MediumText>
 
-                <form>
+                <form onSubmit={onSubmit}>
                     <DiaryFormStyle.DiaryFormWrap>
                         <DiaryFormStyle.TopContent>
                             <DiaryFormStyle.TopLeftContent>
@@ -65,7 +82,11 @@ const DiaryEditor = () => {
                                                 type="radio"
                                                 name="weather"
                                                 id={key}
-                                                onClick={onClickWeather}
+                                                onClick={(e: MouseEvent<HTMLInputElement>) => {
+                                                    const { id } = e.target as any;
+                                                    setWeather(id);
+                                                }}
+                                                defaultChecked={key === weather}
                                             />
                                             <label htmlFor={key}>
                                                 <span>{value}</span>
@@ -77,7 +98,14 @@ const DiaryEditor = () => {
 
                             <DiaryFormStyle.isPublicFieldset>
                                 <legend>공개 여부</legend>
-                                <select name="lock" defaultValue={lock ? "private" : "public"}>
+                                <select
+                                    name="lock"
+                                    defaultValue={lock ? "private" : "public"}
+                                    onClick={(e: MouseEvent<HTMLSelectElement>) => {
+                                        const { value } = e.target as any;
+                                        setLock(value === "private" ? true : false);
+                                    }}
+                                >
                                     <option value="private">비공개</option>
                                     <option value="public">공개</option>
                                 </select>
@@ -129,9 +157,18 @@ const DiaryEditor = () => {
 
                             {Object.entries(emotionIcon).map(([key, value]) => (
                                 <div key={key}>
-                                    <input type="radio" name="emotion" id={key} />
+                                    <input
+                                        type="radio"
+                                        name="emotion"
+                                        id={key}
+                                        onClick={(e: MouseEvent<HTMLInputElement>) => {
+                                            const { id } = e.target as any;
+                                            setEmotion(id);
+                                        }}
+                                        defaultChecked={key === emotion}
+                                    />
                                     <Style.EmotionLabel url={value.icon} htmlFor={key}>
-                                        <span>자신감</span>
+                                        <span>{value.name}</span>
                                         <span>{value.name}</span>
                                     </Style.EmotionLabel>
                                 </div>
@@ -148,7 +185,7 @@ const DiaryEditor = () => {
                         >
                             취소
                         </button>
-                        <button>확인</button>
+                        <button disabled={!submit}>확인</button>
                     </ButtonStyle.ButtonWrap>
                 </form>
             </DiaryFormStyle.DiaryFormContent>

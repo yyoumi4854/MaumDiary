@@ -25,6 +25,7 @@ const DiaryDelete = ({ selectedDiary, setIsDelete }: Props) => {
     const mutation = useMutation({
         mutationFn: deleteDiary,
         onSuccess: () => {
+            setIsDelete(false);
             return queryClient.refetchQueries({
                 queryKey: [MONTH_DIARY.LIST],
             });
@@ -54,7 +55,6 @@ const DiaryDelete = ({ selectedDiary, setIsDelete }: Props) => {
                     <button
                         onClick={() => {
                             mutation.mutate({ id: selectedDiary.id });
-                            setIsDelete(false);
                         }}
                     >
                         삭제

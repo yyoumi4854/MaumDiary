@@ -29,19 +29,10 @@ const DiaryWrite = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [weather, setWeather] = useState<Weather | undefined>();
-    const [lock, setLock] = useState(true); // true: 비공개, flase: 공개
+    const [lock, setLock] = useState(true); // true: 비공개, false: 공개
     const createdAt = dayjs(selectDay);
+
     const submit = title && description && weather;
-
-    const onClickWeather = (e: MouseEvent<HTMLInputElement>) => {
-        const { id } = e.target as any;
-        setWeather(id);
-    };
-
-    const onClickLock = (e: MouseEvent<HTMLSelectElement>) => {
-        const { value } = e.target as any;
-        setLock(value === "private" ? true : false);
-    };
 
     const queryClient = useQueryClient();
 
@@ -106,7 +97,10 @@ const DiaryWrite = () => {
                                                     type="radio"
                                                     name="weather"
                                                     id={key}
-                                                    onClick={onClickWeather}
+                                                    onClick={(e: MouseEvent<HTMLInputElement>) => {
+                                                        const { id } = e.target as any;
+                                                        setWeather(id);
+                                                    }}
                                                 />
                                                 <label htmlFor={key}>
                                                     <span>{value}</span>
@@ -118,7 +112,13 @@ const DiaryWrite = () => {
 
                                 <DiaryFormStyle.isPublicFieldset>
                                     <legend>공개 여부</legend>
-                                    <select name="lock" onClick={onClickLock}>
+                                    <select
+                                        name="lock"
+                                        onClick={(e: MouseEvent<HTMLSelectElement>) => {
+                                            const { value } = e.target as any;
+                                            setLock(value === "private" ? true : false);
+                                        }}
+                                    >
                                         <option value="private">비공개</option>
                                         <option value="public">공개</option>
                                     </select>
@@ -168,7 +168,7 @@ const DiaryWrite = () => {
                             >
                                 취소
                             </button>
-                            <button disabled={submit ? false : true}>확인</button>
+                            <button disabled={!submit}>확인</button>
                         </ButtonStyle.ButtonWrap>
                     </form>
                 </DiaryFormStyle.DiaryFormContent>
