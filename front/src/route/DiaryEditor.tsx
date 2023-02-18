@@ -1,22 +1,44 @@
-import React, { useState, ChangeEvent } from "react";
-import {
-    BsSun,
-    BsFillCloudSunFill,
-    BsFillCloudyFill,
-    BsFillCloudRainHeavyFill,
-    BsSnow2,
-} from "react-icons/bs";
+import React, { useState, ChangeEvent, MouseEvent } from "react";
+import { useRecoilValue } from "recoil";
+import { useLocation, useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+
+import { selectedDayAtom } from "@/recoil/selectedDay";
+import { Weather, Emotion } from "@/types";
+import { weather as weatherIcon } from "@/utils/weather";
+import { emotionIcon } from "@/utils/emotionIcon";
 
 import * as TextStyle from "@/style/common/Text-style";
 import * as ButtonStyle from "@/style/common/Button-style";
 import * as DiaryFormStyle from "@/style/component/DiaryForm-style";
 import * as Style from "@/style/page/DiaryEditor-style";
 
-import Emotion from "@/utils/emotionIcon";
+// console.log(Emotion[Emotion]);
 
 const DiaryEditor = () => {
-    const [diaryTitle, setDiaryTitle] = useState("");
-    const [diaryDescription, setDiaryDescription] = useState("");
+    const selectDay = useRecoilValue(selectedDayAtom);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    // 일기쓰기 (제목, 내용, 날씨, 감정, 공개여부, 날짜)
+    const [title, setTitle] = useState(location.state.title);
+    const [description, setDescription] = useState(location.state.description);
+    const [weather, setWeather] = useState<Weather>(location.state.weather);
+    const [lock, setLock] = useState(location.state.lock); // true: 비공개, flase: 공개
+    const [emotion, setEmotion] = useState<Emotion>(location.state.emotion);
+    const createdAt = dayjs(selectDay);
+
+    const submit = title && description && weather;
+
+    // console.log(location.state.weather === "snowy" && true);
+    // console.log(Object.keys(weatherIcon));
+    // console.log(Object.entries(weatherIcon));
+
+    const onClickWeather = (e: MouseEvent<HTMLInputElement>) => {
+        const { id } = e.target as any;
+        setWeather(id);
+    };
 
     return (
         <div className="content inner">
@@ -28,52 +50,34 @@ const DiaryEditor = () => {
                         <DiaryFormStyle.TopContent>
                             <DiaryFormStyle.TopLeftContent>
                                 <div>
-                                    <button>2023년 01월 23일</button>
+                                    <p>
+                                        {createdAt.year()}년 {createdAt.month() + 1}월{" "}
+                                        {createdAt.date()}일
+                                    </p>
                                 </div>
 
                                 <DiaryFormStyle.WeatherFieldset>
                                     <legend>날씨 선택</legend>
 
-                                    <input type="radio" name="weather" id="clear" />
-                                    <label htmlFor="clear">
-                                        <span>
-                                            <BsSun />
-                                        </span>
-                                    </label>
-
-                                    <input type="radio" name="weather" id="partlyCloudy" />
-                                    <label htmlFor="partlyCloudy">
-                                        <span>
-                                            <BsFillCloudSunFill />
-                                        </span>
-                                    </label>
-
-                                    <input type="radio" name="weather" id="cloudy" />
-                                    <label htmlFor="cloudy">
-                                        <span>
-                                            <BsFillCloudyFill />
-                                        </span>
-                                    </label>
-
-                                    <input type="radio" name="weather" id="rain" />
-                                    <label htmlFor="rain">
-                                        <span>
-                                            <BsFillCloudRainHeavyFill />
-                                        </span>
-                                    </label>
-
-                                    <input type="radio" name="weather" id="snow" />
-                                    <label htmlFor="snow">
-                                        <span>
-                                            <BsSnow2 />
-                                        </span>
-                                    </label>
+                                    {Object.entries(weatherIcon).map(([key, value]) => (
+                                        <div key={key}>
+                                            <input
+                                                type="radio"
+                                                name="weather"
+                                                id={key}
+                                                onClick={onClickWeather}
+                                            />
+                                            <label htmlFor={key}>
+                                                <span>{value}</span>
+                                            </label>
+                                        </div>
+                                    ))}
                                 </DiaryFormStyle.WeatherFieldset>
                             </DiaryFormStyle.TopLeftContent>
 
                             <DiaryFormStyle.isPublicFieldset>
                                 <legend>공개 여부</legend>
-                                <select name="isPublic" id="">
+                                <select name="lock" defaultValue={lock ? "private" : "public"}>
                                     <option value="private">비공개</option>
                                     <option value="public">공개</option>
                                 </select>
@@ -83,7 +87,7 @@ const DiaryEditor = () => {
                         <DiaryFormStyle.TextContent>
                             <legend>일기 내용</legend>
                             <Style.CurrentEmotionContent>
-                                <img src={Emotion.angry} alt="이미지" />
+                                <img src={emotionIcon[emotion].icon} alt="이미지" />
 
                                 <div>
                                     <input
@@ -91,14 +95,14 @@ const DiaryEditor = () => {
                                         name="diaryTitle"
                                         placeholder="제목을 입력해주세요."
                                         maxLength={20}
-                                        value={diaryTitle}
+                                        value={title}
                                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                             const { value } = e.target as any;
-                                            setDiaryTitle(value);
+                                            setTitle(value);
                                         }}
                                     />
                                     <p className="textCount">
-                                        {diaryTitle.length} <span>/ 20</span>
+                                        {title.length} <span>/ 20</span>
                                     </p>
                                 </div>
                             </Style.CurrentEmotionContent>
@@ -107,14 +111,14 @@ const DiaryEditor = () => {
                                 name="diaryDescription"
                                 placeholder="내용을 입력해주세요."
                                 maxLength={500}
-                                value={diaryDescription}
+                                value={description}
                                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                                     const { value } = e.target as any;
-                                    setDiaryDescription(value);
+                                    setDescription(value);
                                 }}
                             ></textarea>
                             <p className="textCount">
-                                {diaryDescription.length} <span>/ 500</span>
+                                {description.length} <span>/ 500</span>
                             </p>
                         </DiaryFormStyle.TextContent>
                     </DiaryFormStyle.DiaryFormWrap>
@@ -123,58 +127,27 @@ const DiaryEditor = () => {
                         <Style.EmotionFieldset>
                             <legend>마음 선택</legend>
 
-                            <input type="radio" name="emotion" id="confidence" />
-                            <Style.EmotionLabel url={Emotion.confidence} htmlFor="confidence">
-                                <span>자신감</span>
-                                <span>자신감</span>
-                            </Style.EmotionLabel>
-
-                            <input type="radio" name="emotion" id="excitement" />
-                            <Style.EmotionLabel url={Emotion.excitement} htmlFor="excitement">
-                                <span>신남</span>
-                                <span>신남</span>
-                            </Style.EmotionLabel>
-
-                            <input type="radio" name="emotion" id="thanks" />
-                            <Style.EmotionLabel url={Emotion.thanks} htmlFor="thanks">
-                                <span>감사</span>
-                                <span>감사</span>
-                            </Style.EmotionLabel>
-
-                            <input type="radio" name="emotion" id="comport" />
-                            <Style.EmotionLabel url={Emotion.comport} htmlFor="comport">
-                                <span>편안</span>
-                                <span>편안</span>
-                            </Style.EmotionLabel>
-
-                            <input type="radio" name="emotion" id="worry" />
-                            <Style.EmotionLabel url={Emotion.worry} htmlFor="worry">
-                                <span>걱정</span>
-                                <span>걱정</span>
-                            </Style.EmotionLabel>
-
-                            <input type="radio" name="emotion" id="sad" />
-                            <Style.EmotionLabel url={Emotion.sad} htmlFor="sad">
-                                <span>슬픔</span>
-                                <span>슬픔</span>
-                            </Style.EmotionLabel>
-
-                            <input type="radio" name="emotion" id="hurt" />
-                            <Style.EmotionLabel url={Emotion.hurt} htmlFor="hurt">
-                                <span>상처</span>
-                                <span>상처</span>
-                            </Style.EmotionLabel>
-
-                            <input type="radio" name="emotion" id="angry" />
-                            <Style.EmotionLabel url={Emotion.angry} htmlFor="angry">
-                                <span>분노</span>
-                                <span>분노</span>
-                            </Style.EmotionLabel>
+                            {Object.entries(emotionIcon).map(([key, value]) => (
+                                <div key={key}>
+                                    <input type="radio" name="emotion" id={key} />
+                                    <Style.EmotionLabel url={value.icon} htmlFor={key}>
+                                        <span>자신감</span>
+                                        <span>{value.name}</span>
+                                    </Style.EmotionLabel>
+                                </div>
+                            ))}
                         </Style.EmotionFieldset>
                     </DiaryFormStyle.DiaryFormWrap>
 
                     <ButtonStyle.ButtonWrap>
-                        <button>취소</button>
+                        <button
+                            onClick={(e: MouseEvent<HTMLButtonElement>) => {
+                                e.preventDefault();
+                                navigate(-1);
+                            }}
+                        >
+                            취소
+                        </button>
                         <button>확인</button>
                     </ButtonStyle.ButtonWrap>
                 </form>

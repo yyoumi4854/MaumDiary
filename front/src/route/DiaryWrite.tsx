@@ -1,16 +1,10 @@
 import React, { useState, ChangeEvent, MouseEvent } from "react";
 import { useRecoilValue } from "recoil";
-import {
-    BsSun,
-    BsFillCloudSunFill,
-    BsFillCloudyFill,
-    BsFillCloudRainHeavyFill,
-    BsSnow2,
-} from "react-icons/bs";
 import dayjs from "dayjs";
 
 import { selectedDayAtom } from "@/recoil/selectedDay";
 import { MONTH_DIARY } from "@/constant/QUERY_KEY";
+import { weather as weatherIcon } from "@/utils/weather";
 import Calendar from "@/component/Calendar";
 
 import * as TextStyle from "@/style/common/Text-style";
@@ -106,65 +100,19 @@ const DiaryWrite = () => {
                                     <DiaryFormStyle.WeatherFieldset>
                                         <legend>날씨 선택</legend>
 
-                                        <input
-                                            type="radio"
-                                            name="weather"
-                                            id="clear"
-                                            onClick={onClickWeather}
-                                        />
-                                        <label htmlFor="clear">
-                                            <span>
-                                                <BsSun />
-                                            </span>
-                                        </label>
-
-                                        <input
-                                            type="radio"
-                                            name="weather"
-                                            id="partlyCloudy"
-                                            onClick={onClickWeather}
-                                        />
-                                        <label htmlFor="partlyCloudy">
-                                            <span>
-                                                <BsFillCloudSunFill />
-                                            </span>
-                                        </label>
-
-                                        <input
-                                            type="radio"
-                                            name="weather"
-                                            id="cloudy"
-                                            onClick={onClickWeather}
-                                        />
-                                        <label htmlFor="cloudy">
-                                            <span>
-                                                <BsFillCloudyFill />
-                                            </span>
-                                        </label>
-
-                                        <input
-                                            type="radio"
-                                            name="weather"
-                                            id="rain"
-                                            onClick={onClickWeather}
-                                        />
-                                        <label htmlFor="rain">
-                                            <span>
-                                                <BsFillCloudRainHeavyFill />
-                                            </span>
-                                        </label>
-
-                                        <input
-                                            type="radio"
-                                            name="weather"
-                                            id="snow"
-                                            onClick={onClickWeather}
-                                        />
-                                        <label htmlFor="snow">
-                                            <span>
-                                                <BsSnow2 />
-                                            </span>
-                                        </label>
+                                        {Object.entries(weatherIcon).map(([key, value]) => (
+                                            <div key={key}>
+                                                <input
+                                                    type="radio"
+                                                    name="weather"
+                                                    id={key}
+                                                    onClick={onClickWeather}
+                                                />
+                                                <label htmlFor={key}>
+                                                    <span>{value}</span>
+                                                </label>
+                                            </div>
+                                        ))}
                                     </DiaryFormStyle.WeatherFieldset>
                                 </DiaryFormStyle.TopLeftContent>
 
