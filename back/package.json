@@ -33,7 +33,6 @@
         "winston-daily-rotate-file": "^4.7.1"
     },
     "devDependencies": {
-        "@prisma/client": "^4.7.1",
         "@types/bcrypt": "^5.0.0",
         "@types/cookie-parser": "^1.4.3",
         "@types/cors": "^2.8.12",
