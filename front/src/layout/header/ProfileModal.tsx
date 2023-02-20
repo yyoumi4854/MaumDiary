@@ -6,16 +6,25 @@ import { BsPerson, BsPower } from "react-icons/bs";
 
 import { userAtom } from "@/recoil/user";
 import { logout } from "@/api/account";
+import useKakao from "@/hooks/useKakao";
 
 import * as Style from "@/style/layout/header/ProfileModal-style";
+import { getCookie } from "@/utils/cookie";
 
 const ProfileModal = () => {
     const resetUserData = useResetRecoilState(userAtom);
 
     const mutation = useMutation(logout);
 
-    const onLogout = (e: MouseEvent<HTMLButtonElement>) => {
+    const { logout: kakaoLogout } = useKakao();
+
+    const onLogout = async (e: MouseEvent<HTMLButtonElement>) => {
+        if (getCookie("kakao_accessToken") !== undefined) {
+            await kakaoLogout();
+        }
+
         if (localStorage.getItem("user") !== null) {
+            console.log("무려 유저의 데이터가 있어요!");
             mutation.mutate();
             resetUserData();
         }

@@ -21,3 +21,9 @@ export const fetchUserData = async () => {
 
     return result;
 };
+
+export const fetchUserDataForKakao = async () => {
+    const result = await instance.get<USER_DATA>("http://localhost:3002/api/account");
+
+    return result;
+};

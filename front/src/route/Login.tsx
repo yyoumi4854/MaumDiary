@@ -6,6 +6,8 @@ import { BsChevronRight } from "react-icons/bs";
 
 import { userAtom } from "@/recoil/user";
 import { fetchUserData, login } from "@/api/account";
+import useKakao from "@/hooks/useKakao";
+
 import * as TextStyle from "@/style/common/Text-style";
 import * as FormStyle from "@/style/common/Form-style";
 import * as ButtonStyle from "@/style/common/Button-style";
@@ -26,6 +28,8 @@ const Login = () => {
 
     const navigate = useNavigate();
 
+    const { authorization, login: kakaoLogin } = useKakao();
+
     const mutation = useMutation({
         mutationFn: login,
         onSuccess: (result) => {
@@ -37,6 +41,7 @@ const Login = () => {
                         cacheTime: 0,
                     })
                     .then((result) => {
+                        console.log("result", result);
                         setUserData(result.data);
                     });
 
@@ -63,6 +68,12 @@ const Login = () => {
             return;
 
         mutation.mutate({ userID: userIDRef.current.value, password: passwordRef.current.value });
+    };
+
+    const onClickKakaoLogin = () => {
+        authorization();
+
+        kakaoLogin();
     };
 
     return (
@@ -115,7 +126,7 @@ const Login = () => {
                             간편하게 시작하기
                             <BsChevronRight />
                         </p>
-                        <span>카카오</span>
+                        <span onClick={onClickKakaoLogin}>카카오</span>
                     </a>
                 </Style.EasyLoginContent>
             </div>

@@ -15,11 +15,16 @@ import DiaryAll from "./diary/DiaryAll";
 import DiaryChat from "./diary/DiaryChat";
 import DiaryUserAnalysis from "./diary/DiaryUserAnalysis";
 import DiaryWrite from "./DiaryWrite";
+import KakaoAuth from "./KakaoAuth";
 
 const router = (period: Period, queryClient: QueryClient) =>
     createBrowserRouter(
         createRoutesFromElements(
-            <Route path="/" element={<Main period={period} />} errorElement={<div></div>}>
+            <Route
+                path="/"
+                element={<Main period={period} />}
+                errorElement={<div>무려 무시무시한 에러페이지</div>}
+            >
                 <Route
                     index={true}
                     loader={homeLoader(queryClient)}
@@ -37,6 +42,7 @@ const router = (period: Period, queryClient: QueryClient) =>
                     <Route path="user/analysis" element={<DiaryUserAnalysis />} />
                 </Route>
                 <Route path="/diary/write" element={<DiaryWrite />} />
+                <Route path="/auth/kakao" element={<KakaoAuth />} />
             </Route>
         )
     );

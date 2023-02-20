@@ -1,5 +1,6 @@
 import { Router, Request as Req, Response as Res } from "express";
 import axios from "axios";
+import dayjs from "dayjs";
 
 import wrapRouter from "../lib/wrapRouter";
 import tokenService from "../services/tokenService";
@@ -71,57 +72,88 @@ accountRouter.get(
     })
 );
 
-accountRouter.get(
-    "/kakao",
-    wrapRouter(async (req: Req, res: Res) => {
-        const { code } = req.query;
+accountRouter.get("/kakao", async (req: Req, res: Res) => {
+    const { code } = req.query;
 
-        console.log(code);
+    const auth = await axios.post<{
+        access_token: string;
+        refresh_token: string;
+        token_type: "bearer";
+        id_token: string;
+        expires_in: number;
+        refresh_token_expires_in: number;
+        scope: string;
+    }>(
+        "https://kauth.kakao.com/oauth/token",
+        {
+            grant_type: "authorization_code",
+            client_id: "984bda20eb902967e5088317c9f5c468",
+            redirectUri: "http://localhost:3002/api/account/kakao",
+            code,
+        },
+        {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+            },
+        }
+    );
 
-        axios
-            .post(
-                "https://kauth.kakao.com/oauth/token",
-                {
-                    grant_type: "authorization_code",
-                    client_id: "984bda20eb902967e5088317c9f5c468",
-                    redirect_uri: "http://localhost:3002/api/account/kakao",
-                    code,
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-                    },
-                }
-            )
-            .then((res) => {
-                console.log("성공함!");
-                console.log(res.data);
-                axios
-                    .get("https://kapi.kakao.com/v2/user/me", {
-                        headers: {
-                            Authorization: `Bearer ${res.data.access_token}`,
-                            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-                        },
-                    })
-                    .then((res) => console.log("성공함!!!", res));
-            })
-            .catch((error) => {
-                console.log("에러남!!!!!");
-                console.log(error);
-            });
+    const userData = await axios.get<{
+        id: number;
+        connected_at: string;
+        properties: { nickname: string };
+        kakao_account: {
+            profile_nickname_needs_agreement: boolean;
+            profile: {
+                nickname: string;
+            };
+        };
+    }>("https://kapi.kakao.com/v2/user/me", {
+        headers: {
+            Authorization: `Bearer ${auth.data.access_token}`,
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        },
+    });
 
-        return { statusCode: 200, content: "hi" };
-    })
-);
+    const Stringify_id = String(userData.data.id);
+
+    let loginResult = await accountService.login(Stringify_id, Stringify_id);
+
+    if (loginResult === null) {
+        await accountService.register({
+            userID: Stringify_id,
+            password: Stringify_id,
+            email: `${Stringify_id}@kakao_user.com`,
+            nickname: userData.data.properties.nickname,
+        });
+
+        loginResult = await accountService.login(Stringify_id, Stringify_id);
+    }
+
+    res.cookie("accessToken", loginResult!.accessToken, { httpOnly: true });
+    res.cookie("refreshToken", loginResult!.refreshToken, { httpOnly: true });
+
+    res.cookie("kakao_accessToken", auth.data.access_token, {
+        expires: dayjs().add(auth.data.expires_in, "second").toDate(),
+    });
+    res.cookie("kakao_refreshToken", auth.data.refresh_token, {
+        expires: dayjs().add(auth.data.refresh_token_expires_in, "second").toDate(),
+    });
+
+    res.redirect(302, "http://localhost:3001/auth/kakao");
+});
 
 // 로그아웃
 accountRouter.delete(
     "/",
+    auth,
     wrapRouter(async (req: Req, res: Res) => {
         const result = await accountService.logout(req.userID!);
 
         res.cookie("refreshToken", "", { maxAge: -1 });
         res.cookie("accessToken", "", { maxAge: -1 });
+        res.cookie("kakao_refreshToken", "", { maxAge: -1 });
+        res.cookie("kakao_accessToken", "", { maxAge: -1 });
         return { statusCode: 200, content: result };
     })
 );
