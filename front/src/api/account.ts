@@ -22,6 +22,18 @@ export const fetchUserData = async () => {
     return result;
 };
 
+export const fetchUserDataForKakao = async () => {
+    const result = await instance.get<USER_DATA>("http://localhost:3002/api/account");
+
+    return result;
+};
+
+export const refetchToken = async () => {
+    const result = await instance.get<boolean>("http://localhost:3002/api/token/refresh");
+
+    return result;
+};
+
 // 아이디 찾기
 export const findUserID = async ({ email, code }: { email: string; code: string }) => {
     const result = await instance.post("/account/user-id", {
@@ -32,14 +44,18 @@ export const findUserID = async ({ email, code }: { email: string; code: string 
     return result;
 };
 
-export const fetchUserDataForKakao = async () => {
-    const result = await instance.get<USER_DATA>("http://localhost:3002/api/account");
-
-    return result;
-};
-
-export const refetchToken = async () => {
-    const result = await instance.get<boolean>("http://localhost:3002/api/token/refresh");
+// 아이디 / 닉네임 / 이메일 중복 검사
+export const checkCertification = async ({
+    target,
+    value,
+}: {
+    target: "email" | "nickname" | "userID";
+    value: string;
+}) => {
+    const result = await instance.post("/account/check", {
+        target,
+        value,
+    });
 
     return result;
 };

@@ -52,5 +52,4 @@ export interface Certification {
     email: string;
     userID: string;
     password: string;
-    code: string;
 }

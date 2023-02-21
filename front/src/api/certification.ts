@@ -12,7 +12,7 @@ export const sendCertification = async ({ email, target }: SendCertification) =>
 };
 
 // 코드 인증
-export const certifyCertification = async ({ email, code }: Certification) => {
+export const certifyCertification = async ({ email, code }: { email: string; code: string }) => {
     const result = await instance.post("/certification/certify", {
         email,
         code,
