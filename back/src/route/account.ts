@@ -208,4 +208,22 @@ accountRouter.patch(
     })
 );
 
+// 아이디 / 닉네임 / 이메일 중복 검사
+accountRouter.post(
+    "/check",
+    wrapRouter(async (req: Req, res: Res) => {
+        const { target, value } = req.body;
+
+        if (typeof target !== "string" || typeof value !== "string")
+            throw new AppError("BodyDataError");
+
+        if (["email", "nickname", "userID"].includes(target) === false)
+            throw new AppError("BodyDataError");
+
+        const result = await accountService.check(target as "userID" | "nickname" | "email", value);
+
+        return { statusCode: 200, content: result };
+    })
+);
+
 export default accountRouter;

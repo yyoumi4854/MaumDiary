@@ -200,6 +200,34 @@ class AccountService {
         }
     }
 
+    async check(target: "userID" | "nickname" | "email", value: string) {
+        try {
+            let result = null;
+
+            if (target === "nickname") {
+                result = await this.prisma.user.findUnique({
+                    where: {
+                        nickname: value,
+                    },
+                });
+            } else {
+                result = await this.prisma.account.findUnique({
+                    where: {
+                        [target]: value,
+                    },
+                });
+            }
+
+            if (result === null) {
+                return true;
+            }
+
+            return false;
+        } catch (e: unknown) {
+            throw new AppError("UnknownError");
+        }
+    }
+
     // async getUserChatRoomsByUserModel(usermodel: string) {
     //     const result1 = await this.prisma.chat.findMany({
     //         where: {
