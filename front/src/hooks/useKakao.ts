@@ -22,7 +22,7 @@ const useKakao = () => {
 
     const setAccessTokenToAuth = () => {
         const token = getCookie("kakao_accessToken");
-        console.log(token);
+
         Kakao.Auth.setAccessToken(token);
     };
 

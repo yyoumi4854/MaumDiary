@@ -41,7 +41,6 @@ const Login = () => {
                         cacheTime: 0,
                     })
                     .then((result) => {
-                        console.log("result", result);
                         setUserData(result.data);
                     });
 
