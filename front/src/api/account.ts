@@ -21,3 +21,13 @@ export const fetchUserData = async () => {
 
     return result;
 };
+
+// 아이디 찾기
+export const findUserID = async ({ email, code }: { email: string; code: string }) => {
+    const result = await instance.post("/account/user-id", {
+        email,
+        code,
+    });
+
+    return result;
+};

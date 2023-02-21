@@ -44,6 +44,9 @@ export interface FectchMonthDiaryList {
     month: number;
 }
 
+export type WriteDiary2 = Omit<Diary, "id" | "emotion" | "likes">;
+export type EditorDiary2 = Omit<Diary, "likes" | "createdAt">;
+
 export interface WriteDiary {
     title: string;
     description: string;
@@ -56,9 +59,9 @@ export interface EditorDiary {
     id: number;
     title: string;
     description: string;
-    weather: Weather;
     emotion: Emotion;
     lock: boolean;
+    weather: Weather;
 }
 
 export interface DeleteDiary {
@@ -69,11 +72,6 @@ export interface DeleteDiary {
 export interface SendCertification {
     email: string;
     target: "email" | "password";
-}
-
-export interface CertifyCertification {
-    email: string;
-    code: string;
 }
 
 export interface NewAccount {
