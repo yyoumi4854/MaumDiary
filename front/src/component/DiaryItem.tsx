@@ -1,37 +1,46 @@
-import * as Style from "@/style/component/DiaryItem-style";
+import { useState } from "react";
+import dayjs from "dayjs";
 
 import { Diary } from "@/types";
 import emotionIcon from "@/utils/emotionIcon";
-import dayjs from "dayjs";
+import * as Style from "@/style/component/DiaryItem-style";
 
 interface Props {
     diary: Diary;
 }
 
 const DiaryItem = ({ diary }: Props) => {
-    const { title, description, emotion, lock, likes, weather, createdAt } = diary;
+    const [open, setOpen] = useState(false);
+
+    const { title, description, emotion, lock, likes, weather, updatedAt, author } = diary;
+
+    const onClick = () => {
+        setOpen((prev) => !prev);
+    };
 
     return (
         <Style.Container>
             <Style.Header>
-                <Style.Title>
+                <Style.LeftPart>
                     <img src={emotionIcon[emotion]} alt="감정" />
                     <p>{title}</p>
-                </Style.Title>
-                <Style.Meta>
+                </Style.LeftPart>
+                <Style.RightPart>
                     <div>
-                        <p className="day">{dayjs(createdAt).format("YYYY년 MM월 DD일")}</p>
+                        <p className="day">{dayjs(updatedAt).format("YYYY년 MM월 DD일")}</p>
                         <p>☀️</p>
                     </div>
-                    <button />
-                </Style.Meta>
+                    <button className={open ? "open" : ""} onClick={onClick} />
+                </Style.RightPart>
             </Style.Header>
-            <Style.Detail>
+            <Style.Content open={open}>{description}</Style.Content>
+            <Style.Footer>
                 <div>
-                    <p>by 겨울감자</p>
+                    <p className="by">by</p>
+                    <p>{author}</p>
                     <p>공감 {likes}</p>
                 </div>
-            </Style.Detail>
+            </Style.Footer>
         </Style.Container>
     );
 };

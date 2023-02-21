@@ -29,6 +29,8 @@ export interface Diary {
     likes: number;
     weather: Weather;
     createdAt: string;
+    updatedAt: string;
+    author: string;
 }
 
 export interface FetchingDiaryListOption {
@@ -37,11 +39,6 @@ export interface FetchingDiaryListOption {
     page: number;
     emotion: "all" | Emotion;
     lock: "true" | "false";
-}
-
-export interface FectchMonthDiaryList {
-    year: number;
-    month: number;
 }
 
 export type WriteDiary2 = Omit<Diary, "id" | "emotion" | "likes">;
@@ -62,10 +59,6 @@ export interface EditorDiary {
     emotion: Emotion;
     lock: boolean;
     weather: Weather;
-}
-
-export interface DeleteDiary {
-    id: number;
 }
 
 // certification

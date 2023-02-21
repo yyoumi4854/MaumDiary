@@ -48,19 +48,20 @@ class AccountService {
             },
         });
 
+        // 유저가 가입한 적이 없을때
         if (user === null) {
-            throw new AppError("LoginError");
+            return null;
         }
 
+        // 차단당한 계정이거나 혹은 탈퇴된 계정일때
         if (user.User.blocking === true) {
-            throw new AppError("WithdrawnError");
+            return null;
         }
 
         const result = await bcrypt.compare(password, user.password);
 
-        // TODO: error 변경
         if (!result) {
-            throw new AppError("UnknownError");
+            return null;
         }
 
         const accessToken = generateToken("access", userID);
@@ -195,6 +196,34 @@ class AccountService {
 
             return { ok: true };
         } catch (e: any) {
+            throw new AppError("UnknownError");
+        }
+    }
+
+    async check(target: "userID" | "nickname" | "email", value: string) {
+        try {
+            let result = null;
+
+            if (target === "nickname") {
+                result = await this.prisma.user.findUnique({
+                    where: {
+                        nickname: value,
+                    },
+                });
+            } else {
+                result = await this.prisma.account.findUnique({
+                    where: {
+                        [target]: value,
+                    },
+                });
+            }
+
+            if (result === null) {
+                return true;
+            }
+
+            return false;
+        } catch (e: unknown) {
             throw new AppError("UnknownError");
         }
     }

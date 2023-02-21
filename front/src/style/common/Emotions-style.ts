@@ -20,8 +20,10 @@ export const Tab = styled.div`
 
     width: 100%;
 
-    margin-bottom: 16px;
     overflow-x: scroll;
+
+    p {
+    }
 
     & {
         -ms-overflow-style: none;
@@ -53,6 +55,7 @@ export const Circle = styled.div<{ url: string }>`
     border-radius: 50%;
 
     background: url(${({ url }) => url}) no-repeat center white;
+    background-size: auto 36px;
     box-shadow: 0px 4px 4px rgba(119, 119, 119, 0.25);
 `;
 

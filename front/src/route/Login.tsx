@@ -1,4 +1,4 @@
-import { useRef, MouseEvent } from "react";
+import { useRef, useState, MouseEvent } from "react";
 import { useSetRecoilState } from "recoil";
 import { useNavigate, Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -6,6 +6,8 @@ import { BsChevronRight } from "react-icons/bs";
 
 import { userAtom } from "@/recoil/user";
 import { fetchUserData, login } from "@/api/account";
+import useKakao from "@/hooks/useKakao";
+
 import * as TextStyle from "@/style/common/Text-style";
 import * as FormStyle from "@/style/common/Form-style";
 import * as ButtonStyle from "@/style/common/Button-style";
@@ -19,35 +21,59 @@ const Login = () => {
     const userIDRef = useRef<HTMLInputElement | null>(null);
     const passwordRef = useRef<HTMLInputElement | null>(null);
 
-    const queryClient = useQueryClient();
-
+    const [warning, setWarning] = useState(false);
     const setUserData = useSetRecoilState(userAtom);
+
+    const queryClient = useQueryClient();
 
     const navigate = useNavigate();
 
+    const { authorization, login: kakaoLogin } = useKakao();
+
     const mutation = useMutation({
         mutationFn: login,
-        onSuccess: () => {
-            queryClient
-                .fetchQuery({
-                    queryKey: [ACCOUNT.USER],
-                    queryFn: fetchUserData,
-                    cacheTime: 0,
-                })
-                .then((result) => {
-                    setUserData(result.data);
-                });
+        onSuccess: (result) => {
+            if (result.data) {
+                queryClient
+                    .fetchQuery({
+                        queryKey: [ACCOUNT.USER],
+                        queryFn: fetchUserData,
+                        cacheTime: 0,
+                    })
+                    .then((result) => {
+                        console.log("result", result);
+                        setUserData(result.data);
+                    });
 
-            navigate("/");
+                navigate("/");
+            } else {
+                setWarning(true);
+            }
         },
     });
 
-    const onClick = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+    const onFocus = () => {
+        if (warning === true) {
+            setWarning(false);
+        }
+    };
 
-        if (userIDRef.current === null || passwordRef.current === null) return;
+    const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+        if (
+            userIDRef.current === null ||
+            passwordRef.current === null ||
+            userIDRef.current.value === "" ||
+            passwordRef.current.value === ""
+        )
+            return;
 
         mutation.mutate({ userID: userIDRef.current.value, password: passwordRef.current.value });
+    };
+
+    const onClickKakaoLogin = () => {
+        authorization();
+
+        kakaoLogin();
     };
 
     return (
@@ -64,14 +90,16 @@ const Login = () => {
                         placeholder="아이디"
                         marginBottom="1em"
                         ref={userIDRef}
+                        onFocus={onFocus}
                     />
                     <FormStyle.BasicsInputText
                         type="password"
                         placeholder="비밀번호"
                         ref={passwordRef}
+                        onFocus={onFocus}
                     />
                     <FormStyle.MessageText warnning={true}>
-                        비밀번호가 틀렸습니다.
+                        {warning && "아이디 또는 비밀번호가 틀렸습니다."}
                     </FormStyle.MessageText>
                 </UserFormStyle.InputWrap>
 
@@ -98,7 +126,7 @@ const Login = () => {
                             간편하게 시작하기
                             <BsChevronRight />
                         </p>
-                        <span>카카오</span>
+                        <span onClick={onClickKakaoLogin}>카카오</span>
                     </a>
                 </Style.EasyLoginContent>
             </div>

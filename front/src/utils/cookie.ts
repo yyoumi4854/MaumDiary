@@ -1,7 +1,9 @@
+import dayjs from "dayjs";
+
 interface CookieOption {
     path?: string;
     expires?: Date;
-    maxAge?: number;
+    "max-age"?: number;
     domain?: string;
     secure?: boolean;
     httpOnly?: boolean;
@@ -10,7 +12,6 @@ interface CookieOption {
 
 export const setCookie = (key: string, value: string, options?: CookieOption) => {
     let cookie = key + "=" + value + "; ";
-
     if (options !== undefined) {
         Object.entries(options).forEach(([option, optionValue]) => {
             if (optionValue instanceof Date) {
@@ -25,11 +26,13 @@ export const setCookie = (key: string, value: string, options?: CookieOption) =>
 };
 
 export const getCookie = (key: string) => {
-    return document.cookie.match("(^|;) ?" + key + "=([^;]*)");
+    const result = document.cookie.match(new RegExp("(^|;) ?" + key + "=([^;]*)"));
+
+    return result ? result[2] : undefined;
 };
 
 export const deleteCookie = (key: string) => {
-    setCookie(key, "", {
-        maxAge: -1,
+    setCookie(key, " ", {
+        "max-age": -1,
     });
 };
