@@ -11,28 +11,40 @@ class CertificationService {
 
     async generateCode(email: string) {
         try {
-            const result = await this.prisma.account.findUnique({
+            // const result = await this.prisma.account.findUnique({
+            //     where: {
+            //         email: email,
+            //     },
+            //     select: {
+            //         userID: true,
+            //     },
+            // });
+
+            const result = await this.prisma.certification.findUnique({
                 where: {
                     email: email,
                 },
-                select: {
-                    userID: true,
-                },
             });
-
-            if (result !== null) {
-                // throw new AppError("UserExistError");
-                return { result: false };
-            }
 
             const code = generator.generate({ length: 8, numbers: true });
 
-            await this.prisma.certification.create({
-                data: {
-                    email: email,
-                    code: code,
-                },
-            });
+            if (result !== null) {
+                await this.prisma.certification.update({
+                    where: {
+                        email: email,
+                    },
+                    data: {
+                        code: code,
+                    },
+                });
+            } else {
+                await this.prisma.certification.create({
+                    data: {
+                        email: email,
+                        code: code,
+                    },
+                });
+            }
 
             mailSender(email, code, "", "이메일 인증 코드");
             await this.prisma.$disconnect();

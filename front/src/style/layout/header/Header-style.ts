@@ -7,7 +7,7 @@ export const HeaderContent = styled.header<{ scroll: boolean }>`
     left: 0;
     height: 60px;
     transition: all 0.2s;
-    z-index: 10;
+    z-index: 20;
 
     ${({ scroll }) =>
         scroll &&

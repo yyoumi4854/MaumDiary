@@ -11,6 +11,7 @@ import faviconLogo from "@/images/favicon-logo.svg";
 
 const Register = () => {
     const [step, setStep] = useState(1);
+    const [email, setEmail] = useState("");
 
     return (
         <UserFormStyle.UserFormContent className="content">
@@ -31,8 +32,10 @@ const Register = () => {
                     </Style.RegisterStepList>
                 </Style.RegisterStepContent>
 
-                {step === 1 && <RegisterStep1 />}
-                {step === 2 && <RegisterStep2 />}
+                {step === 1 && (
+                    <RegisterStep1 setStep={setStep} email={email} setEmail={setEmail} />
+                )}
+                {step === 2 && <RegisterStep2 email={email} />}
             </div>
         </UserFormStyle.UserFormContent>
     );

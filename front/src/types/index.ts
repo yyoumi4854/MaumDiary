@@ -64,3 +64,21 @@ export interface EditorDiary {
 export interface DeleteDiary {
     id: number;
 }
+
+// certification
+export interface SendCertification {
+    email: string;
+    target: "email" | "password";
+}
+
+export interface CertifyCertification {
+    email: string;
+    code: string;
+}
+
+export interface NewAccount {
+    nickname: string;
+    email: string;
+    userID: string;
+    password: string;
+}
