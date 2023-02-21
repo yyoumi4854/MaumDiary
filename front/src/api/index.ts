@@ -1,4 +1,5 @@
 import axios from "axios";
+import { refetchToken } from "./account";
 
 const instance = axios.create({
     withCredentials: true,
@@ -6,22 +7,29 @@ const instance = axios.create({
 
 // TODO: must implement request-intercepter for jwt authorization
 
-// instance.interceptors.response.use(
-//     (response) => {
-//         return response;
-//     },
-//     (error) => {
-//         // if (response.status !== 200) {
-//         //     console.log("작동을 하고 있어용!");
-//         //     console.log(response.statusText);
-//         // }
+instance.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    async (error) => {
+        // TODO: Error 핸들링하기! 어떻게 에러핸들링을 할지 고민해야함!
+        // console.log(error.config);
 
-//         // return response;
-//         // TODO: Error 핸들링하기! 어떻게 에러핸들링을 할지 고민해야함!
-//         console.log("에러가 났어용!");
-//         // return Promise.reject(error);
-//         return error;
-//     }
-// );
+        const config = error.config;
+
+        const errorMessage = error.response.data as string;
+
+        if (errorMessage.includes("Token is invalid")) {
+            //  && !config._retry
+            // config._retry = true;
+
+            await refetchToken();
+
+            return instance(config);
+        }
+
+        return Promise.reject(error);
+    }
+);
 
 export default instance;

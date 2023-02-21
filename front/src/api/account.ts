@@ -27,3 +27,9 @@ export const fetchUserDataForKakao = async () => {
 
     return result;
 };
+
+export const refetchToken = async () => {
+    const result = await instance.get<boolean>("http://localhost:3002/api/token/refresh");
+
+    return result;
+};

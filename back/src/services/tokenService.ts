@@ -55,27 +55,6 @@ class Token {
         return result.token;
     }
 
-    async getAccessToken(refreshToken: string) {
-        const result = await this.prisma.token.findUnique({
-            where: {
-                token: refreshToken,
-            },
-            select: {
-                userID: true,
-            },
-        });
-
-        this.prisma.$disconnect();
-
-        if (result === null) {
-            throw new AppError("InvalidTokenError");
-        }
-
-        const accessToken = generateToken("access", result.userID);
-
-        return accessToken;
-    }
-
     async updateRefreshToken(userID: string) {
         const isExist = await this.getRefreshToken(userID);
 
@@ -114,6 +93,28 @@ class Token {
         }
 
         return true;
+    }
+
+    async getAccessTokenAndRefreshToken(refreshToken: string) {
+        const result = await this.prisma.token.findUnique({
+            where: {
+                token: refreshToken,
+            },
+            select: {
+                userID: true,
+            },
+        });
+
+        this.prisma.$disconnect();
+
+        if (result === null) {
+            throw new AppError("InvalidTokenError");
+        }
+
+        const accessToken = generateToken("access", result.userID);
+        const newRefreshToken = await this.updateRefreshToken(result.userID);
+
+        return { accessToken, newRefreshToken };
     }
 }
 
