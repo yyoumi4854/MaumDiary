@@ -1,5 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, ChangeEvent, MouseEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+
+import { validateEmail } from "@/utils/regExp";
+import { sendCertification } from "@/api/certification";
 
 import * as TextStyle from "@/style/common/Text-style";
 import * as FormStyle from "@/style/common/Form-style";
@@ -10,6 +14,26 @@ import * as Style from "@/style/page/Recovery-style";
 import faviconLogo from "@/images/favicon-logo.svg";
 
 const RecoveryPW = () => {
+    const navigate = useNavigate();
+
+    const [email, setEmail] = useState("");
+    const [emailStep, setEmailStep] = useState(0);
+
+    const sendCodeMutation = useMutation({
+        mutationFn: sendCertification,
+        onSuccess: (data) => {
+            setEmailStep(data.data.result && 2);
+        },
+    });
+
+    const onClickSendPassword = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        sendCodeMutation.mutate({
+            email: email,
+            target: "password",
+        });
+    };
+
     return (
         <UserFormStyle.UserFormContent className="content">
             <div className="userFormInner">
@@ -21,25 +45,47 @@ const RecoveryPW = () => {
                 <UserFormStyle.InputWrap marginTop="2.5em">
                     <FormStyle.FormContent>
                         <p>이메일</p>
+
                         <div>
                             <FormStyle.BasicsInputText
                                 type="text"
                                 placeholder="가입하신 이메일을 입력해 주세요."
                                 isButton={true}
+                                value={email}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    const { value } = e.target as any;
+                                    setEmail(value);
+                                    setEmailStep(validateEmail(value) ? 1 : 0);
+                                }}
                             />
-                            <ButtonStyle.MediumButton>인증번호 발송</ButtonStyle.MediumButton>
+                            <ButtonStyle.MediumButton
+                                disabled={!validateEmail(email)}
+                                onClick={onClickSendPassword}
+                            >
+                                임시 비번 발송
+                            </ButtonStyle.MediumButton>
                         </div>
-                        <FormStyle.MessageText>
-                            임시 비밀번호가 발송되었습니다.
+                        <FormStyle.MessageText warnning={!validateEmail(email)}>
+                            {email && emailStep === 0 && "이메일 형식이 아닙니다."}
+                            {emailStep === 1 && "인시 비번 발송을 클릭해주세요."}
+                            {/* 입력하신 이메일은 없는 이메일 입니다. */}
+                            {emailStep === 2 && "임시 비밀번호가 발송되었습니다."}
                         </FormStyle.MessageText>
                     </FormStyle.FormContent>
 
-                    <Style.RecoveryText>
-                        이메일로 <span>임시 비밀번호가 발급</span>되었습니다.
-                    </Style.RecoveryText>
+                    {emailStep === 2 && (
+                        <Style.RecoveryText>
+                            이메일로 <span>임시 비밀번호가 발급</span>되었습니다.
+                        </Style.RecoveryText>
+                    )}
                 </UserFormStyle.InputWrap>
 
-                <ButtonStyle.LongButton disabled={true}>로그인 하러가기</ButtonStyle.LongButton>
+                <ButtonStyle.LongButton
+                    disabled={emailStep !== 2}
+                    onClick={() => navigate("/login")}
+                >
+                    로그인 하러가기
+                </ButtonStyle.LongButton>
 
                 <UserFormStyle.userFomMenu>
                     <ul>

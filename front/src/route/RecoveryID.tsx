@@ -94,6 +94,7 @@ const RecoveryID = () => {
                         <FormStyle.MessageText warnning={!validateEmail(email)}>
                             {email && emailStep === 0 && "이메일 형식이 아닙니다."}
                             {emailStep === 1 && "인증번호 발송을 클릭해주세요."}
+                            {/* 입력하신 이메일은 없는 이메일 입니다. */}
                             {emailStep === 2 && "인증번호가 발송되었습니다."}
                         </FormStyle.MessageText>
                     </FormStyle.FormContent>
@@ -137,7 +138,7 @@ const RecoveryID = () => {
 
                 <ButtonStyle.LongButton
                     disabled={!goToLogin}
-                    onClick={() => navigate("/login", { state: "userID" })}
+                    onClick={() => navigate("/login", { state: userID })}
                 >
                     로그인 하러가기
                 </ButtonStyle.LongButton>
