@@ -1,5 +1,5 @@
+import { Diary, FetchingDiaryListOption } from "@/types";
 import instance from ".";
-import * as Type from "@/types";
 
 export const fetchDiaryList = async ({
     user,
@@ -7,8 +7,8 @@ export const fetchDiaryList = async ({
     page,
     emotion,
     lock,
-}: Type.FetchingDiaryListOption) => {
-    const result = await instance.get<{ maxParam: number; diaryList: Type.Diary[] }>(
+}: FetchingDiaryListOption) => {
+    const result = await instance.get<{ maxParam: number; diaryList: Diary[] }>(
         `http://localhost:3002/api/diaries/all?user=${user}&count=${count}&page=${page}&emotion=${emotion}&lock=${lock}`,
         {
             withCredentials: true,
@@ -26,7 +26,7 @@ export const fetchDiaryList = async ({
 // [캘린더]
 // 유저가 쓴 일기를 달 단위로 조회
 export const fetchMonthDiaryList = async ({ year, month }: { year: number; month: number }) => {
-    const result = await instance.get<{ [key: number]: Type.Diary }>(
+    const result = await instance.get<{ [key: number]: Diary }>(
         `/diaries/user/?year=${year}&month=${month}`
     );
 
@@ -34,13 +34,7 @@ export const fetchMonthDiaryList = async ({ year, month }: { year: number; month
 };
 
 // 일기 작성
-export const writeDiary = async ({
-    title,
-    description,
-    weather,
-    lock,
-    createdAt,
-}: Type.WriteDiary) => {
+export const writeDiary = async ({ title, description, weather, lock, createdAt }: Diary) => {
     const result = await instance.post("/diaries", {
         title,
         description,
@@ -53,14 +47,7 @@ export const writeDiary = async ({
 };
 
 // 일기 수정
-export const editorDiary = async ({
-    id,
-    title,
-    description,
-    weather,
-    emotion,
-    lock,
-}: Type.EditorDiary) => {
+export const editorDiary = async ({ id, title, description, weather, emotion, lock }: Diary) => {
     const result = await instance.patch(`/diaries/${id}`, {
         title,
         description,

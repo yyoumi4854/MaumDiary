@@ -41,35 +41,16 @@ export interface FetchingDiaryListOption {
     lock: "true" | "false";
 }
 
-export type WriteDiary2 = Omit<Diary, "id" | "emotion" | "likes">;
-export type EditorDiary2 = Omit<Diary, "likes" | "createdAt">;
-
-export interface WriteDiary {
-    title: string;
-    description: string;
-    weather: Weather;
-    lock: boolean;
-    createdAt: string;
-}
-
-export interface EditorDiary {
-    id: number;
-    title: string;
-    description: string;
-    emotion: Emotion;
-    lock: boolean;
-    weather: Weather;
-}
-
 // certification
 export interface SendCertification {
     email: string;
     target: "email" | "password";
 }
 
-export interface NewAccount {
+export interface Certification {
     nickname: string;
     email: string;
     userID: string;
     password: string;
+    code: string;
 }
