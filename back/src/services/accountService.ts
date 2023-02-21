@@ -24,6 +24,8 @@ class AccountService {
             throw new AppError("InvalidEmailFormatError");
         }
 
+        if (password.length > 7) return { ok: false };
+
         const paswordHash = await bcrypt.hash(password, 10);
 
         await userService.create(nickname, email, userID, paswordHash);
@@ -205,12 +207,22 @@ class AccountService {
             let result = null;
 
             if (target === "nickname") {
+                const nicknameCondition = new RegExp(/^[가-힣\d\w\s]{2,8}$/);
+                if (nicknameCondition.test(value) === false) return false;
+
                 result = await this.prisma.user.findUnique({
                     where: {
                         nickname: value,
                     },
                 });
             } else {
+                if (target === "email") {
+                    if (isInvalidEmail(value) === false) return false;
+                } else {
+                    // userID
+                    if (value.length > 7) return false;
+                }
+
                 result = await this.prisma.account.findUnique({
                     where: {
                         [target]: value,
