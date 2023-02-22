@@ -8,7 +8,12 @@ export const validateCode = (code: string) => {
     return /^[\d\w]{8}$/.test(code);
 };
 
-// 닉네임: 특수문자제외, 공백제외, 2글자~8글자
+// 닉네임: 특수문자제외, 공백제외, 2~8글자
 export const validateNickname = (nickname: string) => {
     return /^[가-힣\d\w]{2,8}$/.test(nickname);
+};
+
+// 아이디, 비밀번호: 4~6글자
+export const validateLength = (value: string) => {
+    return value.length >= 4 && value.length <= 6;
 };

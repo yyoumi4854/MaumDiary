@@ -28,19 +28,12 @@ const RegisterStep1 = ({ setStep, email, setEmail }: Props) => {
     const [emailStep, setEmailStep] = useState(0);
     const [codeStep, setCodeStep] = useState(0);
 
-    const validateNext = emailStep === 3 && codeStep === 3;
+    const disableNext = emailStep === 3 && codeStep === 3;
 
     const checkMutation = useMutation({
         mutationFn: checkCertification,
         onSuccess: (data) => {
-            console.log(data.data);
-            if (data.data) {
-                setEmailStep(2);
-                alert("사용가능한 이메일 입니다.");
-            } else {
-                setEmailStep(1);
-                alert("중복된 이메일 입니다.");
-            }
+            setEmailStep(data.data ? 2 : 1);
         },
     });
 
@@ -56,7 +49,6 @@ const RegisterStep1 = ({ setStep, email, setEmail }: Props) => {
     const validateCodeMutation = useMutation({
         mutationFn: certifyCertification,
         onSuccess: (data) => {
-            console.log("인증번호 확인: ", data);
             setCodeStep(data.data.result ? 3 : 2);
         },
     });
@@ -120,8 +112,8 @@ const RegisterStep1 = ({ setStep, email, setEmail }: Props) => {
 
                     <FormStyle.MessageText warnning={emailStep < 2}>
                         {email && emailStep === 0 && "이메일 형식이 아닙니다."}
-                        {emailStep === 1 && "중복된 닉네임 입니다."}
-                        {emailStep === 2 && "인증번호 발송을 클릭해주세요."}
+                        {emailStep === 1 && "이미 가입하신 이메일 입니다."}
+                        {emailStep === 2 && "사용가능한 이메일 입니다."}
                         {emailStep === 3 && "인증번호가 발송되었습니다."}
                     </FormStyle.MessageText>
                 </FormStyle.FormContent>
@@ -157,7 +149,7 @@ const RegisterStep1 = ({ setStep, email, setEmail }: Props) => {
                 </FormStyle.FormContent>
             </UserFormStyle.InputWrap>
 
-            <ButtonStyle.LongButton disabled={!validateNext} onClick={() => setStep(2)}>
+            <ButtonStyle.LongButton disabled={!disableNext} onClick={() => setStep(2)}>
                 다음
             </ButtonStyle.LongButton>
         </>

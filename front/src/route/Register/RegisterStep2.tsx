@@ -3,7 +3,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import { newAccount } from "@/api/certification";
-import { validateNickname } from "@/utils/regExp";
+import { checkCertification } from "@/api/account";
+import { validateLength, validateNickname } from "@/utils/regExp";
 
 import * as FormStyle from "@/style/common/Form-style";
 import * as ButtonStyle from "@/style/common/Button-style";
@@ -21,24 +22,72 @@ const RegisterStep2 = ({ email }: Props) => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [nickname, setNickname] = useState("");
 
-    const validateUserID = userID.length >= 6;
-    const validatePassword = password.length >= 6;
+    const [userIDStep, setUserIDStep] = useState(0);
+    const [nicknameStep, setNicknameStep] = useState(0);
+
     const validateConfirmPassword = password === confirmPassword;
-    const validateNewAccount =
-        validateUserID && validatePassword && validateConfirmPassword && validateNickname(nickname);
+
+    const disablePassword = validateLength(userID) && userIDStep === 3;
+    const disableConfirmPassword = disablePassword && validateLength(password);
+    const disableNickname = disableConfirmPassword && validateLength(confirmPassword);
+    const disableNewAccount = disableNickname && validateNickname(nickname) && nicknameStep === 3;
+
+    const checkMutation = useMutation({
+        mutationFn: checkCertification,
+        onSuccess: (data, variables) => {
+            if (variables.target === "userID") {
+                setUserIDStep(data.data ? 3 : 2);
+            }
+
+            if (variables.target === "nickname") {
+                setNicknameStep(data.data ? 3 : 2);
+            }
+        },
+    });
 
     const newAccountMutation = useMutation({
         mutationFn: newAccount,
         onSuccess: (data) => {
-            console.log("가입하기", data);
-            navigate("/");
-        },
-        onError: () => {
-            // 중복된 아이디 입니다. -> alert로 띄우기
-            // 중복된 닉네임 입니다.
-            alert("이메일, 아이디, 닉네임중 하나가 중복입니다.");
+            console.log("가입하기", data.data);
+            if (data.data.ok) {
+                navigate("/");
+            }
         },
     });
+
+    let timerUserID: NodeJS.Timeout;
+    const onChangeUserID = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target as any;
+        setUserID(value);
+        setUserIDStep(validateLength(value) ? 1 : 0);
+
+        if (validateLength(value)) {
+            clearTimeout(timerUserID);
+            timerUserID = setTimeout(() => {
+                checkMutation.mutate({
+                    target: "userID",
+                    value: value,
+                });
+            }, 1500);
+        }
+    };
+
+    let timerNickname: NodeJS.Timeout;
+    const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target as any;
+        setNickname(value);
+        setNicknameStep(validateLength(value) ? 1 : 0);
+
+        if (validateLength(password)) {
+            clearTimeout(timerNickname);
+            timerNickname = setTimeout(() => {
+                checkMutation.mutate({
+                    target: "nickname",
+                    value: value,
+                });
+            }, 1000);
+        }
+    };
 
     const onClickNewAccount = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -59,14 +108,12 @@ const RegisterStep2 = ({ email }: Props) => {
                         type="text"
                         placeholder="아이디를 입력해주세요."
                         value={userID}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                            const { value } = e.target as any;
-                            setUserID(value);
-                        }}
+                        onChange={onChangeUserID}
                     />
-                    <FormStyle.MessageText warnning={!validateUserID}>
-                        {userID && !validateUserID && "6글자 이상 입력해주세요."}
-                        {validateUserID && "사용가능한 아이디 입니다."}
+                    <FormStyle.MessageText warnning={userIDStep < 3}>
+                        {userID && userIDStep === 0 && "4~6글자 이상 입력해주세요."}
+                        {userIDStep === 2 && "중복된 아이디 입니다."}
+                        {userID && userIDStep === 3 && "사용가능한 아이디 입니다."}
                     </FormStyle.MessageText>
                 </FormStyle.FormContent>
 
@@ -75,7 +122,7 @@ const RegisterStep2 = ({ email }: Props) => {
                     <FormStyle.BasicsInputText
                         type="password"
                         placeholder="비밀번호를 입력해주세요."
-                        disabled={!validateUserID}
+                        disabled={!disablePassword}
                         value={password}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                             const { value } = e.target as any;
@@ -83,9 +130,9 @@ const RegisterStep2 = ({ email }: Props) => {
                         }}
                     />
 
-                    <FormStyle.MessageText warnning={!validatePassword}>
-                        {password && !validatePassword && "6글자 이상 입력해주세요."}
-                        {validatePassword && "사용가능한 비밀번호 입니다."}
+                    <FormStyle.MessageText warnning={!validateLength(password)}>
+                        {password && !validateLength(password) && "4~6글자 입력해주세요."}
+                        {validateLength(password) && "사용가능한 비밀번호 입니다."}
                     </FormStyle.MessageText>
                 </FormStyle.FormContent>
 
@@ -94,7 +141,7 @@ const RegisterStep2 = ({ email }: Props) => {
                     <FormStyle.BasicsInputText
                         type="password"
                         placeholder="비밀번호를 입력해주세요."
-                        disabled={!(validateUserID && validatePassword)}
+                        disabled={!disableConfirmPassword}
                         value={confirmPassword}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => {
                             const { value } = e.target as any;
@@ -116,24 +163,21 @@ const RegisterStep2 = ({ email }: Props) => {
                     <FormStyle.BasicsInputText
                         type="text"
                         placeholder="닉네임을 입력해주세요."
-                        disabled={!(validateUserID && validatePassword && validateConfirmPassword)}
+                        disabled={!disableNickname}
                         value={nickname}
-                        // value={nickname.replace(/\s/g, "")}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                            const { value } = e.target as any;
-                            setNickname(value);
-                        }}
+                        onChange={onChangeNickname}
                     />
-                    <FormStyle.MessageText warnning={!validateNickname(nickname)}>
+                    <FormStyle.MessageText warnning={nicknameStep < 3}>
                         {nickname &&
-                            !validateNickname(nickname) &&
+                            nicknameStep === 0 &&
                             "특수문자, 공백 제외, 2~8글자로 입력해주세요."}
-                        {validateNickname(nickname) && "사용가능한 닉네임 입니다."}
+                        {nicknameStep === 2 && "중복된 아이디 입니다."}
+                        {nickname && nicknameStep === 3 && "사용가능한 닉네임 입니다."}
                     </FormStyle.MessageText>
                 </FormStyle.FormContent>
             </UserFormStyle.InputWrap>
 
-            <ButtonStyle.LongButton disabled={!validateNewAccount} onClick={onClickNewAccount}>
+            <ButtonStyle.LongButton disabled={!disableNewAccount} onClick={onClickNewAccount}>
                 가입하기
             </ButtonStyle.LongButton>
         </>
