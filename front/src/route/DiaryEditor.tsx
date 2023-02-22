@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, MouseEvent } from "react";
+import React, { useState, ChangeEvent, MouseEvent, FormEvent } from "react";
 import { useRecoilValue } from "recoil";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -44,7 +44,7 @@ const DiaryEditor = () => {
         },
     });
 
-    const onSubmit = (e: MouseEvent<HTMLFormElement>) => {
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!submit) return;
         mutation.mutate({

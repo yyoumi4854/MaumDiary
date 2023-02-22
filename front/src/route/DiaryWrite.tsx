@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, MouseEvent } from "react";
+import { useState, ChangeEvent, MouseEvent, FormEvent } from "react";
 import { useRecoilValue } from "recoil";
 import dayjs from "dayjs";
 
@@ -46,7 +46,7 @@ const DiaryWrite = () => {
         },
     });
 
-    const onSubmit = (e: MouseEvent<HTMLFormElement>) => {
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!submit) return;
         mutation.mutate({

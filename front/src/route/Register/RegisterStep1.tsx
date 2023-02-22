@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, MouseEvent, useRef, useEffect } from "react";
+import { useState, ChangeEvent, MouseEvent, useRef, useEffect, FormEvent, Dispatch } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { validateCode, validateEmail } from "@/utils/regExp";
@@ -10,9 +10,9 @@ import * as ButtonStyle from "@/style/common/Button-style";
 import * as UserFormStyle from "@/style/common/UserForm-style";
 
 interface Props {
-    setStep: React.Dispatch<React.SetStateAction<number>>;
+    setStep: Dispatch<React.SetStateAction<number>>;
     email: string;
-    setEmail: React.Dispatch<React.SetStateAction<string>>;
+    setEmail: Dispatch<React.SetStateAction<string>>;
 }
 
 const RegisterStep1 = ({ setStep, email, setEmail }: Props) => {
@@ -87,8 +87,13 @@ const RegisterStep1 = ({ setStep, email, setEmail }: Props) => {
         });
     };
 
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setStep(2);
+    };
+
     return (
-        <>
+        <form onSubmit={onSubmit}>
             <UserFormStyle.InputWrap marginTop="2.5em">
                 <FormStyle.FormContent>
                     <p>이메일</p>
@@ -148,10 +153,8 @@ const RegisterStep1 = ({ setStep, email, setEmail }: Props) => {
                 </FormStyle.FormContent>
             </UserFormStyle.InputWrap>
 
-            <ButtonStyle.LongButton disabled={!disableNext} onClick={() => setStep(2)}>
-                다음
-            </ButtonStyle.LongButton>
-        </>
+            <ButtonStyle.LongButton disabled={!disableNext}>다음</ButtonStyle.LongButton>
+        </form>
     );
 };
 

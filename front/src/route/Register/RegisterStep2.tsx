@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
@@ -96,7 +96,7 @@ const RegisterStep2 = ({ email }: Props) => {
         }
     };
 
-    const onClickNewAccount = (e: MouseEvent<HTMLButtonElement>) => {
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         newAccountMutation.mutate({
             nickname: nickname,
@@ -107,7 +107,7 @@ const RegisterStep2 = ({ email }: Props) => {
     };
 
     return (
-        <>
+        <form onSubmit={onSubmit}>
             <UserFormStyle.InputWrap marginTop="2.5em">
                 <FormStyle.FormContent>
                     <p>아이디</p>
@@ -185,10 +185,8 @@ const RegisterStep2 = ({ email }: Props) => {
                 </FormStyle.FormContent>
             </UserFormStyle.InputWrap>
 
-            <ButtonStyle.LongButton disabled={!disableNewAccount} onClick={onClickNewAccount}>
-                가입하기
-            </ButtonStyle.LongButton>
-        </>
+            <ButtonStyle.LongButton disabled={!disableNewAccount}>가입하기</ButtonStyle.LongButton>
+        </form>
     );
 };
 
