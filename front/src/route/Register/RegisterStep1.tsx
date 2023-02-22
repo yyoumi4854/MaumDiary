@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import { validateCode, validateEmail } from "@/utils/regExp";
 import { certifyCertification, sendCertification } from "@/api/certification";
-import { checkCertification } from "@/api/account";
+import { checkAccount } from "@/api/account";
 
 import * as FormStyle from "@/style/common/Form-style";
 import * as ButtonStyle from "@/style/common/Button-style";
@@ -31,7 +31,7 @@ const RegisterStep1 = ({ setStep, email, setEmail }: Props) => {
     const disableNext = emailStep === 3 && codeStep === 3;
 
     const checkMutation = useMutation({
-        mutationFn: checkCertification,
+        mutationFn: checkAccount,
         onSuccess: (data) => {
             setEmailStep(data.data ? 2 : 1);
         },

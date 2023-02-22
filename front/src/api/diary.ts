@@ -34,7 +34,13 @@ export const fetchMonthDiaryList = async ({ year, month }: { year: number; month
 };
 
 // 일기 작성
-export const writeDiary = async ({ title, description, weather, lock, createdAt }: Diary) => {
+export const writeDiary = async ({
+    title,
+    description,
+    weather,
+    lock,
+    createdAt,
+}: Omit<Diary, "id" | "emotion" | "likes" | "updatedAt" | "author">) => {
     const result = await instance.post("/diaries", {
         title,
         description,
@@ -47,7 +53,14 @@ export const writeDiary = async ({ title, description, weather, lock, createdAt 
 };
 
 // 일기 수정
-export const editorDiary = async ({ id, title, description, weather, emotion, lock }: Diary) => {
+export const editorDiary = async ({
+    id,
+    title,
+    description,
+    weather,
+    emotion,
+    lock,
+}: Omit<Diary, "likes" | "createdAt" | "updatedAt" | "author">) => {
     const result = await instance.patch(`/diaries/${id}`, {
         title,
         description,
@@ -60,7 +73,7 @@ export const editorDiary = async ({ id, title, description, weather, emotion, lo
 };
 
 // 일기 삭제
-export const deleteDiary = async ({ id }: { id: number }) => {
+export const deleteDiary = async ({ id }: Pick<Diary, "id">) => {
     const result = await instance.delete(`/diaries/${id}`);
 
     return result;

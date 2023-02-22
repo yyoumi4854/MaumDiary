@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import { newAccount } from "@/api/certification";
-import { checkCertification } from "@/api/account";
+import { checkAccount } from "@/api/account";
 import { validateLength, validateNickname } from "@/utils/regExp";
 
 import * as FormStyle from "@/style/common/Form-style";
@@ -33,7 +33,7 @@ const RegisterStep2 = ({ email }: Props) => {
     const disableNewAccount = disableNickname && validateNickname(nickname) && nicknameStep === 3;
 
     const checkMutation = useMutation({
-        mutationFn: checkCertification,
+        mutationFn: checkAccount,
         onSuccess: (data, variables) => {
             if (variables.target === "userID") {
                 setUserIDStep(data.data ? 3 : 2);

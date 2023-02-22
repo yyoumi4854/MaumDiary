@@ -41,15 +41,19 @@ export interface FetchingDiaryListOption {
     lock: "true" | "false";
 }
 
-// certification
-export interface SendCertification {
+export interface Send {
     email: string;
     target: "email" | "password";
 }
 
-export interface Certification {
+export interface UserINFO {
     nickname: string;
     email: string;
     userID: string;
     password: string;
+}
+
+export interface Check {
+    target: "email" | "nickname" | "userID";
+    value: string;
 }

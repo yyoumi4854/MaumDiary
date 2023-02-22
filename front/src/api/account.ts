@@ -1,5 +1,5 @@
 import instance from ".";
-import { USER_DATA } from "@/types";
+import { Check, USER_DATA } from "@/types";
 
 export const login = async ({ userID, password }: { userID: string; password: string }) => {
     const result = await instance.post<boolean>("http://localhost:3002/api/account/login", {
@@ -45,13 +45,7 @@ export const findUserID = async ({ email, code }: { email: string; code: string 
 };
 
 // 아이디 / 닉네임 / 이메일 중복 검사
-export const checkCertification = async ({
-    target,
-    value,
-}: {
-    target: "email" | "nickname" | "userID";
-    value: string;
-}) => {
+export const checkAccount = async ({ target, value }: Check) => {
     const result = await instance.post("/account/check", {
         target,
         value,

@@ -1,8 +1,8 @@
-import { Certification, SendCertification } from "@/types";
+import { UserINFO, Send } from "@/types";
 import instance from ".";
 
 // 메일 발송
-export const sendCertification = async ({ email, target }: SendCertification) => {
+export const sendCertification = async ({ email, target }: Send) => {
     const result = await instance.post("/certification/send", {
         email,
         target,
@@ -22,7 +22,7 @@ export const certifyCertification = async ({ email, code }: { email: string; cod
 };
 
 // 회원가입
-export const newAccount = async ({ nickname, email, userID, password }: Certification) => {
+export const newAccount = async ({ nickname, email, userID, password }: UserINFO) => {
     const result = await instance.post("/account/new", {
         nickname,
         email,
