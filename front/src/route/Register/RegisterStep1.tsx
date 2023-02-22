@@ -54,7 +54,6 @@ const RegisterStep1 = ({ setStep, email, setEmail }: Props) => {
     });
 
     let timer: NodeJS.Timeout;
-
     const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target as any;
         setEmail(value);

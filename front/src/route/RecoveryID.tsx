@@ -1,10 +1,10 @@
-import React, { useState, ChangeEvent, MouseEvent } from "react";
+import React, { useState, ChangeEvent, MouseEvent, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
 import { validateCode, validateEmail } from "@/utils/regExp";
 import { sendCertification } from "@/api/certification";
-import { findUserID } from "@/api/account";
+import { checkAccount, findUserID } from "@/api/account";
 
 import * as TextStyle from "@/style/common/Text-style";
 import * as FormStyle from "@/style/common/Form-style";
@@ -17,6 +17,13 @@ import faviconLogo from "@/images/favicon-logo.svg";
 const RecoveryID = () => {
     const navigate = useNavigate();
 
+    const firstInputRef = useRef<HTMLInputElement | null>(null);
+
+    useEffect(() => {
+        if (!firstInputRef.current) return;
+        firstInputRef.current.focus();
+    }, []);
+
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
     const [userID, setUserID] = useState("");
@@ -24,12 +31,21 @@ const RecoveryID = () => {
     const [emailStep, setEmailStep] = useState(0);
     const [codeStep, setCodeStep] = useState(0);
 
-    const goToLogin = emailStep === 2 && codeStep === 3;
+    const disableLogin = emailStep === 3 && codeStep === 3;
+
+    const checkMutation = useMutation({
+        mutationFn: checkAccount,
+        onSuccess: (data) => {
+            setEmailStep(data.data ? 1 : 2);
+        },
+    });
 
     const sendCodeMutation = useMutation({
         mutationFn: sendCertification,
         onSuccess: (data) => {
-            setEmailStep(data.data.result && 2);
+            if (data.data.result) {
+                setEmailStep(3);
+            }
         },
     });
 
@@ -44,6 +60,24 @@ const RecoveryID = () => {
             }
         },
     });
+
+    let timer: NodeJS.Timeout;
+    const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target as any;
+        setEmail(value);
+
+        if (validateEmail(value)) {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                checkMutation.mutate({
+                    target: "email",
+                    value: value,
+                });
+            }, 1000);
+        } else {
+            setEmailStep(0);
+        }
+    };
 
     const onClickSendCode = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -74,15 +108,12 @@ const RecoveryID = () => {
                         <p>이메일</p>
                         <div>
                             <FormStyle.BasicsInputText
+                                ref={firstInputRef}
                                 type="text"
                                 placeholder="가입하신 이메일을 입력해 주세요."
                                 isButton={true}
                                 value={email}
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    const { value } = e.target as any;
-                                    setEmail(value);
-                                    setEmailStep(validateEmail(value) ? 1 : 0);
-                                }}
+                                onChange={onChangeEmail}
                             />
                             <ButtonStyle.MediumButton
                                 disabled={!validateEmail(email)}
@@ -91,11 +122,11 @@ const RecoveryID = () => {
                                 인증번호 발송
                             </ButtonStyle.MediumButton>
                         </div>
-                        <FormStyle.MessageText warnning={!validateEmail(email)}>
+                        <FormStyle.MessageText warnning={emailStep < 2}>
                             {email && emailStep === 0 && "이메일 형식이 아닙니다."}
-                            {emailStep === 1 && "인증번호 발송을 클릭해주세요."}
-                            {/* 입력하신 이메일은 없는 이메일 입니다. */}
-                            {emailStep === 2 && "인증번호가 발송되었습니다."}
+                            {emailStep === 1 && "가입 내역이 없는 이메일 입니다."}
+                            {emailStep === 2 && "인증번호 발송을 클릭해주세요."}
+                            {emailStep === 3 && "인증번호가 발송되었습니다."}
                         </FormStyle.MessageText>
                     </FormStyle.FormContent>
 
@@ -105,7 +136,7 @@ const RecoveryID = () => {
                             <FormStyle.BasicsInputText
                                 type="text"
                                 placeholder="인증번호를 입력해주세요."
-                                disabled={emailStep !== 2}
+                                disabled={emailStep < 2}
                                 isButton={true}
                                 value={code}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -115,7 +146,7 @@ const RecoveryID = () => {
                                 }}
                             />
                             <ButtonStyle.MediumButton
-                                disabled={!validateCode(code)}
+                                disabled={emailStep < 2}
                                 onClick={onClickValidateCode}
                             >
                                 인증번호 확인
@@ -137,7 +168,7 @@ const RecoveryID = () => {
                 </UserFormStyle.InputWrap>
 
                 <ButtonStyle.LongButton
-                    disabled={!goToLogin}
+                    disabled={!disableLogin}
                     onClick={() => navigate("/login", { state: userID })}
                 >
                     로그인 하러가기
