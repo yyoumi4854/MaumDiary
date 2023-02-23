@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, MouseEvent, useRef, useEffect } from "react";
+import { useState, ChangeEvent, MouseEvent, useRef, useEffect, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
@@ -95,6 +95,11 @@ const RecoveryID = () => {
         });
     };
 
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        navigate("/login");
+    };
+
     return (
         <UserFormStyle.UserFormContent className="content">
             <div className="userFormInner">
@@ -103,76 +108,77 @@ const RecoveryID = () => {
                     <TextStyle.TitleText textAlign="center">아이디 찾기</TextStyle.TitleText>
                 </UserFormStyle.TitleContent>
 
-                <UserFormStyle.InputWrap marginTop="2.5em">
-                    <FormStyle.FormContent>
-                        <p>이메일</p>
-                        <div>
-                            <FormStyle.BasicsInputText
-                                ref={firstInputRef}
-                                type="text"
-                                placeholder="가입하신 이메일을 입력해 주세요."
-                                isButton={true}
-                                value={email}
-                                onChange={onChangeEmail}
-                            />
-                            <ButtonStyle.MediumButton
-                                disabled={!validateEmail(email)}
-                                onClick={onClickSendCode}
-                            >
-                                인증번호 발송
-                            </ButtonStyle.MediumButton>
-                        </div>
-                        <FormStyle.MessageText warnning={emailStep < 2}>
-                            {email && emailStep === 0 && "이메일 형식이 아닙니다."}
-                            {emailStep === 1 && "가입 내역이 없는 이메일 입니다."}
-                            {emailStep === 2 && "인증번호 발송을 클릭해주세요."}
-                            {emailStep === 3 && "인증번호가 발송되었습니다."}
-                        </FormStyle.MessageText>
-                    </FormStyle.FormContent>
+                <form onSubmit={onSubmit}>
+                    <UserFormStyle.InputWrap marginTop="2.5em">
+                        <FormStyle.FormContent>
+                            <p>이메일</p>
+                            <div>
+                                <FormStyle.BasicsInputText
+                                    ref={firstInputRef}
+                                    type="text"
+                                    placeholder="가입하신 이메일을 입력해 주세요."
+                                    isButton={true}
+                                    value={email}
+                                    onChange={onChangeEmail}
+                                />
+                                <ButtonStyle.MediumButton
+                                    disabled={emailStep < 2}
+                                    onClick={onClickSendCode}
+                                >
+                                    인증번호 발송
+                                </ButtonStyle.MediumButton>
+                            </div>
+                            <FormStyle.MessageText warnning={emailStep < 2}>
+                                {email && emailStep === 0 && "이메일 형식이 아닙니다."}
+                                {emailStep === 1 && "가입 내역이 없는 이메일 입니다."}
+                                {emailStep === 2 && "인증번호 발송을 클릭해주세요."}
+                                {emailStep === 3 && "인증번호가 발송되었습니다."}
+                            </FormStyle.MessageText>
+                        </FormStyle.FormContent>
 
-                    <FormStyle.FormContent>
-                        <p>인증번호 확인</p>
-                        <div>
-                            <FormStyle.BasicsInputText
-                                type="text"
-                                placeholder="인증번호를 입력해주세요."
-                                disabled={emailStep < 2}
-                                isButton={true}
-                                value={code}
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                    const { value } = e.target as any;
-                                    setCode(value);
-                                    setCodeStep(validateCode(value) ? 1 : 0);
-                                }}
-                            />
-                            <ButtonStyle.MediumButton
-                                disabled={emailStep < 2}
-                                onClick={onClickValidateCode}
-                            >
-                                인증번호 확인
-                            </ButtonStyle.MediumButton>
-                        </div>
-                        <FormStyle.MessageText warnning={codeStep % 2 === 0}>
-                            {code && codeStep === 0 && "영어,숫자 조합으로 8글자를 입력해주세요."}
-                            {codeStep === 1 && "인증번호 확인을 클릭해주세요."}
-                            {codeStep === 2 && "올바르지 않은 인증번호 입니다."}
-                            {codeStep === 3 && "알맞은 인증번호 입니다."}
-                        </FormStyle.MessageText>
-                    </FormStyle.FormContent>
+                        <FormStyle.FormContent>
+                            <p>인증번호 확인</p>
+                            <div>
+                                <FormStyle.BasicsInputText
+                                    type="text"
+                                    placeholder="인증번호를 입력해주세요."
+                                    disabled={emailStep < 2}
+                                    isButton={true}
+                                    value={code}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                        const { value } = e.target as any;
+                                        setCode(value);
+                                        setCodeStep(validateCode(value) ? 1 : 0);
+                                    }}
+                                />
+                                <ButtonStyle.MediumButton
+                                    disabled={codeStep < 1}
+                                    onClick={onClickValidateCode}
+                                >
+                                    인증번호 확인
+                                </ButtonStyle.MediumButton>
+                            </div>
+                            <FormStyle.MessageText warnning={codeStep % 2 === 0}>
+                                {code &&
+                                    codeStep === 0 &&
+                                    "영어,숫자 조합으로 8글자를 입력해주세요."}
+                                {codeStep === 1 && "인증번호 확인을 클릭해주세요."}
+                                {codeStep === 2 && "올바르지 않은 인증번호 입니다."}
+                                {codeStep === 3 && "알맞은 인증번호 입니다."}
+                            </FormStyle.MessageText>
+                        </FormStyle.FormContent>
 
-                    {codeStep === 3 && (
-                        <Style.RecoveryText>
-                            아이디는 <span>{userID}</span> 입니다.
-                        </Style.RecoveryText>
-                    )}
-                </UserFormStyle.InputWrap>
+                        {codeStep === 3 && (
+                            <Style.RecoveryText>
+                                아이디는 <span>{userID}</span> 입니다.
+                            </Style.RecoveryText>
+                        )}
+                    </UserFormStyle.InputWrap>
 
-                <ButtonStyle.LongButton
-                    disabled={!disableLogin}
-                    onClick={() => navigate("/login", { state: userID })}
-                >
-                    로그인 하러가기
-                </ButtonStyle.LongButton>
+                    <ButtonStyle.LongButton disabled={!disableLogin}>
+                        로그인 하러가기
+                    </ButtonStyle.LongButton>
+                </form>
 
                 <UserFormStyle.userFomMenu>
                     <ul>
