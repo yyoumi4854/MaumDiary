@@ -27,18 +27,18 @@ const DiaryCalendar = () => {
 
     const [dayJs, setDayJs] = useState(dayjs());
 
-    const { data, isSuccess } = useQuery({
-        queryKey: [MONTH_DIARY.LIST, { year: dayJs.year(), month: dayJs.month() + 1 }],
-        queryFn: () => fetchMonthDiaryList({ year: dayJs.year(), month: dayJs.month() + 1 }),
-        placeholderData: {},
-    });
-    if (!isSuccess) return null;
+    // const { data, isSuccess } = useQuery({
+    //     queryKey: [MONTH_DIARY.LIST, { year: dayJs.year(), month: dayJs.month() + 1 }],
+    //     queryFn: () => fetchMonthDiaryList({ year: dayJs.year(), month: dayJs.month() + 1 }),
+    //     placeholderData: {},
+    // });
+    // if (!isSuccess) return null;
 
     return (
         <Style.DiaryCalendarContent>
-            <Calendar dayJs={dayJs} setDayJs={setDayJs} data={data} />
+            {/* <Calendar dayJs={dayJs} setDayJs={setDayJs} data={data} />
             <Diary selectedDiary={data[dayjs(selectDay).date()]} />
-            <MonthStatistics dayJs={dayJs} data={data} />
+            <MonthStatistics dayJs={dayJs} data={data} /> */}
         </Style.DiaryCalendarContent>
     );
 };

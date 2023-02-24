@@ -13,13 +13,9 @@ interface Props {
 }
 
 const Calendar = ({ dayJs, setDayJs, data }: Props) => {
-    const calendar = useCalendar(dayJs, setDayJs, data);
+    // const calendar = useCalendar(dayJs, setDayJs, data);
 
-    return (
-        <>
-            <Style.CalendarContent>{calendar}</Style.CalendarContent>
-        </>
-    );
+    return <>{/* <Style.CalendarContent>{calendar}</Style.CalendarContent> */}</>;
 };
 
 export default Calendar;

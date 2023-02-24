@@ -1,4 +1,5 @@
 import { Diary, FetchingDiaryListOption } from "@/types";
+import dayjs from "dayjs";
 import instance from ".";
 
 export const fetchDiaryList = async ({
@@ -30,7 +31,14 @@ export const fetchMonthDiaryList = async ({ year, month }: { year: number; month
         `/diaries/user/?year=${year}&month=${month}`
     );
 
-    return result.data;
+    // return result.data;
+    const currentDate = dayjs().year(year).month(month);
+
+    return {
+        [currentDate.format("yyyy-mm")]: result.data,
+        nextMonth: currentDate.add(1, "month"),
+        prevMonth: currentDate.subtract(1, "month"),
+    };
 };
 
 // 일기 작성

@@ -15,7 +15,9 @@ const day = ["SUN", "MUN", "TUE", "WEN", "THU", "FRI", "SAT"];
 const useCalendar = (
     dayJs: dayjs.Dayjs,
     setDayJs: React.Dispatch<React.SetStateAction<dayjs.Dayjs>>,
-    data: { [key: number]: Diary }
+    data: { [key: number]: Diary } | undefined,
+    onClickNextButton: () => void,
+    onClickPrevButton: () => void
 ) => {
     const [selectedDay, setSelectedDay] = useRecoilState(selectedDayAtom);
 
@@ -80,20 +82,24 @@ const useCalendar = (
         <>
             <Style.ControlContent>
                 <button
-                    onClick={() => {
-                        setDayJs(dayJs.clone().subtract(1, "month"));
-                    }}
+                    onClick={onClickPrevButton}
+                    // onClick={() => {
+                    //     // setDayJs(dayJs.clone().subtract(1, "month"));
+                    //     onClickPrevButton;
+                    // }}
                 >
                     <BsChevronLeft />
                 </button>
                 <div>
                     <span>{currentDay.format("YYYY")}</span>
-                    <strong>{currentDay.format("MMMM").toUpperCase()}</strong>
+                    <strong>{currentDay.format("MM").toUpperCase()}</strong>
                 </div>
                 <button
-                    onClick={() => {
-                        setDayJs(dayJs.clone().add(1, "month"));
-                    }}
+                    onClick={onClickNextButton}
+                    // onClick={() => {
+                    //     // setDayJs(dayJs.clone().add(1, "month"));
+                    //     ;
+                    // }}
                 >
                     <BsChevronRight />
                 </button>
