@@ -1,6 +1,6 @@
 import { useRef, useState, FormEvent } from "react";
 import { useSetRecoilState } from "recoil";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BsChevronRight } from "react-icons/bs";
 
@@ -27,6 +27,7 @@ const Login = () => {
     const queryClient = useQueryClient();
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const { authorization, login: kakaoLogin } = useKakao();
 
@@ -89,6 +90,7 @@ const Login = () => {
                     <UserFormStyle.InputWrap marginTop="2.5em">
                         <FormStyle.BasicsInputText
                             type="text"
+                            defaultValue={location.state}
                             placeholder="아이디"
                             marginBottom="1em"
                             ref={userIDRef}

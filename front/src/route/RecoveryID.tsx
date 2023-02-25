@@ -97,7 +97,7 @@ const RecoveryID = () => {
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        navigate("/login");
+        navigate("/login", { state: userID });
     };
 
     return (
