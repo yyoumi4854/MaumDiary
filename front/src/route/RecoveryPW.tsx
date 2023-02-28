@@ -84,6 +84,7 @@ const RecoveryPW = () => {
 
                             <div>
                                 <FormStyle.BasicsInputText
+                                    autoFocus
                                     type="text"
                                     placeholder="가입하신 이메일을 입력해 주세요."
                                     isButton={true}

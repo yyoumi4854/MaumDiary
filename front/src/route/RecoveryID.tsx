@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, MouseEvent, useRef, useEffect, FormEvent } from "react";
+import { useState, ChangeEvent, MouseEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
@@ -16,13 +16,6 @@ import faviconLogo from "@/images/favicon-logo.svg";
 
 const RecoveryID = () => {
     const navigate = useNavigate();
-
-    const firstInputRef = useRef<HTMLInputElement | null>(null);
-
-    useEffect(() => {
-        if (!firstInputRef.current) return;
-        firstInputRef.current.focus();
-    }, []);
 
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
@@ -114,7 +107,7 @@ const RecoveryID = () => {
                             <p>이메일</p>
                             <div>
                                 <FormStyle.BasicsInputText
-                                    ref={firstInputRef}
+                                    autoFocus
                                     type="text"
                                     placeholder="가입하신 이메일을 입력해 주세요."
                                     isButton={true}

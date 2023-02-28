@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, MouseEvent, useRef, useEffect, FormEvent, Dispatch } from "react";
+import { useState, ChangeEvent, MouseEvent, FormEvent, Dispatch } from "react";
 import { useMutation } from "@tanstack/react-query";
 
 import { validateCode, validateEmail } from "@/utils/regExp";
@@ -16,13 +16,6 @@ interface Props {
 }
 
 const RegisterStep1 = ({ setStep, email, setEmail }: Props) => {
-    const firstInputRef = useRef<HTMLInputElement | null>(null);
-
-    useEffect(() => {
-        if (!firstInputRef.current) return;
-        firstInputRef.current.focus();
-    }, []);
-
     const [code, setCode] = useState("");
 
     const [emailStep, setEmailStep] = useState(0);
@@ -99,7 +92,7 @@ const RegisterStep1 = ({ setStep, email, setEmail }: Props) => {
                     <p>이메일</p>
                     <div>
                         <FormStyle.BasicsInputText
-                            ref={firstInputRef}
+                            autoFocus
                             type="text"
                             placeholder="이메일을 입력해주세요."
                             isButton={true}

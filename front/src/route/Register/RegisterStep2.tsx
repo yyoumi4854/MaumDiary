@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
@@ -16,13 +16,6 @@ interface Props {
 
 const RegisterStep2 = ({ email }: Props) => {
     const navigate = useNavigate();
-
-    const firstInputRef = useRef<HTMLInputElement | null>(null);
-
-    useEffect(() => {
-        if (!firstInputRef.current) return;
-        firstInputRef.current.focus();
-    }, []);
 
     const [userID, setUserID] = useState("");
     const [password, setPassword] = useState("");
@@ -112,7 +105,7 @@ const RegisterStep2 = ({ email }: Props) => {
                 <FormStyle.FormContent>
                     <p>아이디</p>
                     <FormStyle.BasicsInputText
-                        ref={firstInputRef}
+                        autoFocus
                         type="text"
                         placeholder="아이디를 입력해주세요."
                         value={userID}
