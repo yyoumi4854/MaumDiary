@@ -1,10 +1,14 @@
-import React from "react";
+import Chat from "@/component/diaryChat/Chat";
+import ChatList from "./../../component/diaryChat/ChatList";
+
+import { DiaryChatContent } from "@/style/component/diaryChat/DiaryChat-style";
 
 const DiaryChat = () => {
     return (
-        <div>
-            <p>여긴 채팅화면 입니다.</p>
-        </div>
+        <DiaryChatContent>
+            <ChatList />
+            <Chat />
+        </DiaryChatContent>
     );
 };
 

@@ -4,7 +4,7 @@ export const DiaryLayout = styled.div`
     padding: 20px 0;
     .inner {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
         gap: 0 20px;
 
         & > div {
