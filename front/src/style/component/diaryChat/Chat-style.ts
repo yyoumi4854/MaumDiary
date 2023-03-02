@@ -66,7 +66,6 @@ export const InputContentForm = styled.form`
 
     & > div {
         padding: 0.5rem;
-        /* max-height: 112px; */
         max-height: calc(4 * 1.5 * 1rem + 1rem);
         border-radius: 2px;
         background: #fff;

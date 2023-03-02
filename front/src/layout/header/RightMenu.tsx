@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import { useRecoilValue } from "recoil";
 
+import { userAtom } from "@/recoil/user";
 import IsLoginMenu from "./IsLoginMenu";
 import UserMenu from "./UserMenu";
 
 import * as Style from "@/style/layout/header/RightMenu-style";
 
 const RightMenu = () => {
-    const [isLogin, setisLogin] = useState(true); // 로그인 할때 안할때
+    const user = useRecoilValue(userAtom);
 
     return (
         <>
-            {isLogin ? (
+            {user === null ? (
+                <UserMenu />
+            ) : (
                 <Style.RightMenuContent>
                     <IsLoginMenu />
                 </Style.RightMenuContent>
-            ) : (
-                <UserMenu />
             )}
         </>
     );

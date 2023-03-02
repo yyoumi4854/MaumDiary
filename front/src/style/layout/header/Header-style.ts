@@ -37,4 +37,10 @@ export const HeaderContent = styled.header<{ scroll: boolean }>`
 
 export const LeftContent = styled.div`
     ${({ theme }) => theme.common.flexCenter};
+
+    ${({ theme }) => theme.device.mobile} {
+        a {
+            ${({ theme }) => theme.common.positionCenter}
+        }
+    }
 `;

@@ -1,16 +1,20 @@
 import React, { useEffect, MouseEvent } from "react";
 import { Link } from "react-router-dom";
 
+import { userAtom } from "@/recoil/user";
 import * as FixModal from "@/utils/FixModalScroll";
 
 import * as Style from "@/style/layout/header/MobileNav-style";
 import * as Common from "@/style/common/common-style";
+import { useRecoilValue } from "recoil";
 
 interface Props {
     setIsMobileNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MobileNav = ({ setIsMobileNavOpen }: Props) => {
+    const user = useRecoilValue(userAtom);
+
     useEffect(() => {
         FixModal.disableScroll();
         return FixModal.enableScroll;
@@ -28,12 +32,16 @@ const MobileNav = ({ setIsMobileNavOpen }: Props) => {
         <Common.FixedContent className="mobile" onClick={handleCloseModal}>
             <Style.MobileNavContent className="active">
                 <ul>
-                    <li>
-                        <Link to="/diary/calendar">일기장</Link>
-                    </li>
-                    <li>
-                        <Link to="/diary/write">일기 쓰기</Link>
-                    </li>
+                    {user !== null && (
+                        <>
+                            <li>
+                                <Link to="/diary/calendar">일기장</Link>
+                            </li>
+                            <li>
+                                <Link to="/diary/write">일기 쓰기</Link>
+                            </li>
+                        </>
+                    )}
                     <li>
                         <a href="#">서비스 소개</a>
                     </li>
