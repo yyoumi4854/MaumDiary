@@ -2,17 +2,23 @@ import styled from "styled-components";
 import * as Css from "@/style/common/Css-style";
 
 // 넘어갈 경우
-export const ChatListContent = styled.div`
-    grid-column: 1 / span 4;
+export const ChatListContent = styled.div<{ onChatting: boolean }>`
+    grid-column: 1 / 5;
     padding: 20px;
     ${Css.diaryContnet}
     overflow: auto;
+
+    ${({ theme }) => theme.device.mobile} {
+        grid-column: 1 / 11;
+        display: ${({ onChatting }) => (onChatting ? "none" : "block")};
+    }
 `;
 
 export const ListContent = styled.div`
     display: grid;
     grid-template-columns: 48px auto 50px;
     gap: 1em;
+    cursor: pointer;
 `;
 
 export const ProfileContent = styled.div`

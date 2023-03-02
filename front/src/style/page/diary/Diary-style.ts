@@ -8,13 +8,13 @@ export const DiaryLayout = styled.div`
         gap: 0 20px;
 
         & > div {
-            grid-column: 2 / span 4;
+            grid-column: 2 / 6;
         }
     }
 
     ${({ theme }) => theme.device.mobile} {
         .inner > div {
-            grid-column: 1 / span 4;
+            grid-column: 1 / 6;
         }
     }
 `;

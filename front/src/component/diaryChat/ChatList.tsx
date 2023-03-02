@@ -1,9 +1,19 @@
+import { Dispatch } from "react";
 import * as Style from "@/style/component/diaryChat/ChatList-style";
 
-const ChatList = () => {
+interface Props {
+    on: boolean;
+    setOn: Dispatch<React.SetStateAction<boolean>>;
+}
+
+const ChatList = ({ on, setOn }: Props) => {
+    const onClick = () => {
+        setOn(true);
+    };
+
     return (
-        <Style.ChatListContent>
-            <Style.ListContent>
+        <Style.ChatListContent onChatting={on}>
+            <Style.ListContent onClick={onClick}>
                 <Style.ProfileContent>
                     <img src="" alt="프로필" />
                 </Style.ProfileContent>

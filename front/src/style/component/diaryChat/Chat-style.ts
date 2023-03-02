@@ -2,11 +2,17 @@ import styled from "styled-components";
 import * as Css from "@/style/common/Css-style";
 
 export const ChatContent = styled.div`
-    grid-column: 5 / span 10;
+    grid-column: 5 / 11;
     position: relative;
     ${Css.diaryContnet}
     padding: 20px;
     height: calc(100vh - 60px - 40px);
+
+    ${({ theme }) => theme.device.mobile} {
+        grid-column: 1 / 11;
+        height: calc(100vh - 60px - 40px - 64px);
+        padding: 1em;
+    }
 `;
 
 export const TopContent = styled.div`
@@ -53,9 +59,15 @@ export const InputContentForm = styled.form`
     margin-top: 0.5rem;
     width: 100%;
 
+    ${({ theme }) => theme.device.mobile} {
+        grid-template-columns: auto 60px;
+        gap: 0;
+    }
+
     & > div {
         padding: 0.5rem;
-        max-height: 112px;
+        /* max-height: 112px; */
+        max-height: calc(4 * 1.5 * 1rem + 1rem);
         border-radius: 2px;
         background: #fff;
         line-height: 1.5;

@@ -27,7 +27,7 @@ export const SmallButton = styled.button`
     ${disabled}
 
     ${({ theme }) => theme.device.mobile} {
-        width: 100px;
+        width: 60px;
     }
 `;
 
