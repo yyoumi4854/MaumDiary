@@ -57,3 +57,9 @@ export interface Check {
     target: "email" | "nickname" | "userID";
     value: string;
 }
+
+export interface PeriodDiary {
+    week: Pick<Diary, "id" | "createdAt" | "emotion">[];
+    month: Pick<Diary, "id" | "createdAt" | "emotion">[];
+    year: Pick<Diary, "id" | "createdAt" | "emotion">[];
+}

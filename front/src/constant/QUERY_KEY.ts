@@ -9,3 +9,7 @@ export const DIARY = {
 export const MONTH_DIARY = {
     LIST: "MONTH_DIARY_LIST",
 };
+
+export const PERIOD = {
+    ALL: "PERIOD_ALL",
+};

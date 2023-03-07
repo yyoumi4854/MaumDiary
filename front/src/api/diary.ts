@@ -1,4 +1,4 @@
-import { Diary, FetchingDiaryListOption } from "@/types";
+import { Diary, FetchingDiaryListOption, Period, PeriodDiary } from "@/types";
 import instance from ".";
 
 export const fetchDiaryList = async ({
@@ -29,6 +29,14 @@ export const fetchMonthDiaryList = async ({ year, month }: { year: number; month
     const result = await instance.get<{ [key: number]: Diary }>(
         `/diaries/user/?year=${year}&month=${month}`
     );
+
+    return result.data;
+};
+
+// [마음분석]
+// 일년 전, 한달 전,일주일전 일기를 다 가져오기
+export const fetchPastDiary = async () => {
+    const result = await instance.get<PeriodDiary>(`/diaries/period/all`);
 
     return result.data;
 };
