@@ -71,6 +71,16 @@ class UserService {
             throw new AppError("UpdateError");
         }
     }
+
+    async checking(nickname: string) {
+        const result = await this.prisma.user.findUnique({
+            where: {
+                nickname,
+            },
+        });
+
+        return result;
+    }
 }
 
 export default new UserService();

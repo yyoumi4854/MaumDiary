@@ -23,8 +23,7 @@ const ProfileModal = () => {
             await kakaoLogout();
         }
 
-        if (localStorage.getItem("user") !== null) {
-            console.log("무려 유저의 데이터가 있어요!");
+        if (sessionStorage.getItem("user") !== null) {
             mutation.mutate();
             resetUserData();
         }
