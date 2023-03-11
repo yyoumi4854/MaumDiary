@@ -14,13 +14,13 @@ const Header = () => {
     const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", scroll);
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("scroll", scroll);
         };
     });
 
-    const handleScroll = () => {
+    const scroll = () => {
         setHeaderBackground(window.scrollY ? true : false);
     };
 

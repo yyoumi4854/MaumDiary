@@ -3,6 +3,8 @@ import { Outlet } from "react-router-dom";
 import Header from "@/layout/header/Header";
 import Footer from "@/layout/footer/Footer";
 import { Period } from "@/types";
+import TopButton from "./TopButton";
+
 import * as Style from "@/style/layout/Main-style";
 
 import theme from "@/style/Theme";
@@ -25,6 +27,7 @@ const Main = ({ period }: Props) => {
                 <Header />
                 <Outlet context={period} />
                 <Footer />
+                <TopButton />
             </div>
         </Style.MainContainer>
     );
