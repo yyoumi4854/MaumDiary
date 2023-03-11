@@ -1,7 +1,7 @@
 import { MouseEvent } from "react";
 import { useRecoilValue, useResetRecoilState } from "recoil";
 import { useMutation } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsPerson, BsPower } from "react-icons/bs";
 
 import { userAtom } from "@/recoil/user";
@@ -14,6 +14,8 @@ import { getCookie } from "@/utils/cookie";
 const ProfileModal = () => {
     const user = useRecoilValue(userAtom);
     const resetUserData = useResetRecoilState(userAtom);
+
+    const navigate = useNavigate();
 
     const mutation = useMutation(logout);
 
@@ -29,9 +31,11 @@ const ProfileModal = () => {
             mutation.mutate();
             resetUserData();
         }
+
+        navigate("/");
     };
 
-    if (!user) return;
+    if (!user) return null;
     const { email, User } = user;
 
     return (

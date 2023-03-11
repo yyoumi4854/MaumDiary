@@ -16,15 +16,15 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import theme from "@/style/Theme";
 import { MONTH_DIARY } from "@/constant/QUERY_KEY";
 import { fetchMonthDiaryList } from "@/api/diary";
-
-import * as Style from "@/style/component/diaryUserAnalysis/Chart-style";
 import { bad, CHART_DATA, good, max } from "./emotionData";
 import { Emotion } from "@/types";
 import { userAtom } from "@/recoil/user";
 
+import * as Style from "@/style/component/diaryUserAnalysis/Chart-style";
+
 const Chart = () => {
     const user = useRecoilValue(userAtom);
-    if (!user) return;
+    if (!user) return null;
     const { nickname } = user.User;
 
     const [dayJs, setDayJs] = useState(dayjs());
@@ -52,7 +52,7 @@ const Chart = () => {
 
     return (
         <Style.ChartContent>
-            <Style.ChartTopContent>
+            <div>
                 <Style.ControlContent>
                     <button
                         onClick={() => {
@@ -75,7 +75,7 @@ const Chart = () => {
                     </button>
                 </Style.ControlContent>
 
-                <Style.Chart>
+                <Style.ChartWrap>
                     <ResponsiveContainer width="100%" height="100%">
                         <RadarChart
                             cx="50%"
@@ -103,8 +103,8 @@ const Chart = () => {
                             <Legend />
                         </RadarChart>
                     </ResponsiveContainer>
-                </Style.Chart>
-            </Style.ChartTopContent>
+                </Style.ChartWrap>
+            </div>
 
             <Style.TextContent>
                 <p>

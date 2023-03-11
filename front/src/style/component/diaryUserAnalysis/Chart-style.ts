@@ -4,8 +4,7 @@ export const ChartContent = styled.div`
     padding: 5rem 0;
 `;
 
-export const ChartTopContent = styled.div``;
-export const Chart = styled.div`
+export const ChartWrap = styled.div`
     width: 100%;
     height: 560px;
 
