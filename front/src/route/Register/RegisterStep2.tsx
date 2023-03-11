@@ -48,7 +48,6 @@ const RegisterStep2 = ({ email }: Props) => {
     const newAccountMutation = useMutation({
         mutationFn: newAccount,
         onSuccess: (data) => {
-            console.log("가입하기", data.data);
             if (data.data.ok) {
                 navigate("/");
             }
