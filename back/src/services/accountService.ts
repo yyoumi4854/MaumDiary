@@ -100,6 +100,7 @@ class AccountService {
             },
             select: {
                 certified_account: true,
+                email: true,
                 User: {
                     select: {
                         nickname: true,
