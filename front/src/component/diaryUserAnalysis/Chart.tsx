@@ -50,8 +50,6 @@ const Chart = () => {
 
     Object.values(data).forEach((diary) => (EmotionData[diary.emotion] += 1));
 
-    const emotionTick = () => {};
-
     return (
         <Style.ChartContent>
             <Style.ChartTopContent>
@@ -115,13 +113,13 @@ const Chart = () => {
                     <br />
                     {max(EmotionData) && (
                         <>
-                            가장 많이 차지한 감정은 <span>{max(EmotionData)}</span>이고
+                            가장 많이 차지한 마음은 <span>{max(EmotionData)}</span>이고
                             <br />
                         </>
                     )}
                     {good === bad ? (
                         <>
-                            긍정적 감정과 부정적 감정이 <span>같습니다.</span>
+                            긍정적 마음과 부정적 마음이 <span>같습니다.</span>
                         </>
                     ) : (
                         <>
