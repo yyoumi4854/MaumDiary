@@ -13,4 +13,11 @@ export const TopButtonWrap = styled.button`
         font-size: ${({ theme }) => theme.fonts.size.middle};
         color: #fff;
     }
+
+    ${({ theme }) => theme.device.mobile} {
+        bottom: 72px;
+        right: 3%;
+        width: 48px;
+        height: 48px;
+    }
 `;
