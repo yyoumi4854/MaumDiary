@@ -4,6 +4,7 @@ export interface USER_DATA {
         id: string;
     };
     certified_account: boolean;
+    email: string;
 }
 
 export type Period = "dawn" | "morning" | "afternoon" | "evening";

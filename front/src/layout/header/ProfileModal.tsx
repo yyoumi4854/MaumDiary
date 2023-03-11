@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { useResetRecoilState } from "recoil";
+import { useRecoilValue, useResetRecoilState } from "recoil";
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { BsPerson, BsPower } from "react-icons/bs";
@@ -12,6 +12,7 @@ import * as Style from "@/style/layout/header/ProfileModal-style";
 import { getCookie } from "@/utils/cookie";
 
 const ProfileModal = () => {
+    const user = useRecoilValue(userAtom);
     const resetUserData = useResetRecoilState(userAtom);
 
     const mutation = useMutation(logout);
@@ -30,13 +31,18 @@ const ProfileModal = () => {
         }
     };
 
+    if (!user) return;
+    const { email, User } = user;
+
     return (
         <Style.ProfileContent>
             <Style.ProfileTopContent>
-                <div>프로필</div>
                 <div>
-                    <p>겨울감자</p>
-                    <span>ruyria</span>
+                    <img src="" alt="프로필" />
+                </div>
+                <div>
+                    <p>{User.nickname}</p>
+                    <span>{email}</span>
                 </div>
             </Style.ProfileTopContent>
             <Style.ProfileBottomContent>
