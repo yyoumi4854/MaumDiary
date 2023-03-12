@@ -17,6 +17,7 @@ import DiaryUserAnalysis from "./diary/DiaryUserAnalysis";
 import DiaryWrite from "./DiaryWrite";
 import DiaryEditor from "./DiaryEditor";
 import KakaoAuth from "./KakaoAuth";
+import Intro from "./Intro";
 
 const router = (period: Period, queryClient: QueryClient) =>
     createBrowserRouter(
@@ -49,6 +50,7 @@ const router = (period: Period, queryClient: QueryClient) =>
                 <Route path="/diary/write" element={<DiaryWrite />} />
                 <Route path="/diary/editor" element={<DiaryEditor />} />
                 <Route path="/auth/kakao" element={<KakaoAuth />} />
+                <Route path="/intro" element={<Intro />} />
             </Route>
         )
     );

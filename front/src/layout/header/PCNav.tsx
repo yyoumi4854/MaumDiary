@@ -22,7 +22,7 @@ const PCNav = () => {
                     </>
                 )}
                 <li>
-                    <a href="#">서비스 소개</a>
+                    <Link to="/intro">서비스 소개</Link>
                 </li>
             </ul>
         </Style.PCNavContent>
