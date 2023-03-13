@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-export const IntroContent = styled.div``;
-
 export const TitleSection = styled.section`
     position: relative;
     height: calc(100vh - 60px);

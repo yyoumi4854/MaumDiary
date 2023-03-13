@@ -9,7 +9,7 @@ import intro3 from "@/images/intro3.png";
 
 const Intro = () => {
     return (
-        <Style.IntroContent>
+        <div>
             <Style.TitleSection>
                 <Style.TitleContent>
                     <TextStyle.TitleText>
@@ -90,7 +90,7 @@ const Intro = () => {
                     <span>세번째 기능 이미지</span>
                 </Style.IntroWrap>
             </Style.IntroSection>
-        </Style.IntroContent>
+        </div>
     );
 };
 
