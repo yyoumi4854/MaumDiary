@@ -18,6 +18,7 @@ import DiaryWrite from "./DiaryWrite";
 import DiaryEditor from "./DiaryEditor";
 import KakaoAuth from "./KakaoAuth";
 import Intro from "./Intro";
+import Error from "./Error";
 
 const router = (period: Period, queryClient: QueryClient) =>
     createBrowserRouter(
@@ -25,7 +26,7 @@ const router = (period: Period, queryClient: QueryClient) =>
             <Route
                 path="/"
                 element={<Main period={period} />}
-                errorElement={<div>무려 무시무시한 에러페이지</div>}
+                errorElement={<Error period={period} />}
             >
                 <Route
                     index={true}

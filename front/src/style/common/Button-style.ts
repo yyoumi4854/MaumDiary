@@ -32,10 +32,15 @@ export const SmallButton = styled.button`
 `;
 
 // 인증번호 발송, 인증번호 확인,
-export const MediumButton = styled.button`
+export const MediumButton = styled.button<{ hover?: boolean }>`
     width: 120px;
     ${mainColorButton}
     ${disabled}
+    transition: all .3s;
+
+    &:hover {
+        background: ${({ theme, hover }) => hover && theme.colors.mainDeep};
+    }
 
     ${({ theme }) => theme.device.mobile} {
         width: 100px;
