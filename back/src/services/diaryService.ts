@@ -46,9 +46,15 @@ class DiaryService {
     }
 
     async getDiaryList(count: number, page: number, lock: boolean, emotion: string) {
+        const maxParam = await this.prisma.diary.count({
+            where: {
+                lock,
+            },
+        });
+
         const result = await this.prisma.diary.findMany({
-            take: Number(count),
-            skip: (Number(page) - 1) * Number(count),
+            take: count,
+            skip: (page - 1) * count,
             where: {
                 emotion: emotion != "all" ? emotion : undefined,
                 lock: lock,
@@ -62,15 +68,19 @@ class DiaryService {
                 likes: true,
                 weather: true,
                 createdAt: true,
+                updatedAt: true,
+                author: true,
             },
-            orderBy: [{ createdAt: "desc" }],
+            orderBy: [{ updatedAt: "desc" }],
         });
 
         if (result === null) {
             throw new AppError("NotFindError");
         }
+
         await this.prisma.$disconnect();
-        return result;
+
+        return { maxParam, diaryList: result };
     }
 
     async getUserDiaryList(userID: string, count: number, page: number) {

@@ -1,8 +1,6 @@
 import { css } from "styled-components";
 import { transparentize } from "polished";
 
-import * as Css from "@/style/common/Css-style";
-
 export const diaryContnet = css`
     border-radius: 10px;
     background: ${transparentize(0.5, "#fff")};
@@ -33,8 +31,10 @@ export const appearance = css`
 
 export const chattingCount = css`
     padding: 4px;
+    min-width: calc(0.9rem + 8px);
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.mainDeep};
     color: #fff;
     font-size: ${({ theme }) => theme.fonts.size.small};
+    text-align: center;
 `;

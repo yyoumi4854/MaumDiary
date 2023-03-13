@@ -30,6 +30,12 @@ const Global = createGlobalStyle`
         color: ${({ theme }) => theme.colors.mainDark};
     }
 
+    textarea{
+        border: none;
+        line-height: 1.5;
+    white-space: pre-line;
+    resize: none;
+    }
     button{
         padding: 0;
         background: transparent;

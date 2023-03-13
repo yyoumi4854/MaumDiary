@@ -15,13 +15,19 @@ import DiaryAll from "./diary/DiaryAll";
 import DiaryChat from "./diary/DiaryChat";
 import DiaryUserAnalysis from "./diary/DiaryUserAnalysis";
 import DiaryWrite from "./DiaryWrite";
+import DiaryEditor from "./DiaryEditor";
+import KakaoAuth from "./KakaoAuth";
+import Intro from "./Intro";
+import Error from "./Error";
 
 const router = (period: Period, queryClient: QueryClient) =>
-    // TODO: rootLoaderFn에 유저의 데이터 가져오는 로직 만들기
-    // 닉네임 유니크하게 만들지 의논하기
     createBrowserRouter(
         createRoutesFromElements(
-            <Route path="/" element={<Main period={period} />} errorElement={<div></div>}>
+            <Route
+                path="/"
+                element={<Main period={period} />}
+                errorElement={<Error period={period} />}
+            >
                 <Route
                     index={true}
                     loader={homeLoader(queryClient)}
@@ -43,6 +49,9 @@ const router = (period: Period, queryClient: QueryClient) =>
                     <Route path="user/analysis" element={<DiaryUserAnalysis />} />
                 </Route>
                 <Route path="/diary/write" element={<DiaryWrite />} />
+                <Route path="/diary/editor" element={<DiaryEditor />} />
+                <Route path="/auth/kakao" element={<KakaoAuth />} />
+                <Route path="/intro" element={<Intro />} />
             </Route>
         )
     );

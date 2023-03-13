@@ -4,6 +4,7 @@ export interface USER_DATA {
         id: string;
     };
     certified_account: boolean;
+    email: string;
 }
 
 export type Period = "dawn" | "morning" | "afternoon" | "evening";
@@ -29,6 +30,8 @@ export interface Diary {
     likes: number;
     weather: Weather;
     createdAt: string;
+    updatedAt: string;
+    author: string;
 }
 
 export interface FetchingDiaryListOption {
@@ -39,7 +42,25 @@ export interface FetchingDiaryListOption {
     lock: "true" | "false";
 }
 
-export interface FectchMonthDiaryList {
-    year: number;
-    month: number;
+export interface Send {
+    email: string;
+    target: "email" | "password";
+}
+
+export interface UserINFO {
+    nickname: string;
+    email: string;
+    userID: string;
+    password: string;
+}
+
+export interface Check {
+    target: "email" | "nickname" | "userID";
+    value: string;
+}
+
+export interface PeriodDiary {
+    week: Pick<Diary, "id" | "createdAt" | "emotion">[];
+    month: Pick<Diary, "id" | "createdAt" | "emotion">[];
+    year: Pick<Diary, "id" | "createdAt" | "emotion">[];
 }

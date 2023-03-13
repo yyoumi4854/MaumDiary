@@ -1,10 +1,19 @@
-import React from "react";
+import { useState } from "react";
+
+import Chat from "@/component/diaryChat/Chat";
+import ChatList from "./../../component/diaryChat/ChatList";
+
+import { DiaryChatContent } from "@/style/component/diaryChat/DiaryChat-style";
 
 const DiaryChat = () => {
+    const [on, setOn] = useState(false);
+    // 상대방 선택 state만들기
+
     return (
-        <div>
-            <p>여긴 채팅화면 입니다.</p>
-        </div>
+        <DiaryChatContent>
+            <ChatList on={on} setOn={setOn} />
+            {on && <Chat setOn={setOn} />}
+        </DiaryChatContent>
     );
 };
 

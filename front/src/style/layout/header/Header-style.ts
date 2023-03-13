@@ -7,7 +7,7 @@ export const HeaderContent = styled.header<{ scroll: boolean }>`
     left: 0;
     height: 60px;
     transition: all 0.2s;
-    z-index: 10;
+    z-index: 20;
 
     ${({ scroll }) =>
         scroll &&
@@ -37,4 +37,10 @@ export const HeaderContent = styled.header<{ scroll: boolean }>`
 
 export const LeftContent = styled.div`
     ${({ theme }) => theme.common.flexCenter};
+
+    ${({ theme }) => theme.device.mobile} {
+        a {
+            ${({ theme }) => theme.common.positionCenter}
+        }
+    }
 `;

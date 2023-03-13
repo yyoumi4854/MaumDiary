@@ -97,3 +97,16 @@ Content-Type: application/json
 {
     "isCertified": true
 }
+
+###
+
+### target의 값은 "userID", "nickname", "email"만 들어갈 수 있습니다.
+### 값이 있으면 false 없으면 true를 응답해줍니다.
+
+POST {{URL}}/check
+Content-Type: application/json
+
+{
+    "target": "userID",
+    "value": "test"
+}

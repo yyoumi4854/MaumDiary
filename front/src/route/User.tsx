@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsPencilFill } from "react-icons/bs";
 
-import CancelAccount from "./../component/CancelAccount";
+import Withdrawal from "../component/Withdrawal";
 
 import * as TextStyle from "@/style/common/Text-style";
 import * as FormStyle from "@/style/common/Form-style";
@@ -82,12 +82,7 @@ const User = () => {
                 </div>
             </UserFormStyle.UserFormContent>
 
-            {cancelAccountModal && (
-                <CancelAccount
-                    cancelAccountModal={cancelAccountModal}
-                    setCancelAccountModal={setCancelAccountModal}
-                />
-            )}
+            {cancelAccountModal && <Withdrawal setCancelAccountModal={setCancelAccountModal} />}
         </>
     );
 };

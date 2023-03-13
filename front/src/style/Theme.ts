@@ -47,6 +47,7 @@ const fonts = {
         title: "2rem", // 32px
         middle: "1.5rem", // 24px
         small: ".9rem", // 14.4px
+        xsmall: ".7rem", //11.2px
     },
 
     weight: {

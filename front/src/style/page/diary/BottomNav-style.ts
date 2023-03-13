@@ -9,6 +9,7 @@ export const BottomNavContent = styled.nav`
     width: 100%;
     height: 64px;
     background: #fff;
+    z-index: 10;
 
     ul {
         display: grid;
@@ -31,7 +32,6 @@ export const NavList = styled.li<{ current?: boolean }>`
         }
 
         svg {
-            /* margin: 0 auto; */
             ${({ theme }) => theme.common.marginXCenter}
 
             font-size: 24px;

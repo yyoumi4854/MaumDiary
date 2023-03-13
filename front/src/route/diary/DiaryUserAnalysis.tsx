@@ -1,10 +1,14 @@
-import React from "react";
+import Chart from "@/component/diaryUserAnalysis/Chart";
+import PastEmotion from "@/component/diaryUserAnalysis/PastEmotion";
+
+import { DiaryUserAnalysisContent } from "@/style/page/diary/DiaryUserAnalysis-style";
 
 const DiaryUserAnalysis = () => {
     return (
-        <div>
-            <p>여기는 나의 마음 분석 페이지 입니다.</p>
-        </div>
+        <DiaryUserAnalysisContent>
+            <Chart />
+            <PastEmotion />
+        </DiaryUserAnalysisContent>
     );
 };
 

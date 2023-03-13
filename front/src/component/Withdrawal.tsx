@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { useResetRecoilState } from "recoil";
 
 import * as FixModal from "@/utils/FixModalScroll";
+import { withdrawal } from "@/api/user";
+import { userAtom } from "@/recoil/user";
 
 import * as TextStyle from "@/style/common/Text-style";
 import * as ButtonStyle from "@/style/common/Button-style";
@@ -10,15 +15,28 @@ import * as Style from "@/style/component/Modal-style";
 
 import faviconLogo from "@/images/favicon-logo.svg";
 
-type Props = {
-    cancelAccountModal: boolean;
+interface Props {
     setCancelAccountModal: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
-const CancelAccount = ({ cancelAccountModal, setCancelAccountModal }: Props) => {
+const Withdrawal = ({ setCancelAccountModal }: Props) => {
+    const navigate = useNavigate();
+
+    const resetUserData = useResetRecoilState(userAtom);
+
     useEffect(() => {
         FixModal.disableScroll();
         return FixModal.enableScroll;
+    });
+
+    const withdrawalMutation = useMutation({
+        mutationFn: withdrawal,
+        onSuccess: (data) => {
+            if (data.data.ok) {
+                resetUserData();
+                navigate("/");
+            }
+        },
     });
 
     return (
@@ -35,11 +53,11 @@ const CancelAccount = ({ cancelAccountModal, setCancelAccountModal }: Props) => 
 
                 <ButtonStyle.ButtonWrap>
                     <button onClick={() => setCancelAccountModal(false)}>취소</button>
-                    <button>탈퇴</button>
+                    <button onClick={() => withdrawalMutation.mutate()}>탈퇴</button>
                 </ButtonStyle.ButtonWrap>
             </Style.ModalContent>
         </Common.FixedContent>
     );
 };
 
-export default CancelAccount;
+export default Withdrawal;

@@ -6,12 +6,12 @@ import { Diary } from "@/types";
 import * as TextStyle from "@/style/common/Text-style";
 import * as Style from "@/style/component/diaryCalendar/MonthStatistics-style";
 
-import EmotionIMG from "@/utils/emotionIcon";
+import EmotionIcon from "@/utils/emotionIcon";
 
-type Props = {
+interface Props {
     dayJs: dayjs.Dayjs;
     data: { [key: number]: Diary };
-};
+}
 
 const MonthStatistics = ({ dayJs, data }: Props) => {
     const currentDay = dayJs.clone();
@@ -49,35 +49,35 @@ const MonthStatistics = ({ dayJs, data }: Props) => {
             </Style.StatisticsContnet>
 
             <Style.EmotionListContent>
-                <Style.EmotionList url={EmotionIMG.confidence}>
+                <Style.EmotionList url={EmotionIcon.confidence}>
                     <dt>자신감</dt>
                     <dd>{emotionCount["confidence"]}</dd>
                 </Style.EmotionList>
-                <Style.EmotionList url={EmotionIMG.excitement}>
+                <Style.EmotionList url={EmotionIcon.excitement}>
                     <dt>신남</dt>
                     <dd>{emotionCount["excitement"]}</dd>
                 </Style.EmotionList>
-                <Style.EmotionList url={EmotionIMG.thanks}>
+                <Style.EmotionList url={EmotionIcon.thanks}>
                     <dt>감사</dt>
                     <dd>{emotionCount["thanks"]}</dd>
                 </Style.EmotionList>
-                <Style.EmotionList url={EmotionIMG.comfort}>
+                <Style.EmotionList url={EmotionIcon.comfort}>
                     <dt>편안</dt>
                     <dd>{emotionCount["comfort"]}</dd>
                 </Style.EmotionList>
-                <Style.EmotionList url={EmotionIMG.worry}>
+                <Style.EmotionList url={EmotionIcon.worry}>
                     <dt>걱정</dt>
                     <dd>{emotionCount["worry"]}</dd>
                 </Style.EmotionList>
-                <Style.EmotionList url={EmotionIMG.sad}>
+                <Style.EmotionList url={EmotionIcon.sad}>
                     <dt>슬픔</dt>
                     <dd>{emotionCount["sad"]}</dd>
                 </Style.EmotionList>
-                <Style.EmotionList url={EmotionIMG.hurt}>
+                <Style.EmotionList url={EmotionIcon.hurt}>
                     <dt>상처</dt>
                     <dd>{emotionCount["hurt"]}</dd>
                 </Style.EmotionList>
-                <Style.EmotionList url={EmotionIMG.angry}>
+                <Style.EmotionList url={EmotionIcon.angry}>
                     <dt>분노</dt>
                     <dd>{emotionCount["angry"]}</dd>
                 </Style.EmotionList>

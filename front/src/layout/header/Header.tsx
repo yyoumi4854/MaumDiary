@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BsList } from "react-icons/bs";
 
 import Logo from "@/component/common/Logo";
-import PCNav from "./PcNav";
+import PCNav from "./PCNav";
 import MobileNav from "./MobileNav";
 import RightMenu from "./RightMenu";
 
@@ -14,13 +14,13 @@ const Header = () => {
     const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", scroll);
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("scroll", scroll);
         };
     });
 
-    const handleScroll = () => {
+    const scroll = () => {
         setHeaderBackground(window.scrollY ? true : false);
     };
 

@@ -3,12 +3,14 @@ import styled, { css } from "styled-components";
 const mainColorButton = css`
     height: 40px;
     background: ${({ theme }) => theme.colors.main};
+    border-radius: 2px;
     color: #fff;
 `;
 
 const greyColorButton = css`
     height: 40px;
     background: ${({ theme }) => theme.colors.greyBackground};
+    border-radius: 2px;
     color: ${({ theme }) => theme.colors.greyText};
 `;
 
@@ -19,12 +21,26 @@ const disabled = css`
     }
 `;
 
-// 인증번호 발송, 인증번호 확인,
-export const MediumButton = styled.button`
-    width: 120px;
-    border-radius: 2px;
+export const SmallButton = styled.button`
+    width: 80px;
     ${mainColorButton}
     ${disabled}
+
+    ${({ theme }) => theme.device.mobile} {
+        width: 60px;
+    }
+`;
+
+// 인증번호 발송, 인증번호 확인,
+export const MediumButton = styled.button<{ hover?: boolean }>`
+    width: 120px;
+    ${mainColorButton}
+    ${disabled}
+    transition: all .3s;
+
+    &:hover {
+        background: ${({ theme, hover }) => hover && theme.colors.mainDeep};
+    }
 
     ${({ theme }) => theme.device.mobile} {
         width: 100px;
@@ -34,8 +50,8 @@ export const MediumButton = styled.button`
 // 로그인, 회원가입, 로그인 하러가기...
 export const LongButton = styled.button`
     width: 100%;
-    border-radius: 4px;
     ${mainColorButton}
+    border-radius: 4px;
     ${disabled}
 `;
 
@@ -46,7 +62,6 @@ export const ButtonWrap = styled.div`
     button {
         width: 80px;
         height: 40px;
-        border-radius: 2px;
     }
     button:first-of-type {
         ${greyColorButton}
@@ -54,5 +69,6 @@ export const ButtonWrap = styled.div`
     button:last-of-type {
         margin-left: 0.5rem;
         ${mainColorButton}
+        ${disabled}
     }
 `;

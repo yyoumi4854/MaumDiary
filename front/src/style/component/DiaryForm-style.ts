@@ -139,8 +139,6 @@ export const TextContent = styled.div`
         height: 360px;
         margin-top: 20px;
         ${textBox}
-        line-height: 1.5;
-        resize: none;
         ${Css.scrollbar}
     }
 
