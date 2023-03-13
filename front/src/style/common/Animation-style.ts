@@ -33,3 +33,21 @@ export const StarblurSize = keyframes`
     opacity: 1;
   }
 `;
+
+export const LoadingSpin = keyframes`
+  100% {
+      transform: rotate(360deg);
+  }
+`;
+
+export const LoadingCircle = keyframes`
+  0% {
+      stroke-dashoffset: 157;
+  }
+  75% {
+      stroke-dashoffset: -147;
+  }
+  100% {
+      stroke-dashoffset: -157;
+  }
+`;

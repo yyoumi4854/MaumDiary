@@ -6,6 +6,7 @@ import { DIARY } from "@/constant/QUERY_KEY";
 import { fetchDiaryList } from "@/api/diary";
 import Emotions from "./common/Emotions";
 import DiaryItem from "./DiaryItem";
+import Loding from "./common/Loading";
 
 import * as Style from "@/style/component/DiarySection-style";
 
@@ -76,7 +77,7 @@ const DiarySection = () => {
             {data.pages.map((page) =>
                 page.diaryList.map((diary, idx) => <DiaryItem key={idx} diary={diary} />)
             )}
-            {isFetchingNextPage && <div>무려 로 딩 중 임</div>}
+            {isFetchingNextPage && <Loding />}
             <div ref={observedDivRef}>이거 보면 무려 다음 페이지가 불러와짐</div>
         </Style.Container>
     );
