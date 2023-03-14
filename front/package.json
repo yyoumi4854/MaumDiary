@@ -19,6 +19,7 @@
         "react-router-dom": "^6.6.1",
         "recharts": "^2.4.3",
         "recoil": "^0.7.6",
+        "socket.io-client": "^4.6.1",
         "styled-components": "^5.3.6",
         "styled-reset": "^4.4.4"
     },

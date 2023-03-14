@@ -6,7 +6,8 @@ import { USER_DATA } from "@/types";
 const storageEffect: <T>(key: string) => AtomEffect<T> =
     (key) =>
     ({ setSelf, onSet }) => {
-        const userData = localStorage.getItem(key);
+        // const userData = localStorage.getItem(key);
+        const userData = sessionStorage.getItem(key);
 
         if (userData !== null) {
             setSelf(JSON.parse(userData));
@@ -14,8 +15,10 @@ const storageEffect: <T>(key: string) => AtomEffect<T> =
 
         onSet((newValue, _, isReset) => {
             isReset
-                ? localStorage.removeItem(key)
-                : localStorage.setItem(key, JSON.stringify(newValue));
+                ? sessionStorage.removeItem(key)
+                : sessionStorage.setItem(key, JSON.stringify(newValue));
+            // ? localStorage.removeItem(key)
+            // : localStorage.setItem(key, JSON.stringify(newValue));
         });
     };
 

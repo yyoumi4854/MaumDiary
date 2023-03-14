@@ -64,3 +64,48 @@ export interface PeriodDiary {
     month: Pick<Diary, "id" | "createdAt" | "emotion">[];
     year: Pick<Diary, "id" | "createdAt" | "emotion">[];
 }
+
+export interface ClientToServerEvents {
+    hello: (data: string) => void;
+
+    login: (nickname: string) => void;
+    focus: (roomID: string) => void;
+    transmit: (data: {
+        roomID: number;
+        transmitter: string;
+        receiver: string;
+        message: string;
+    }) => void;
+}
+
+export interface ServerToClientEvents {
+    connection: (sample: { id: number }) => void;
+
+    receive: (data: {
+        roomID: number;
+        transmitter: string;
+        receiver: string;
+        message: string;
+    }) => void;
+}
+
+export interface Message {
+    id: number;
+    transmitter: string;
+    receiver: string;
+    message: string;
+    read: boolean;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface ChattingRooms {
+    [key: number]: {
+        id: number;
+        messages: ({ unread: number } | Message)[];
+        user: {
+            nickname: string;
+        }[];
+    };
+    unread: number;
+}
