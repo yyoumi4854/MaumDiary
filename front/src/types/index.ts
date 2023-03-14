@@ -63,20 +63,23 @@ export interface ServerToClientEvents {
     }) => void;
 }
 
-export interface ChattingRoomList {
-    maxParam: number;
-    rooms: {
-        [key: number]: {
-            id: number;
-            messages: {
-                message: string;
-                transmitter: string;
-                receiver: string;
-                createdAt: string;
-            }[];
-            user: {
-                nickname: string;
-            }[];
-        };
+export interface Message {
+    id: number;
+    transmitter: string;
+    receiver: string;
+    message: string;
+    read: boolean;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface ChattingRooms {
+    [key: number]: {
+        id: number;
+        messages: ({ unread: number } | Message)[];
+        user: {
+            nickname: string;
+        }[];
     };
+    unread: number;
 }

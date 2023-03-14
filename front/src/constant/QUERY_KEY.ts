@@ -8,4 +8,5 @@ export const DIARY = {
 
 export const Chatting = {
     ROOMS: "Chatting_ROOMS",
+    Messages: "Chatting_Messages",
 };

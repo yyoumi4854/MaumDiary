@@ -3,14 +3,14 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import socketIO, { Socket } from "socket.io-client";
 import { useRecoilValue } from "recoil";
 
-import useChatting from "@/hooks/useChatting";
+import { useChattingRooms, useMessages } from "@/hooks/useChatting";
 import { ServerToClientEvents, ClientToServerEvents } from "@/types";
-import { createRoom, getAllChatting } from "@/api/chatting";
 import { userAtom } from "@/recoil/user";
 
 const DiaryChat = () => {
-    const sample = useChatting();
-    console.log("sample", sample);
+    // const sample = useChatting();
+    // console.log("sample", sample);
+    useMessages();
     //
 
     // useEffect(() => {

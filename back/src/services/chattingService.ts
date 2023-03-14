@@ -165,12 +165,6 @@ class Chatting {
                         nickname,
                     },
                 },
-
-                // messages: {
-                //     every: {
-                //         AND: { read: false },
-                //     },
-                // },
             },
             select: {
                 id: true,
@@ -180,27 +174,56 @@ class Chatting {
                     },
                 },
                 messages: {
-                    // TODO: read가 false 인 메시지만 가져와야함
+                    take: 99,
                 },
-                // messages: {
-                //     take: 1,
-                //     orderBy: {
-                //         createdAt: "desc",
-                //     },
-
-                // },
             },
         });
 
         await this.prisma.$disconnect();
-        console.log(result);
-        const rooms = result.reduce((prev, curr) => {
-            return {
-                ...prev,
-                [curr.id]: curr,
-            };
-        }, {});
+
+        const rooms = result.reduce(
+            (prev, curr) => {
+                const unread = curr.messages.filter((message) => message.read === false).length;
+
+                return {
+                    ...prev,
+                    [curr.id]: {
+                        ...curr,
+                        unread,
+                    },
+                    unread: prev.unread + unread,
+                };
+            },
+            {
+                unread: 0,
+            }
+        );
+
         return { maxParam, rooms };
+    }
+
+    async getAllMessage(count: number, page: number, roomID: number) {
+        const checking = await this.checking(roomID);
+
+        if (checking === null) {
+            return { messages: null };
+        }
+
+        const maxParam = await this.prisma.messege.count({
+            where: {
+                roomID,
+            },
+        });
+
+        const messages = await this.prisma.messege.findMany({
+            take: count,
+            skip: (page - 1) * count,
+            where: {
+                roomID,
+            },
+        });
+
+        return { maxParam, messages };
     }
 
     async checking(roomID: number) {
