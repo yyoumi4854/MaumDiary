@@ -53,3 +53,12 @@ export const checkAccount = async ({ target, value }: Check) => {
 
     return result;
 };
+
+// 비밀번호 변경
+export const savePassword = async ({ password }: { password: string }) => {
+    const result = await instance.put("/account/password", {
+        password,
+    });
+
+    return result;
+};

@@ -75,9 +75,9 @@ const RegisterStep2 = ({ email }: Props) => {
     const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target as any;
         setNickname(value);
-        setNicknameStep(validateLength(value) ? 1 : 0);
+        setNicknameStep(validateNickname(value) ? 1 : 0);
 
-        if (validateLength(password)) {
+        if (validateNickname(value)) {
             clearTimeout(timerNickname);
             timerNickname = setTimeout(() => {
                 checkMutation.mutate({

@@ -30,7 +30,7 @@ const Error = ({ period }: Props) => {
                 <p>
                     홈페이지 이용에 불편을 드려 죄송합니다.
                     <br />
-                    조속히 해결하도록 하겠습니다.
+                    신속히 해결하도록 하겠습니다.
                 </p>
                 <ButtonStyle.MediumButton hover={true} onClick={() => navigate("/")}>
                     메인으로 이동
