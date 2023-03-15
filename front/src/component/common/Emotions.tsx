@@ -26,7 +26,7 @@ const Emotions = ({ onClick }: Props) => {
     };
 
     return (
-        <Style.Container>
+        <div>
             <Style.Tab ref={tabRef} onScroll={onScroll}>
                 <Style.TabButton name="all" onClick={onClick}>
                     <Style.Circle url={faviconLogo} />
@@ -65,8 +65,9 @@ const Emotions = ({ onClick }: Props) => {
                     <p>분노</p>
                 </Style.TabButton>
             </Style.Tab>
+
             <Style.ScrollIndicator left={left} />
-        </Style.Container>
+        </div>
     );
 };
 

@@ -10,12 +10,7 @@ import * as Style from "@/style/component/GreetingSection-style";
 interface Props {
     period: Period;
 }
-// div
-// span => h2
-// div => p
-// div
 
-// link도 div로 묶기
 const GreetingSection = ({ period }: Props) => {
     const user = useRecoilValue(userAtom);
 
@@ -44,7 +39,7 @@ const GreetingSection = ({ period }: Props) => {
                         </>
                     ) : (
                         <>
-                            <h2>{"겨울감자"}님,</h2>
+                            <h2>{user.User.nickname}님,</h2>
                             <p>
                                 어떤 하루를 보내셨나요? <br />
                                 오늘의 마음을 기록해 보세요!
