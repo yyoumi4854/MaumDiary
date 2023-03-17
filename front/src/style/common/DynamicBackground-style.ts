@@ -3,8 +3,6 @@ import { transparentize } from "polished";
 
 import * as Animation from "../common/Animation-style";
 
-import CloudSVG from "@/images/cloud.svg";
-
 export const Background = styled.div`
     position: fixed;
     left: 0;
@@ -20,10 +18,15 @@ export const Lane = styled.div`
     height: 160px;
 `;
 
-export const Cloud = styled.img.attrs({
-    src: CloudSVG,
-})`
+export const Cloud = styled.div<{ bg: boolean }>`
     ${({ theme }) => theme.common.positionCenter}
+
+    img {
+        filter: ${({ bg }) =>
+            bg
+                ? "invert(100%) sepia(2%) saturate(653%) hue-rotate(329deg) brightness(112%) contrast(100%)"
+                : "invert(98%) sepia(88%) saturate(766%) hue-rotate(305deg) brightness(106%) contrast(106%)"};
+    }
 `;
 
 export const Star = styled.div`
