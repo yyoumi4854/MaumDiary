@@ -24,6 +24,8 @@ class AccountService {
             throw new AppError("InvalidEmailFormatError");
         }
 
+        if (password.length > 7) return { ok: false };
+
         const paswordHash = await bcrypt.hash(password, 10);
 
         await userService.create(nickname, email, userID, paswordHash);
@@ -48,19 +50,20 @@ class AccountService {
             },
         });
 
+        // 유저가 가입한 적이 없을때
         if (user === null) {
-            throw new AppError("LoginError");
+            return null;
         }
 
+        // 차단당한 계정이거나 혹은 탈퇴된 계정일때
         if (user.User.blocking === true) {
-            throw new AppError("WithdrawnError");
+            return null;
         }
 
         const result = await bcrypt.compare(password, user.password);
 
-        // TODO: error 변경
         if (!result) {
-            throw new AppError("UnknownError");
+            return null;
         }
 
         const accessToken = generateToken("access", userID);
@@ -99,6 +102,7 @@ class AccountService {
             },
             select: {
                 certified_account: true,
+                email: true,
                 User: {
                     select: {
                         nickname: true,
@@ -195,6 +199,44 @@ class AccountService {
 
             return { ok: true };
         } catch (e: any) {
+            throw new AppError("UnknownError");
+        }
+    }
+
+    async check(target: "userID" | "nickname" | "email", value: string) {
+        try {
+            let result = null;
+
+            if (target === "nickname") {
+                const nicknameCondition = new RegExp(/^[가-힣\d\w\s]{2,8}$/);
+                if (nicknameCondition.test(value) === false) return false;
+
+                result = await this.prisma.user.findUnique({
+                    where: {
+                        nickname: value,
+                    },
+                });
+            } else {
+                if (target === "email") {
+                    if (isInvalidEmail(value) === false) return false;
+                } else {
+                    // userID
+                    if (value.length > 7) return false;
+                }
+
+                result = await this.prisma.account.findUnique({
+                    where: {
+                        [target]: value,
+                    },
+                });
+            }
+
+            if (result === null) {
+                return true;
+            }
+
+            return false;
+        } catch (e: unknown) {
             throw new AppError("UnknownError");
         }
     }

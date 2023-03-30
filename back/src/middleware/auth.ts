@@ -4,8 +4,15 @@ import { verifyToken } from "../lib/token";
 import tokenService from "../services/tokenService";
 
 const auth = async (req: Req, res: Res, next: NextFunction) => {
-    let accessToken = req.headers.authorization;
-    const refreshToken = req.headers.refreshtoken;
+    let { accessToken, refreshToken } = req.cookies as {
+        accessToken: string;
+        refreshToken: string;
+    };
+
+    //
+    // let accessToken = req.headers.authorization;
+    // const refreshToken = req.headers.refreshtoken;
+    //
 
     // if there are no token in header, it occurs error
     if (accessToken === null || typeof accessToken !== "string") {
@@ -30,7 +37,7 @@ const auth = async (req: Req, res: Res, next: NextFunction) => {
     }
 
     // split accessToken
-    accessToken = accessToken.split(" ")[1];
+    // accessToken = accessToken.split(" ")[1];
 
     const accessPayload = verifyToken(accessToken);
     const refreshPayload = verifyToken(refreshToken);

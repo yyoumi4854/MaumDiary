@@ -18,13 +18,13 @@ model Certification {
 
 model User {
   id       Int     @id @default(autoincrement())
-  nickname String
+  nickname String  @unique
   blocking Boolean @default(false)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
   diary     Diary[]
-  chat      Chat[]
+  chat      ChattingRoom[]
   Account   Account?
 }
 
@@ -37,17 +37,38 @@ model Account {
   id                Int     @unique
 }
 
+// enum Emotion {
+//   confidence
+//   excitement
+//   thanks
+//   comfort
+//   worry
+//   sad
+//   hurt
+//   angry
+// }
+
+// enum Weather {
+//   sunny
+//   rainy
+//   cloudy
+//   snowy
+//   cloudAndSun
+// }
+
 model Diary {
-  id            Int      @id @unique @default(autoincrement())
-  emotion       String   @default("normal")
-  title         String
-  description   String
-  private       Boolean  @default(false)
-  view          Int      @default(0)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  user_model_id Int
-  user          User     @relation(fields: [user_model_id], references: [id])
+  id          Int      @id @unique @default(autoincrement())
+  emotion     String   @default("thanks")
+  title       String
+  description String
+  lock        Boolean  @default(false)
+  likes       Int      @default(0)
+  weather     String   @default("sunny")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  author String
+  user   User   @relation(fields: [author], references: [nickname])
 }
 
 model Token {
@@ -56,28 +77,23 @@ model Token {
   userID String @unique
 }
 
-model Chat {
-  id            Int       @id @default(autoincrement())
-  user_model_id String    @unique
-  inviter       String
-  invitee       String
-  lastmessage   String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  messege       Messege[]
-  user          User[]
-
-  // @@fulltext([user_model_id])
+model ChattingRoom {
+  id        Int       @id @default(autoincrement())
+  users     User[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Messege[]
 }
 
 model Messege {
-  id        Int      @id @default(autoincrement())
-  chatRoom  String
-  sender    String
-  receiver  String
-  msgText   String
-  read      Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  chat      Chat     @relation(fields: [chatRoom], references: [user_model_id])
+  id          Int      @id @default(autoincrement())
+  transmitter String
+  receiver    String
+  message     String
+  read        Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  roomID      Int
+
+  chattingRoom ChattingRoom @relation(fields: [roomID], references: [id])
 }

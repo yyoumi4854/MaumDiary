@@ -7,21 +7,17 @@ const tokenRouter = Router();
 
 tokenRouter.get(
     "/refresh",
-    auth,
     wrapRouter(async (req, res) => {
-        const refreshToken = await tokenService.updateRefreshToken(req.userID!);
+        const { refreshToken } = req.cookies as { refreshToken: string };
 
-        return { statusCode: 200, content: refreshToken };
-    })
-);
+        const { accessToken, newRefreshToken } = await tokenService.getAccessTokenAndRefreshToken(
+            refreshToken
+        );
 
-tokenRouter.get(
-    "/access",
-    auth,
-    wrapRouter(async (req, res) => {
-        const accessToken = await tokenService.getAccessToken(req.refreshToken!);
+        res.cookie("refreshToken", newRefreshToken, { httpOnly: true });
+        res.cookie("accessToken", accessToken, { httpOnly: true });
 
-        return { statusCode: 200, content: accessToken };
+        return { statusCode: 200, content: true };
     })
 );
 
