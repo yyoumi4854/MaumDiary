@@ -38,3 +38,12 @@ export const chattingCount = css`
     font-size: ${({ theme }) => theme.fonts.size.small};
     text-align: center;
 `;
+
+export const Profile = css`
+    border-radius: 50%;
+    background: lightgray;
+    overflow: hidden;
+    img {
+        width: 100%;
+    }
+`;

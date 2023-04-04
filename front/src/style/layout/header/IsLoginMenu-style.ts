@@ -44,8 +44,7 @@ export const ProfileToggleList = styled.li`
     button > div {
         width: 36px;
         height: 36px;
-        border-radius: 50%;
-        background: lightgray;
+        ${Css.Profile}
 
         ${({ theme }) => theme.device.mobile} {
             width: 24px;
