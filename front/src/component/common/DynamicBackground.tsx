@@ -4,6 +4,8 @@ import { Period } from "@/types";
 
 import * as Style from "@/style/common/DynamicBackground-style";
 
+import CloudSVG from "@/images/cloud.svg";
+
 interface Props {
     period: Period;
 }
@@ -49,8 +51,10 @@ const DynamicBackground = ({ period }: Props) => {
             {OffestList.map((offset, idx) => {
                 return (
                     <Style.Lane key={idx}>
-                        {period === "morning" || period === "afternoon" ? (
-                            <Style.Cloud style={{ left: `${offset}%` }} />
+                        {period !== "evening" ? (
+                            <Style.Cloud style={{ left: `${offset}%` }} bg={period !== "afternoon"}>
+                                <img src={CloudSVG} alt="구름" />
+                            </Style.Cloud>
                         ) : (
                             <Style.Star style={{ left: `${offset}%` }}>
                                 <span></span>

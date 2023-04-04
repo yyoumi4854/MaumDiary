@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import * as Css from "@/style/common/Css-style";
+import { Chating } from "@/style/common/Css-style";
 
 export const ChatContent = styled.div`
     grid-column: 5 / 11;
@@ -65,11 +66,6 @@ export const InputContentForm = styled.form`
     }
 
     & > div {
-        padding: 0.5rem;
-        max-height: calc(4 * 1.5 * 1rem + 1rem);
-        border-radius: 2px;
-        background: #fff;
-        line-height: 1.5;
-        overflow: auto;
+        ${Chating}
     }
 `;

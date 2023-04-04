@@ -1,4 +1,5 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
 import { Link, useLocation } from "react-router-dom";
 import {
     BsFillCalendarEventFill,
@@ -7,9 +8,14 @@ import {
     BsFillEmojiSmileFill,
 } from "react-icons/bs";
 
+import { userAtom } from "@/recoil/user";
+
 import * as Style from "@/style/page/diary/AsideNav-style";
 
 const AsideNav = () => {
+    const user = useRecoilValue(userAtom);
+    if (!user) return null;
+
     const { pathname } = useLocation();
 
     return (
@@ -18,7 +24,7 @@ const AsideNav = () => {
                 <div>
                     <img src="" alt="프로필" />
                 </div>
-                <p>겨울감자</p>
+                <p>{user.User.nickname}</p>
             </Style.ProfileContent>
 
             <Style.NavContent>

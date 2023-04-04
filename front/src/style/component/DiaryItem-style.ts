@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import { transparentize } from "polished";
+import { Chating, Profile } from "../common/Css-style";
 
 export const Container = styled.article`
+    margin-top: 64px;
     width: 100%;
 
-    background: rgba(255, 255, 255, 0.6);
+    background: ${transparentize(0.5, "#fff")};
     border-radius: 8px;
 
     & + & {
@@ -11,19 +14,16 @@ export const Container = styled.article`
     }
 
     ${({ theme }) => theme.device.mobile} {
-        padding: 0 8px;
+        margin-top: 20px;
     }
 `;
 
 export const Header = styled.div`
     ${({ theme }) => theme.common.flexBetween}
-
-    height: 96px;
-
-    padding: 0 24px 24px 24px;
+    padding: 24px 40px;
 
     ${({ theme }) => theme.device.mobile} {
-        height: 39px;
+        padding: 3%;
     }
 `;
 export const LeftPart = styled.div`
@@ -36,46 +36,43 @@ export const LeftPart = styled.div`
 
     p {
         margin-left: 16px;
-
-        font-size: ${({ theme }) => theme.fonts.size.basicsDesktop};
         font-weight: ${({ theme }) => theme.fonts.weight.medium};
+    }
 
-        ${({ theme }) => theme.device.mobile} {
+    ${({ theme }) => theme.device.mobile} {
+        justify-content: flex-start;
+        width: 50%;
+        p {
             margin-left: 8px;
-
-            font-size: 10px;
         }
     }
 `;
 export const RightPart = styled.div`
     ${({ theme }) => theme.common.flexCenter}
+    gap: 0 8px;
 
     div {
         ${({ theme }) => theme.common.flexCenter}
-        gap: 8px;
-
-        margin-right: 8px;
 
         .day {
-            position: relative;
-
-            width: 120px;
-            font-size: ${({ theme }) => theme.fonts.size.basicsMobile};
+            ${({ theme }) => theme.common.flexCenter}
+            font-size: ${({ theme }) => theme.fonts.size.small};
             font-weight: ${({ theme }) => theme.fonts.weight.light};
-            color: #888888;
+            color: ${({ theme }) => theme.colors.greyText};
 
             &::after {
                 content: "";
-
-                position: absolute;
-
-                top: 6px;
-                right: 0;
-
+                margin: 0 8px;
                 width: 4px;
                 height: 4px;
-
+                border-radius: 50%;
                 background: ${({ theme }) => theme.colors.greyText};
+            }
+        }
+
+        ${({ theme }) => theme.device.mobile} {
+            .dat {
+                font-size: ${({ theme }) => theme.fonts.size.xsmall};
             }
         }
     }
@@ -98,12 +95,6 @@ export const RightPart = styled.div`
             transform: rotate(180deg);
         }
     }
-
-    ${({ theme }) => theme.device.mobile} {
-        div .day {
-            margin-right: 12px;
-        }
-    }
 `;
 
 export const Content = styled.div<{ open: boolean }>`
@@ -111,38 +102,95 @@ export const Content = styled.div<{ open: boolean }>`
 
     width: 727px;
 
-    padding: 0 24px;
+    padding: 0 40px;
     margin-bottom: 24px;
 `;
 
 export const Footer = styled.div`
     ${({ theme }) => theme.common.flexBetween}
-
-    height: 56px;
-
-    padding: 0 40px;
-
-    div {
-        ${({ theme }) => theme.common.flexCenter}
-
-        & > p {
-            margin-right: 8px;
-        }
-
-        & .by {
-            margin-right: 4px;
-
-            color: ${({ theme }) => theme.colors.greyText};
-        }
-
-        p {
-            font-size: ${({ theme }) => theme.fonts.size.basicsMobile};
-        }
-    }
-
+    padding: 16px 40px;
     border-top: 1px solid ${({ theme }) => theme.colors.greyBorder};
 
     ${({ theme }) => theme.device.mobile} {
-        height: 40px;
+        padding: 8px 3%;
+    }
+`;
+
+export const FooterLeft = styled.div`
+    ${({ theme }) => theme.common.flexCenter}
+
+    div:first-of-type {
+        width: 24px;
+        height: 24px;
+        ${Profile}
+    }
+
+    & > p {
+        margin-left: 8px;
+        font-size: ${({ theme }) => theme.fonts.size.small};
+        span {
+            color: ${({ theme }) => theme.colors.greyText};
+        }
+    }
+
+    div:last-of-type {
+        ${({ theme }) => theme.common.flexCenter}
+        position: relative;
+        cursor: pointer;
+
+        svg.fill {
+            color: ${({ theme }) => theme.colors.warnning};
+        }
+
+        p {
+            margin-left: 4px;
+        }
+
+        &::before {
+            content: "";
+            margin: 0 8px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: ${({ theme }) => theme.colors.greyText};
+        }
+    }
+`;
+
+export const FooterRight = styled.div`
+    button {
+        line-height: 100%;
+    }
+
+    div {
+        button {
+            border-radius: 2px;
+            padding: 6px 8px;
+            font-size: ${({ theme }) => theme.fonts.size.small};
+        }
+
+        button:first-of-type {
+            background: ${({ theme }) => theme.colors.greyBackground};
+            color: ${({ theme }) => theme.colors.greyText};
+        }
+
+        button:last-of-type {
+            margin-left: 0.5rem;
+            background: ${({ theme }) => theme.colors.main};
+            color: #fff;
+        }
+    }
+`;
+
+export const ChatContent = styled.div`
+    padding: 16px 40px;
+
+    & > div {
+        ${Chating}
+        background: ${({ theme }) => theme.colors.greyBackground};
+    }
+
+    ${({ theme }) => theme.device.mobile} {
+        padding: 8px 3%;
     }
 `;

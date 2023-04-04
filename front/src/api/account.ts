@@ -1,5 +1,5 @@
 import instance from ".";
-import { Check, USER_DATA } from "@/types";
+import { Check, UserINFO, USER_DATA } from "@/types";
 
 export const login = async ({ userID, password }: { userID: string; password: string }) => {
     const result = await instance.post<boolean>("http://localhost:3002/api/account/login", {
@@ -49,6 +49,15 @@ export const checkAccount = async ({ target, value }: Check) => {
     const result = await instance.post("/account/check", {
         target,
         value,
+    });
+
+    return result;
+};
+
+// 비밀번호 변경
+export const savePassword = async ({ password }: Pick<UserINFO, "password">) => {
+    const result = await instance.put("/account/password", {
+        password,
     });
 
     return result;
