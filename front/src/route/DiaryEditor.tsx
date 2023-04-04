@@ -22,7 +22,7 @@ const DiaryEditor = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // 일기쓰기 (제목, 내용, 날씨, 감정, 공개여부, 날짜)
+    // 일기수정 (제목, 내용, 날씨, 감정, 공개여부, 날짜)
     const [title, setTitle] = useState(location.state.title);
     const [description, setDescription] = useState(location.state.description);
     const [weather, setWeather] = useState<Weather>(location.state.weather);
@@ -60,7 +60,7 @@ const DiaryEditor = () => {
     return (
         <div className="content inner">
             <DiaryFormStyle.DiaryFormContent>
-                <TextStyle.MediumText>일기 쓰기</TextStyle.MediumText>
+                <TextStyle.MediumText>일기 수정</TextStyle.MediumText>
 
                 <form onSubmit={onSubmit}>
                     <DiaryFormStyle.DiaryFormWrap>
