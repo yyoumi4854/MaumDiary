@@ -82,7 +82,7 @@ $code_base/back yarn build
 
 <br>
 
-## 2. 일기 Read
+## 2. 일기 Read(읽기)
 
 일기는 캘린더, 목록 형태로 볼 수 있습니다.
 
@@ -96,7 +96,7 @@ $code_base/back yarn build
 
 <br>
 
-## 3. 일기 Creact, Update, Delect
+## 3. 일기 Create(생성), Update(갱신), Delete(삭제)
 
 일기를 쓰고, 수정하고, 삭제할 수 있습니다.
 
